@@ -14,7 +14,7 @@ class AirplaneClientProcess : public ClientProcess
 public:
 	AirplaneClientProcess(pClient client);
 
-	virtual void SetLoginInformation();
+    virtual void SetLoginInformation();
 
 protected:
 	virtual void SendPositionInfo(pTimeUpdate Update);

@@ -14,7 +14,7 @@ class ControllerClientProcess : public ClientProcess
 public:
 	ControllerClientProcess(pClient client);
 
-	virtual void SetLoginInformation();
+    virtual void SetLoginInformation();
 
 protected:
 	virtual void SendPositionInfo(pTimeUpdate Update);

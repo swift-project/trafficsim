@@ -8,17 +8,17 @@
 
 #include "STLib/Client.h"
 
-#define SERVER_ADDR	"vatsim-germany.org"
-#define SERVER_PORT	6809
-#define USER_ID		"111111"
-#define USER_PASS	"111111"
-
 class ClientProcess : public QObject
 {
 	Q_OBJECT
 public:
 	ClientProcess(pClient client);
-	virtual void SetLoginInformation() = 0;
+    virtual void SetLoginInformation() = 0;
+
+    static QString Server;
+    static qint16 Port;
+    static QString Username;
+    static QString Password;
 	
 signals:
 	void ClientFinished();
@@ -49,7 +49,7 @@ private:
 
 	pTimeUpdate mNextUpdate;
 	QTimer * mTimer;
-	bool isConnected;
+    bool isConnected;
 };
 
 #endif

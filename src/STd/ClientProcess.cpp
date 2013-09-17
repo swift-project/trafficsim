@@ -71,7 +71,7 @@ bool ClientProcess::LoginToServer()
 		{
 			return true;
 		}
-		this->SetLoginInformation();
+        this->SetLoginInformation();
 		bool retVal = true;
 		try
 		{

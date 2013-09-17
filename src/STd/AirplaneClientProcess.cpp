@@ -22,7 +22,9 @@ void AirplaneClientProcess::SetLoginInformation()
 	PilotInfo.sim = Cvatlib_Network::simType_MSFS95;
 	try
 	{
-		mNetwork->SetPilotLoginInfo(SERVER_ADDR, SERVER_PORT, USER_ID, USER_PASS, PilotInfo);
+        mNetwork->SetPilotLoginInfo(Server.toStdString().c_str(), Port,
+                                    Username.toStdString().c_str(), Password.toStdString().c_str(),
+                                    PilotInfo);
 	}
 	catch (InvalidObjectException * e)
 	{

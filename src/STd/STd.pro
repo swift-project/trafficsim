@@ -16,3 +16,5 @@ HEADERS += *.h
 LIBS    += -L../../lib -lSTLib -L../../ShimLib -lvatlib
 
 DESTDIR = ../../bin
+
+include(../../QtArg/qtarg.pri)

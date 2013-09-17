@@ -19,8 +19,10 @@ void ControllerClientProcess::SetLoginInformation()
 	ControllerInfo.name = "Controller Name";
 	ControllerInfo.rating = mClient->GetRating();
 	try
-	{
-		mNetwork->SetATCLoginInfo(SERVER_ADDR, SERVER_PORT, USER_ID, USER_PASS, ControllerInfo);
+    {
+        mNetwork->SetATCLoginInfo(Server.toStdString().c_str(), Port,
+                                    Username.toStdString().c_str(), Password.toStdString().c_str(),
+                                    ControllerInfo);
 	}
 	catch (InvalidObjectException * e)
 	{
