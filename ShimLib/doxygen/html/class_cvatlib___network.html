@@ -107,7 +107,6 @@ $(document).ready(function(){initNavTree('class_cvatlib___network.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_cvatlib___network-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -143,72 +142,6 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aa073f25f13362444dee9440d73b1101a"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#aa073f25f13362444dee9440d73b1101a">onConnectionStatusChangedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, <a class="el" href="class_cvatlib___network.html#af0f61d2ca4faf8ba17ac181cb8dfa464">connStatus</a> oldStatus, <a class="el" href="class_cvatlib___network.html#af0f61d2ca4faf8ba17ac181cb8dfa464">connStatus</a> newStatus, void *cbVar)</td></tr>
-<tr class="separator:aa073f25f13362444dee9440d73b1101a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd8c7556bbc46083ad49d9e5bc16c4eb"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#afd8c7556bbc46083ad49d9e5bc16c4eb">onTextMessageReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *from, const char *to, const char *message, void *cbVar)</td></tr>
-<tr class="separator:afd8c7556bbc46083ad49d9e5bc16c4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab821059872ddc3cc35e3fca97c7b0895"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ab821059872ddc3cc35e3fca97c7b0895">onRadioMessageReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *from, <a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> numFreq, <a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> *freqList, const char *message, void *cbVar)</td></tr>
-<tr class="separator:ab821059872ddc3cc35e3fca97c7b0895"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a761a1ad1f13055f84394f19a73ae34c6"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a761a1ad1f13055f84394f19a73ae34c6">onPilotDisconnectedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, void *cbVar)</td></tr>
-<tr class="separator:a761a1ad1f13055f84394f19a73ae34c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a587d49f9a34bebe9265e625d4f43df"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a1a587d49f9a34bebe9265e625d4f43df">onControllerDisconnectedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, void *cbVar)</td></tr>
-<tr class="separator:a1a587d49f9a34bebe9265e625d4f43df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4aa857f5a0bb219eb0fbc5bd03613b96"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a4aa857f5a0bb219eb0fbc5bd03613b96">onPilotPositionUpdateEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_pilot_pos_update">PilotPosUpdate</a> pos, void *cbVar)</td></tr>
-<tr class="separator:a4aa857f5a0bb219eb0fbc5bd03613b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9532355b8821374250c210084a2fb824"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a9532355b8821374250c210084a2fb824">onInterimPilotPositionUpdateEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_pilot_pos_update">PilotPosUpdate</a> pos, void *cbVar)</td></tr>
-<tr class="separator:a9532355b8821374250c210084a2fb824"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c55d8f7767e573ca3122832ee3ce163"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a0c55d8f7767e573ca3122832ee3ce163">onAtcPositionUpdateEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_a_t_c_pos_update">ATCPosUpdate</a> pos, void *cbVar)</td></tr>
-<tr class="separator:a0c55d8f7767e573ca3122832ee3ce163"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bd23581e29ffcdafc5b88aa5aba79d6"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a3bd23581e29ffcdafc5b88aa5aba79d6">onKickedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *reason, void *cbVar)</td></tr>
-<tr class="separator:a3bd23581e29ffcdafc5b88aa5aba79d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af208c8f2123f8759fe6ccde735296542"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#af208c8f2123f8759fe6ccde735296542">onPongEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> elapsedTime, void *cbVar)</td></tr>
-<tr class="separator:af208c8f2123f8759fe6ccde735296542"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0f3d92a2d7bf3b166691b1fffaee023"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ae0f3d92a2d7bf3b166691b1fffaee023">onFlightPlanReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_flight_plan">FlightPlan</a> fp, void *cbVar)</td></tr>
-<tr class="separator:ae0f3d92a2d7bf3b166691b1fffaee023"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15ec4b08c2d6026ff56225371331ad8f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a15ec4b08c2d6026ff56225371331ad8f">onHandoffRequestReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *atcCallsign, const char *acCallsign, void *cbVar)</td></tr>
-<tr class="separator:a15ec4b08c2d6026ff56225371331ad8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf568ba1f45a5083724bbb8d1a49c701"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#aaf568ba1f45a5083724bbb8d1a49c701">onHandoffAcceptedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *atcFromCallsign, const char *atcToCallsign, const char *acCallsign, void *cbVar)</td></tr>
-<tr class="separator:aaf568ba1f45a5083724bbb8d1a49c701"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43a5058b42907a894b8ca19a09fbaf2e"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a43a5058b42907a894b8ca19a09fbaf2e">onHandoffCancelledRejectedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *atcCallsign, const char *acCallsign, void *cbVar)</td></tr>
-<tr class="separator:a43a5058b42907a894b8ca19a09fbaf2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e9f4b324ec5459434660ade1a04229f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a3e9f4b324ec5459434660ade1a04229f">onMetarReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *data, void *cbVar)</td></tr>
-<tr class="separator:a3e9f4b324ec5459434660ade1a04229f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a779a68c8cfb0e0c9dc4339acffc5a1ec"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a779a68c8cfb0e0c9dc4339acffc5a1ec">onInfoQueryRequestReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#aeb835d56ed75761d13c0872d391d55bc">infoQuery</a> type, const char *data, void *cbVar)</td></tr>
-<tr class="separator:a779a68c8cfb0e0c9dc4339acffc5a1ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8884e300d28b74edf32bd144df37be9"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ab8884e300d28b74edf32bd144df37be9">onInfoQueryReplyReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#aeb835d56ed75761d13c0872d391d55bc">infoQuery</a> type, const char *data, const char *data2, void *cbVar)</td></tr>
-<tr class="separator:ab8884e300d28b74edf32bd144df37be9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2f6ee62647bf69974000373cbca3250"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ac2f6ee62647bf69974000373cbca3250">onCapabilitiesReplyReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, const char **keysValues, void *cbVar)</td></tr>
-<tr class="separator:ac2f6ee62647bf69974000373cbca3250"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a780741c8d66bfce5c4f20308b81d0595"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a780741c8d66bfce5c4f20308b81d0595">onAtisReplyReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#a9d69ee19239a776f29179ee729b93cd9">atisLineType</a> type, const char *data, void *cbVar)</td></tr>
-<tr class="separator:a780741c8d66bfce5c4f20308b81d0595"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2898aadc37755870fc9923dab48f6b6f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a2898aadc37755870fc9923dab48f6b6f">onTemperatureDataReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_temp_layer">TempLayer</a> layers[4], <a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> pressure, void *cbVar)</td></tr>
-<tr class="separator:a2898aadc37755870fc9923dab48f6b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50860c00e0f14d812a6a7f922c099214"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a50860c00e0f14d812a6a7f922c099214">onErrorReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, <a class="el" href="class_cvatlib___network.html#af21699b1b27376e061d75443ec448342">error</a> type, const char *message, const char *errorData, void *cbVar)</td></tr>
-<tr class="separator:a50860c00e0f14d812a6a7f922c099214"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0607b82ec8ecbfc743b2f34e7a853fb8"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a0607b82ec8ecbfc743b2f34e7a853fb8">onWindDataReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_wind_layer">WindLayer</a> layers[4], void *cbVar)</td></tr>
-<tr class="separator:a0607b82ec8ecbfc743b2f34e7a853fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab09ff0868f60e2e12bbcabedd5b31d01"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ab09ff0868f60e2e12bbcabedd5b31d01">onCloudDataReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_cloud_layer">CloudLayer</a> cLayers[2], <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_storm_layer">StormLayer</a> sLayer, float visibility, void *cbVar)</td></tr>
-<tr class="separator:ab09ff0868f60e2e12bbcabedd5b31d01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5ba4c9af29a819b4c1c25c118bc2080"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ae5ba4c9af29a819b4c1c25c118bc2080">onPilotInfoRequestReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, void *cbVar)</td></tr>
-<tr class="separator:ae5ba4c9af29a819b4c1c25c118bc2080"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a8790b2e91f9a870d85caf9a582b21a"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a0a8790b2e91f9a870d85caf9a582b21a">onPilotInfoReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, const char **keysValues, void *cbVar)</td></tr>
-<tr class="separator:a0a8790b2e91f9a870d85caf9a582b21a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad101696f766c18e43deabe89e49b88ce"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ad101696f766c18e43deabe89e49b88ce">onSharedStateReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *atcCallsign, const char *acCallsign, <a class="el" href="class_cvatlib___network.html#ad0541771891d8eac899871c1897fb8e5">ccpPropertyType</a> prop, const char *data, void *cbVar)</td></tr>
-<tr class="separator:ad101696f766c18e43deabe89e49b88ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d2cce960513940119a42a839f0fa1ca"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a3d2cce960513940119a42a839f0fa1ca">onLandlineCommandReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#a46da5ba2ca856f7dc9dc2da89ff583bc">landlineCommand</a> cmd, <a class="el" href="class_cvatlib___network.html#a0e91ee065fa0ff13ac974b55d73c9e76">landlineType</a> type, const char *ip, <a class="el" href="vatlib_8h.html#aea50feaf24fd53b7ffab0e9b62ff30a6">USHORT</a> port, void *cbVar)</td></tr>
-<tr class="separator:a3d2cce960513940119a42a839f0fa1ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12c5a504e7e1efef0e5867bf83aa3459"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a12c5a504e7e1efef0e5867bf83aa3459">onTrackingCommandReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *atcCallsign, const char *acCallsign, <a class="el" href="class_cvatlib___network.html#a322e5f795dae79ab3c6c1541af20338a">trackCommand</a> cmd, void *cbVar)</td></tr>
-<tr class="separator:a12c5a504e7e1efef0e5867bf83aa3459"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a385c23254e7ad9061889e547bb32ce4c"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a385c23254e7ad9061889e547bb32ce4c">onBreakCommandReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, bool wantsBreak, void *cbVar)</td></tr>
-<tr class="separator:a385c23254e7ad9061889e547bb32ce4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a404e27203c0555e28dd486e46a5f2b01"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a404e27203c0555e28dd486e46a5f2b01">onSharedStateIDRequestReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, void *cbVar)</td></tr>
-<tr class="separator:a404e27203c0555e28dd486e46a5f2b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac07965a0e6c791b98da403a57c336b02"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ac07965a0e6c791b98da403a57c336b02">onSharedStateIDReplyReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, void *cbVar)</td></tr>
-<tr class="separator:ac07965a0e6c791b98da403a57c336b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ac124cb201ee448f575226803fcee8f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a3ac124cb201ee448f575226803fcee8f">onPushStripReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *atcCallsign, const char *acCallsign, <a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> type, const char **annotations, void *cbVar)</td></tr>
-<tr class="separator:a3ac124cb201ee448f575226803fcee8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad857e740486edc544d2184a6eb7bc2af"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ad857e740486edc544d2184a6eb7bc2af">onHelpRequestReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, bool wantsHelp, const char *message, void *cbVar)</td></tr>
-<tr class="separator:ad857e740486edc544d2184a6eb7bc2af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Error Codes</div></td></tr>
 <tr class="memitem:ab677a20f70496d7a1c10446119f50674"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ab677a20f70496d7a1c10446119f50674">error_enum</a> { <br/>
 &#160;&#160;<a class="el" href="class_cvatlib___network.html#ab677a20f70496d7a1c10446119f50674a3d93b2c8fb38d638709b17f4eabb3c17">error_Ok</a> = 0, 
@@ -366,7 +299,7 @@ Public Types</h2></td></tr>
 <tr class="memitem:aeb835d56ed75761d13c0872d391d55bc"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#aeb835d56ed75761d13c0872d391d55bc">infoQuery</a></td></tr>
 <tr class="separator:aeb835d56ed75761d13c0872d391d55bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">ATIS Line Identifiers</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><dl class="section note"><dt>Note</dt><dd>The atisType type is meant to hold the character code number of the chars in the enum </dd></dl>
+<tr><td colspan="2"><div class="groupText"><dl class="section note"><dt>Note</dt><dd>The atisLineType type is meant to hold the character code number of the chars in the enum </dd></dl>
 </div></td></tr>
 <tr class="memitem:a141c428a4cab6b4d9a195cd26b124493"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a141c428a4cab6b4d9a195cd26b124493">atisLineType_enum</a> { <a class="el" href="class_cvatlib___network.html#a141c428a4cab6b4d9a195cd26b124493a6102fa7513deba98c25c08f008ada894">atisLineType_VoiceRoom</a> = 'V', 
 <a class="el" href="class_cvatlib___network.html#a141c428a4cab6b4d9a195cd26b124493af5d3bc3192a4e4dd64441c0a4f0df110">atisLineType_TextMessage</a> = 'T', 
@@ -431,6 +364,78 @@ Public Types</h2></td></tr>
 <tr class="separator:ae8fe1906978e3ea84abfcd0e8c4c3eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a322e5f795dae79ab3c6c1541af20338a"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a322e5f795dae79ab3c6c1541af20338a">trackCommand</a></td></tr>
 <tr class="separator:a322e5f795dae79ab3c6c1541af20338a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Setup and Handling Callbacks</div></td></tr>
+<tr class="memitem:aa073f25f13362444dee9440d73b1101a"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#aa073f25f13362444dee9440d73b1101a">onConnectionStatusChangedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, <a class="el" href="class_cvatlib___network.html#af0f61d2ca4faf8ba17ac181cb8dfa464">connStatus</a> oldStatus, <a class="el" href="class_cvatlib___network.html#af0f61d2ca4faf8ba17ac181cb8dfa464">connStatus</a> newStatus, void *cbVar)</td></tr>
+<tr class="separator:aa073f25f13362444dee9440d73b1101a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50860c00e0f14d812a6a7f922c099214"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a50860c00e0f14d812a6a7f922c099214">onErrorReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, <a class="el" href="class_cvatlib___network.html#af21699b1b27376e061d75443ec448342">error</a> type, const char *message, const char *errorData, void *cbVar)</td></tr>
+<tr class="separator:a50860c00e0f14d812a6a7f922c099214"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Basic Communications Callbacks</div></td></tr>
+<tr class="memitem:afd8c7556bbc46083ad49d9e5bc16c4eb"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#afd8c7556bbc46083ad49d9e5bc16c4eb">onTextMessageReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *from, const char *to, const char *message, void *cbVar)</td></tr>
+<tr class="separator:afd8c7556bbc46083ad49d9e5bc16c4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab821059872ddc3cc35e3fca97c7b0895"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ab821059872ddc3cc35e3fca97c7b0895">onRadioMessageReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *from, <a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> numFreq, <a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> *freqList, const char *message, void *cbVar)</td></tr>
+<tr class="separator:ab821059872ddc3cc35e3fca97c7b0895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a779a68c8cfb0e0c9dc4339acffc5a1ec"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a779a68c8cfb0e0c9dc4339acffc5a1ec">onInfoQueryRequestReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#aeb835d56ed75761d13c0872d391d55bc">infoQuery</a> type, const char *data, void *cbVar)</td></tr>
+<tr class="separator:a779a68c8cfb0e0c9dc4339acffc5a1ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8884e300d28b74edf32bd144df37be9"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ab8884e300d28b74edf32bd144df37be9">onInfoQueryReplyReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#aeb835d56ed75761d13c0872d391d55bc">infoQuery</a> type, const char *data, const char *data2, void *cbVar)</td></tr>
+<tr class="separator:ab8884e300d28b74edf32bd144df37be9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2f6ee62647bf69974000373cbca3250"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ac2f6ee62647bf69974000373cbca3250">onCapabilitiesReplyReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, const char **keysValues, void *cbVar)</td></tr>
+<tr class="separator:ac2f6ee62647bf69974000373cbca3250"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a780741c8d66bfce5c4f20308b81d0595"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a780741c8d66bfce5c4f20308b81d0595">onAtisReplyReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#a9d69ee19239a776f29179ee729b93cd9">atisLineType</a> type, const char *data, void *cbVar)</td></tr>
+<tr class="separator:a780741c8d66bfce5c4f20308b81d0595"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0f3d92a2d7bf3b166691b1fffaee023"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ae0f3d92a2d7bf3b166691b1fffaee023">onFlightPlanReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_flight_plan">FlightPlan</a> fp, void *cbVar)</td></tr>
+<tr class="separator:ae0f3d92a2d7bf3b166691b1fffaee023"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5ba4c9af29a819b4c1c25c118bc2080"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ae5ba4c9af29a819b4c1c25c118bc2080">onPilotInfoRequestReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, void *cbVar)</td></tr>
+<tr class="separator:ae5ba4c9af29a819b4c1c25c118bc2080"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a8790b2e91f9a870d85caf9a582b21a"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a0a8790b2e91f9a870d85caf9a582b21a">onPilotInfoReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, const char **keysValues, void *cbVar)</td></tr>
+<tr class="separator:a0a8790b2e91f9a870d85caf9a582b21a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">ATC Callbacks</div></td></tr>
+<tr class="memitem:a1a587d49f9a34bebe9265e625d4f43df"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a1a587d49f9a34bebe9265e625d4f43df">onControllerDisconnectedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, void *cbVar)</td></tr>
+<tr class="separator:a1a587d49f9a34bebe9265e625d4f43df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c55d8f7767e573ca3122832ee3ce163"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a0c55d8f7767e573ca3122832ee3ce163">onAtcPositionUpdateEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_a_t_c_pos_update">ATCPosUpdate</a> pos, void *cbVar)</td></tr>
+<tr class="separator:a0c55d8f7767e573ca3122832ee3ce163"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15ec4b08c2d6026ff56225371331ad8f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a15ec4b08c2d6026ff56225371331ad8f">onHandoffRequestReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *atcCallsign, const char *acCallsign, void *cbVar)</td></tr>
+<tr class="separator:a15ec4b08c2d6026ff56225371331ad8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf568ba1f45a5083724bbb8d1a49c701"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#aaf568ba1f45a5083724bbb8d1a49c701">onHandoffAcceptedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *atcFromCallsign, const char *atcToCallsign, const char *acCallsign, void *cbVar)</td></tr>
+<tr class="separator:aaf568ba1f45a5083724bbb8d1a49c701"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43a5058b42907a894b8ca19a09fbaf2e"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a43a5058b42907a894b8ca19a09fbaf2e">onHandoffCancelledRejectedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *atcCallsign, const char *acCallsign, void *cbVar)</td></tr>
+<tr class="separator:a43a5058b42907a894b8ca19a09fbaf2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d2cce960513940119a42a839f0fa1ca"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a3d2cce960513940119a42a839f0fa1ca">onLandlineCommandReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#a46da5ba2ca856f7dc9dc2da89ff583bc">landlineCommand</a> cmd, <a class="el" href="class_cvatlib___network.html#a0e91ee065fa0ff13ac974b55d73c9e76">landlineType</a> type, const char *ip, <a class="el" href="vatlib_8h.html#aea50feaf24fd53b7ffab0e9b62ff30a6">USHORT</a> port, void *cbVar)</td></tr>
+<tr class="separator:a3d2cce960513940119a42a839f0fa1ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12c5a504e7e1efef0e5867bf83aa3459"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a12c5a504e7e1efef0e5867bf83aa3459">onTrackingCommandReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *atcCallsign, const char *acCallsign, <a class="el" href="class_cvatlib___network.html#a322e5f795dae79ab3c6c1541af20338a">trackCommand</a> cmd, void *cbVar)</td></tr>
+<tr class="separator:a12c5a504e7e1efef0e5867bf83aa3459"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a385c23254e7ad9061889e547bb32ce4c"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a385c23254e7ad9061889e547bb32ce4c">onBreakCommandReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, bool wantsBreak, void *cbVar)</td></tr>
+<tr class="separator:a385c23254e7ad9061889e547bb32ce4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad101696f766c18e43deabe89e49b88ce"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ad101696f766c18e43deabe89e49b88ce">onSharedStateReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *atcCallsign, const char *acCallsign, <a class="el" href="class_cvatlib___network.html#ad0541771891d8eac899871c1897fb8e5">ccpPropertyType</a> prop, const char *data, void *cbVar)</td></tr>
+<tr class="separator:ad101696f766c18e43deabe89e49b88ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a404e27203c0555e28dd486e46a5f2b01"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a404e27203c0555e28dd486e46a5f2b01">onSharedStateIDRequestReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, void *cbVar)</td></tr>
+<tr class="separator:a404e27203c0555e28dd486e46a5f2b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac07965a0e6c791b98da403a57c336b02"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ac07965a0e6c791b98da403a57c336b02">onSharedStateIDReplyReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, void *cbVar)</td></tr>
+<tr class="separator:ac07965a0e6c791b98da403a57c336b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ac124cb201ee448f575226803fcee8f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a3ac124cb201ee448f575226803fcee8f">onPushStripReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *atcCallsign, const char *acCallsign, <a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> type, const char **annotations, void *cbVar)</td></tr>
+<tr class="separator:a3ac124cb201ee448f575226803fcee8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad857e740486edc544d2184a6eb7bc2af"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ad857e740486edc544d2184a6eb7bc2af">onHelpRequestReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, bool wantsHelp, const char *message, void *cbVar)</td></tr>
+<tr class="separator:ad857e740486edc544d2184a6eb7bc2af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Pilot Callbacks</div></td></tr>
+<tr class="memitem:a761a1ad1f13055f84394f19a73ae34c6"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a761a1ad1f13055f84394f19a73ae34c6">onPilotDisconnectedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, void *cbVar)</td></tr>
+<tr class="separator:a761a1ad1f13055f84394f19a73ae34c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aa857f5a0bb219eb0fbc5bd03613b96"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a4aa857f5a0bb219eb0fbc5bd03613b96">onPilotPositionUpdateEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_pilot_pos_update">PilotPosUpdate</a> pos, void *cbVar)</td></tr>
+<tr class="separator:a4aa857f5a0bb219eb0fbc5bd03613b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9532355b8821374250c210084a2fb824"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a9532355b8821374250c210084a2fb824">onInterimPilotPositionUpdateEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_pilot_pos_update">PilotPosUpdate</a> pos, void *cbVar)</td></tr>
+<tr class="separator:a9532355b8821374250c210084a2fb824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Administrative Callbacks</div></td></tr>
+<tr class="memitem:a3bd23581e29ffcdafc5b88aa5aba79d6"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a3bd23581e29ffcdafc5b88aa5aba79d6">onKickedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *reason, void *cbVar)</td></tr>
+<tr class="separator:a3bd23581e29ffcdafc5b88aa5aba79d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af208c8f2123f8759fe6ccde735296542"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#af208c8f2123f8759fe6ccde735296542">onPongEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *callsign, <a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> elapsedTime, void *cbVar)</td></tr>
+<tr class="separator:af208c8f2123f8759fe6ccde735296542"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Weather Callbacks</div></td></tr>
+<tr class="memitem:a3e9f4b324ec5459434660ade1a04229f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a3e9f4b324ec5459434660ade1a04229f">onMetarReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, const char *data, void *cbVar)</td></tr>
+<tr class="separator:a3e9f4b324ec5459434660ade1a04229f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2898aadc37755870fc9923dab48f6b6f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a2898aadc37755870fc9923dab48f6b6f">onTemperatureDataReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_temp_layer">TempLayer</a> layers[4], <a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> pressure, void *cbVar)</td></tr>
+<tr class="separator:a2898aadc37755870fc9923dab48f6b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0607b82ec8ecbfc743b2f34e7a853fb8"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a0607b82ec8ecbfc743b2f34e7a853fb8">onWindDataReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_wind_layer">WindLayer</a> layers[4], void *cbVar)</td></tr>
+<tr class="separator:a0607b82ec8ecbfc743b2f34e7a853fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab09ff0868f60e2e12bbcabedd5b31d01"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ab09ff0868f60e2e12bbcabedd5b31d01">onCloudDataReceivedEvent</a> )(<a class="el" href="class_cvatlib___network.html">Cvatlib_Network</a> *obj, <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_cloud_layer">CloudLayer</a> cLayers[2], <a class="el" href="class_cvatlib___network.html#struct_cvatlib___network_1_1_storm_layer">StormLayer</a> sLayer, float visibility, void *cbVar)</td></tr>
+<tr class="separator:ab09ff0868f60e2e12bbcabedd5b31d01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -512,7 +517,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a478ad8851ad72d65a61f2bee426c7a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac612b99fc3246815d5bf1e357d03cafc"><td class="memItemLeft" align="right" valign="top">VM void CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ac612b99fc3246815d5bf1e357d03cafc">SendPlaneInfo</a> (const char *callsign, const char **keysValues) PVM</td></tr>
 <tr class="separator:ac612b99fc3246815d5bf1e357d03cafc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Admin Functions</div></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Administrative Functions</div></td></tr>
 <tr class="memitem:ace36fd3edeb8c6c656794a77bbfeacdf"><td class="memItemLeft" align="right" valign="top">VM void CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#ace36fd3edeb8c6c656794a77bbfeacdf">KickUser</a> (const char *callsign, const char *message) PVM</td></tr>
 <tr class="separator:ace36fd3edeb8c6c656794a77bbfeacdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69ee819526548e405c9e6e5db3d06cc5"><td class="memItemLeft" align="right" valign="top">VM void CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___network.html#a69ee819526548e405c9e6e5db3d06cc5">PingUser</a> (const char *callsign) PVM</td></tr>
@@ -1874,7 +1879,7 @@ This callback will also be triggered by Squawkbox high speed updates </dd></dl>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">obj</td><td>Passes in a reference to the <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> object to which it is registered </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">callsign</td><td>Passes in the callsign of the client who has responded to a ping </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">elapsedTime</td><td>Passes in the amount of time that it took to receive the reply </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">elapsedTime</td><td>Passes in the amount of time, in seconds, that it took to receive the reply </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">cbVar</td><td>Passes in a variable defined when the callback is installed </td></tr>
   </table>
   </dd>
@@ -2298,7 +2303,8 @@ This callback will also be triggered by Squawkbox high speed updates </dd></dl>
 <p>ATC client </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="af85496dbfd6de561dc77e18dc31afcd3acc9dc3565dd61db9112ed474a94b823e"></a>connectionType_AVC</em>&nbsp;</td><td class="fielddoc">
-<p>AVC. Should not be used, this is an old type for use by AVC only </p>
+<p>AVC</p>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>This is a legacy value for the Advanced Voice Client and should not be used </dd></dl>
 </td></tr>
 </table>
 
@@ -2349,52 +2355,54 @@ This callback will also be triggered by Squawkbox high speed updates </dd></dl>
 <p>No error </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674aa1737186e01f7d725305dd08e8cc7230"></a>error_CallsignTaken</em>&nbsp;</td><td class="fielddoc">
-<p>The selected callsign is already being used by a connected user </p>
+<p>The selected callsign is already being used by a connected user (Fatal) </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674aed43093abc91b3e513b49557d643478a"></a>error_CallsignInvalid</em>&nbsp;</td><td class="fielddoc">
-<p>The selected callsign is invalid </p>
+<p>The selected callsign is invalid (Fatal) </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674adaf85fdc9d36c24b7c560699e1ccdefd"></a>error_Registered</em>&nbsp;</td><td class="fielddoc">
-<p>Already registered </p>
+<p>Already registered (Fatal)</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>find the real meaning </dd></dl>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674a05db66e50aca750fa36e69770d1d6b78"></a>error_Syntax</em>&nbsp;</td><td class="fielddoc">
-<p>Syntax error </p>
+<p>Syntax error in packet </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674a56050281029c7013e0b10e5dd1d20846"></a>error_SourceInvalid</em>&nbsp;</td><td class="fielddoc">
-<p>Invalid source </p>
+<p>Invalid source (sender) callsign in packet </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674a4cba8e82757248947d07daf0d6a5948a"></a>error_CIDPasswdInvalid</em>&nbsp;</td><td class="fielddoc">
-<p>Invalid CID or Password </p>
+<p>Invalid CID or Password (Fatal) </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674aaf5ab36425de13a4913730422f2a44cc"></a>error_CallsignNotExists</em>&nbsp;</td><td class="fielddoc">
 <p>No such callsign on the network </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674ab0ae6ab7501efbd0e9f1bfb397231d67"></a>error_NoFP</em>&nbsp;</td><td class="fielddoc">
-<p>No flightplan </p>
+<p>No flightplan available for that callsign </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674a886859aaf00bd2127750e150d54b31df"></a>error_NoWeather</em>&nbsp;</td><td class="fielddoc">
-<p>No such weather profile </p>
+<p>The requested weather profile does not exist </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674a2853be69989073df43913bc72b342425"></a>error_ProtoVersion</em>&nbsp;</td><td class="fielddoc">
-<p>Invalid protocol version </p>
+<p>Invalid protocol version (Fatal) </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674a73ed30acc341ea447e48261a8e475ea3"></a>error_LevelTooHigh</em>&nbsp;</td><td class="fielddoc">
-<p>Requested level too high </p>
+<p>Requested level too high (eg. login as S2 when user is a S1) (Fatal) </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674a6cb33b651fc5da08c8e12aad52cdb7a5"></a>error_ServerFull</em>&nbsp;</td><td class="fielddoc">
-<p>The server is full </p>
+<p>The server is full (Fatal) </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674aeaaaec1a5d5705e268e6388e47ac7d0f"></a>error_CIDSuspended</em>&nbsp;</td><td class="fielddoc">
-<p>The CID is suspended </p>
+<p>The CID is suspended (Fatal) </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674a8e915a82630bb541900e0501cfaedda8"></a>error_InvalidControl</em>&nbsp;</td><td class="fielddoc">
-<p>Invalid control </p>
+<p>Invalid control</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>find the real meaning </dd></dl>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674a629bf58654bc20f4a72cac83c3501eb3"></a>error_InvalidPosition</em>&nbsp;</td><td class="fielddoc">
-<p>Invalid position for rating </p>
+<p>Invalid position for rating (Fatal) </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ab677a20f70496d7a1c10446119f50674afacd21b7d34a35bc9a9575e28f8dba3d"></a>error_SoftwareNotAuthorized</em>&nbsp;</td><td class="fielddoc">
-<p>This software is not authorized </p>
+<p>This software is not authorized (Fatal) </p>
 </td></tr>
 </table>
 
@@ -2476,31 +2484,47 @@ This callback will also be triggered by Squawkbox high speed updates </dd></dl>
 <p>Parameters the user can query the server or other users for </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="a9ff51bcef6c9be595b415a7a9d11f038a154ed49d19d789820937c7db24af33bf"></a>infoQuery_FP</em>&nbsp;</td><td class="fielddoc">
-<p>Request a pilots flightplan. Pilot replies with flightplan (Only send to pilots) </p>
+<p>Request a pilots flightplan. Pilot replies with flightplan (Only send to pilots)</p>
+<p>Replies are received in <a class="el" href="class_cvatlib___network.html#ae0f3d92a2d7bf3b166691b1fffaee023">onFlightPlanReceivedEvent</a></p>
+<dl class="section note"><dt>Note</dt><dd>The internal library will automatically handle the sending of a reply to this info query </dd></dl>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a9ff51bcef6c9be595b415a7a9d11f038a4355f59a6b3b020c626414e067454394"></a>infoQuery_Freq</em>&nbsp;</td><td class="fielddoc">
-<p>Request a pilots frequency (Only send to pilots) </p>
+<p>Request a pilots com1 frequency (Only send to pilots)</p>
+<p>Reply parameters are frequency (eg. 122.8), NULL </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a9ff51bcef6c9be595b415a7a9d11f038ac25ae5f9cd43ba5a2fb09866bb1bbe3e"></a>infoQuery_UserInfo</em>&nbsp;</td><td class="fielddoc">
-<p>Gets user info (Supervisors only) </p>
+<p>Gets user info (Supervisors only)</p>
+<p>Replies are received as a text message</p>
+<dl class="section note"><dt>Note</dt><dd>The internal library will automatically handle the sending of a reply to this info query </dd></dl>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a9ff51bcef6c9be595b415a7a9d11f038a4bede5c6cc2024d1cd441742c5affdd3"></a>infoQuery_ATIS</em>&nbsp;</td><td class="fielddoc">
-<p>Request a controllers text ATIS (Only send to controllers) </p>
+<p>Request a controllers text ATIS (Only send to controllers)</p>
+<p>Replies are received as multiple <a class="el" href="class_cvatlib___network.html#a780741c8d66bfce5c4f20308b81d0595">onAtisReplyReceivedEvent</a> </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a9ff51bcef6c9be595b415a7a9d11f038a86b97a6716a4845046f9b4c297e5daef"></a>infoQuery_Server</em>&nbsp;</td><td class="fielddoc">
-<p>What server is this client on? </p>
+<p>What server is this client on?</p>
+<p>Reply parameters are HostnameOrIP, NULL</p>
+<dl class="section note"><dt>Note</dt><dd>The internal library will automatically handle the sending of a reply to this info query </dd></dl>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a9ff51bcef6c9be595b415a7a9d11f038aab7929111c1d1cd708a0b70c697ae321"></a>infoQuery_Name</em>&nbsp;</td><td class="fielddoc">
-<p>What is this clients real name? </p>
+<p>What is this clients real name?</p>
+<p>Reply parameters are Name, SectorFile (empty string for pilots) </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a9ff51bcef6c9be595b415a7a9d11f038a8156c5191d7374a2f7fd806dffe7c909"></a>infoQuery_ATC</em>&nbsp;</td><td class="fielddoc">
-<p>Is this controller working or observing? (Only send to controllers) </p>
+<p>Does this callsign have ATC privileges? (Only send to controllers)</p>
+<p>This info query actually gets sent to the server. If a blank callsign is sent, server assumes client is asking about itself</p>
+<p>Reply parameters are YorN, CallsignChecked (If you sent blank callsign, will be NULL)</p>
+<dl class="section note"><dt>Note</dt><dd>The internal library will automatically handle the sending of a reply to this info query </dd></dl>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a9ff51bcef6c9be595b415a7a9d11f038a32c6d90d7b88135396b51e5982c5b5cf"></a>infoQuery_Capabilities</em>&nbsp;</td><td class="fielddoc">
-<p>What is this clients capabilities? </p>
+<p>What is this clients capabilities?</p>
+<p>Replies are received in <a class="el" href="class_cvatlib___network.html#ac2f6ee62647bf69974000373cbca3250">onCapabilitiesReplyReceivedEvent</a></p>
+<dl class="section note"><dt>Note</dt><dd>The internal library will automatically handle the sending of a reply to this info query </dd></dl>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a9ff51bcef6c9be595b415a7a9d11f038aa82d0d34621bf6383b088e56355e10e0"></a>infoQuery_IP</em>&nbsp;</td><td class="fielddoc">
-<p>What is my IP? </p>
+<p>What is my public IP? (Only send to server)</p>
+<p>Reply parameters are IP, NULL</p>
+<dl class="section note"><dt>Note</dt><dd>The internal library will automatically handle the sending of a reply to this info query </dd></dl>
 </td></tr>
 </table>
 
@@ -4445,10 +4469,11 @@ This callback will also be triggered by Squawkbox high speed updates </dd></dl>
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="class_invalid_object_exception.html" title="An exception that is thrown if a method is called after the object becomes invalid. ">InvalidObjectException</a></td><td>Thrown if this method is called on an invalid object </td></tr>
     <tr><td class="paramname"><a class="el" href="class_invalid_network_session_exception.html" title="An exception that is thrown if a method requiring a network session is called before a network sessio...">InvalidNetworkSessionException</a></td><td>Thrown if a network session has not been created </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_network_not_connected_exception.html" title="An exception that is thrown if a method requiring a network connection is called before a connection ...">NetworkNotConnectedException</a></td><td>Thrown if there is no network connection </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_network_not_connected_exception.html" title="An exception that is thrown if a method requiring a network connection is called before a connection ...">NetworkNotConnectedException</a></td><td>Thrown if there is no network connection</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>This method does not block </dd></dl>
 
 </div>
 </div>

@@ -188,6 +188,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9bd1915046e406742d3ad702d1e2493d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb1830c8677c447099ec8697b1de04ed"><td class="memItemLeft" align="right" valign="top">VM void CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___voice___simple.html#afb1830c8677c447099ec8697b1de04ed">LeaveRoom</a> (<a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> roomIndex) PVM</td></tr>
 <tr class="separator:afb1830c8677c447099ec8697b1de04ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4be6ab4dcac3d307543e419202fbcf18"><td class="memItemLeft" align="right" valign="top">VM void CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___voice___simple.html#a4be6ab4dcac3d307543e419202fbcf18">SetRoomVolume</a> (<a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> roomIndex, <a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> volume) PVM</td></tr>
+<tr class="separator:a4be6ab4dcac3d307543e419202fbcf18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62532f6eb46dded5baac7f52b7db98ea"><td class="memItemLeft" align="right" valign="top">VM void CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___voice___simple.html#a62532f6eb46dded5baac7f52b7db98ea">SetMicState</a> (<a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> roomIndex, bool micIsOpen) PVM</td></tr>
 <tr class="separator:a62532f6eb46dded5baac7f52b7db98ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d7c98a4b098c4475b3f4202b05cddfc"><td class="memItemLeft" align="right" valign="top">VM bool CALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cvatlib___voice___simple.html#a3d7c98a4b098c4475b3f4202b05cddfc">IsAudioPlaying</a> (<a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a> roomIndex) PVM</td></tr>
@@ -832,7 +834,7 @@ The onHardwareDeviceReceivedEvent does not provide the numerical index required 
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="class_invalid_object_exception.html" title="An exception that is thrown if a method is called after the object becomes invalid. ">InvalidObjectException</a></td><td>Thrown if this method is called on an invalid object </td></tr>
     <tr><td class="paramname"><a class="el" href="class_object_not_setup_exception.html" title="An exception that is thrown if a method is called before the setup function. ">ObjectNotSetupException</a></td><td>Thrown if this method is called before the setup method is called </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isnt valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index </td></tr>
     <tr><td class="paramname"><a class="el" href="class_room_not_connected_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t connected. ">RoomNotConnectedException</a></td><td>Thrown if this method is called with a room that isn't connected </td></tr>
   </table>
   </dd>
@@ -882,7 +884,7 @@ The onHardwareDeviceReceivedEvent does not provide the numerical index required 
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="class_invalid_object_exception.html" title="An exception that is thrown if a method is called after the object becomes invalid. ">InvalidObjectException</a></td><td>Thrown if this method is called on an invalid object </td></tr>
     <tr><td class="paramname"><a class="el" href="class_object_not_setup_exception.html" title="An exception that is thrown if a method is called before the setup function. ">ObjectNotSetupException</a></td><td>Thrown if this method is called before the setup method is called </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isnt valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index </td></tr>
     <tr><td class="paramname"><a class="el" href="class_room_not_connected_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t connected. ">RoomNotConnectedException</a></td><td>Thrown if this method is called with a room that isn't connected</td></tr>
   </table>
   </dd>
@@ -942,7 +944,7 @@ The onRoomUserReceivedEvent is called separately for each user in the room and d
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="class_invalid_object_exception.html" title="An exception that is thrown if a method is called after the object becomes invalid. ">InvalidObjectException</a></td><td>Thrown if this method is called on an invalid object </td></tr>
     <tr><td class="paramname"><a class="el" href="class_object_not_setup_exception.html" title="An exception that is thrown if a method is called before the setup function. ">ObjectNotSetupException</a></td><td>Thrown if this method is called before the setup method is called </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isnt valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index </td></tr>
     <tr><td class="paramname"><a class="el" href="class_room_not_connected_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t connected. ">RoomNotConnectedException</a></td><td>Thrown if this method is called with a room that isn't connected </td></tr>
   </table>
   </dd>
@@ -1167,7 +1169,7 @@ The onRoomUserReceivedEvent is called separately for each user in the room and d
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="class_invalid_object_exception.html" title="An exception that is thrown if a method is called after the object becomes invalid. ">InvalidObjectException</a></td><td>Thrown if this method is called on an invalid object </td></tr>
     <tr><td class="paramname"><a class="el" href="class_object_not_setup_exception.html" title="An exception that is thrown if a method is called before the setup function. ">ObjectNotSetupException</a></td><td>Thrown if this method is called before the setup method is called </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isnt valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index</td></tr>
+    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index</td></tr>
   </table>
   </dd>
 </dl>
@@ -1203,7 +1205,7 @@ When this function returns true, it only means that the neccessary requirements 
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="class_invalid_object_exception.html" title="An exception that is thrown if a method is called after the object becomes invalid. ">InvalidObjectException</a></td><td>Thrown if this method is called on an invalid object </td></tr>
     <tr><td class="paramname"><a class="el" href="class_object_not_setup_exception.html" title="An exception that is thrown if a method is called before the setup function. ">ObjectNotSetupException</a></td><td>Thrown if this method is called before the setup method is called </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isnt valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index </td></tr>
     <tr><td class="paramname"><a class="el" href="class_room_not_connected_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t connected. ">RoomNotConnectedException</a></td><td>Thrown if this method is called with a room that isn't connected</td></tr>
   </table>
   </dd>
@@ -1380,7 +1382,7 @@ When this function returns true, it only means that the neccessary requirements 
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="class_invalid_object_exception.html" title="An exception that is thrown if a method is called after the object becomes invalid. ">InvalidObjectException</a></td><td>Thrown if this method is called on an invalid object </td></tr>
     <tr><td class="paramname"><a class="el" href="class_object_not_setup_exception.html" title="An exception that is thrown if a method is called before the setup function. ">ObjectNotSetupException</a></td><td>Thrown if this method is called before the setup method is called </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isnt valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index </td></tr>
     <tr><td class="paramname"><a class="el" href="class_room_not_connected_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t connected. ">RoomNotConnectedException</a></td><td>Thrown if this method is called with a room that isn't connected </td></tr>
   </table>
   </dd>
@@ -1430,7 +1432,7 @@ When this function returns true, it only means that the neccessary requirements 
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="class_invalid_object_exception.html" title="An exception that is thrown if a method is called after the object becomes invalid. ">InvalidObjectException</a></td><td>Thrown if this method is called on an invalid object </td></tr>
     <tr><td class="paramname"><a class="el" href="class_object_not_setup_exception.html" title="An exception that is thrown if a method is called before the setup function. ">ObjectNotSetupException</a></td><td>Thrown if this method is called before the setup method is called </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isnt valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t valid. ">InvalidRoomException</a></td><td>Thrown if this method is called with an invalid room index </td></tr>
     <tr><td class="paramname"><a class="el" href="class_room_not_connected_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t connected. ">RoomNotConnectedException</a></td><td>Thrown if this method is called with a room that isn't connected </td></tr>
   </table>
   </dd>
@@ -1548,6 +1550,48 @@ When this function returns true, it only means that the neccessary requirements 
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This volume setting is independent of the operating system volume control and operates by modifying the incoming data before it gets passed to the operating system </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4be6ab4dcac3d307543e419202fbcf18"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VM void CALL Cvatlib_Voice_Simple::SetRoomVolume </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a>&#160;</td>
+          <td class="paramname"><em>roomIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vatlib_8h.html#afeeffe52c8fd59db7c61cf8b02042dbf">INT</a>&#160;</td>
+          <td class="paramname"><em>volume</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the volume of the output on a per-room basis</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">roomIndex</td><td>The 0-based index of the room to change </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">volume</td><td>The volume to set on the room. Valid values 0-100 where 0 is mute and 100 is no change in volume</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="class_invalid_object_exception.html" title="An exception that is thrown if a method is called after the object becomes invalid. ">InvalidObjectException</a></td><td>Thrown if this method is called on an invalid object </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_object_not_setup_exception.html" title="An exception that is thrown if a method is called before the setup function. ">ObjectNotSetupException</a></td><td>Thrown if this method is called before the setup method is called</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This volume setting is implemented as a modifier to the output volume set by <a class="el" href="class_cvatlib___voice___simple.html#a0d324e1ef66aebc9a0732e1b31cc818a">SetOutputVolume</a> </dd></dl>
 
 </div>
 </div>

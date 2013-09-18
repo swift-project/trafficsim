@@ -65,6 +65,7 @@ var class_cvatlib___voice___simple =
     [ "SetOutputDevice", "class_cvatlib___voice___simple.html#a5bf9e173df65d9ce1b150eeba2bb69dd", null ],
     [ "SetOutputSquelch", "class_cvatlib___voice___simple.html#a3b09302759f4a90a8e8b00c03b8a4977", null ],
     [ "SetOutputVolume", "class_cvatlib___voice___simple.html#a0d324e1ef66aebc9a0732e1b31cc818a", null ],
+    [ "SetRoomVolume", "class_cvatlib___voice___simple.html#a4be6ab4dcac3d307543e419202fbcf18", null ],
     [ "SetSideToneVolume", "class_cvatlib___voice___simple.html#af47e68c174d21876f62b815f454017a8", null ],
     [ "Setup", "class_cvatlib___voice___simple.html#a6c8da54c344948608be4705cd553cbce", null ],
     [ "StartPlaybackTest", "class_cvatlib___voice___simple.html#ab649dca0c5b369c4221897f3871b89c9", null ],

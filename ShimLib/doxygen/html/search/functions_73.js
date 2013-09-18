@@ -24,6 +24,7 @@ var searchData=
   ['setoutputsquelch',['SetOutputSquelch',['../class_cvatlib___voice___simple.html#a3b09302759f4a90a8e8b00c03b8a4977',1,'Cvatlib_Voice_Simple']]],
   ['setoutputvolume',['SetOutputVolume',['../class_cvatlib___voice___simple.html#a0d324e1ef66aebc9a0732e1b31cc818a',1,'Cvatlib_Voice_Simple']]],
   ['setpilotlogininfo',['SetPilotLoginInfo',['../class_cvatlib___network.html#a7db9e7268969e1f4f8844833c5c2063a',1,'Cvatlib_Network']]],
+  ['setroomvolume',['SetRoomVolume',['../class_cvatlib___voice___simple.html#a4be6ab4dcac3d307543e419202fbcf18',1,'Cvatlib_Voice_Simple']]],
   ['setsidetonevolume',['SetSideToneVolume',['../class_cvatlib___voice___simple.html#af47e68c174d21876f62b815f454017a8',1,'Cvatlib_Voice_Simple']]],
   ['setup',['Setup',['../class_cvatlib___voice___simple.html#a6c8da54c344948608be4705cd553cbce',1,'Cvatlib_Voice_Simple']]],
   ['setwantbreak',['SetWantBreak',['../class_cvatlib___network.html#ae74d16df138f83ab9101b9d8296471a9',1,'Cvatlib_Network']]],

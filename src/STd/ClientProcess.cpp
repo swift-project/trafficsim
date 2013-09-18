@@ -46,21 +46,21 @@ ClientProcess::ClientProcess(pClient client)
 			mNetwork->InstallOnTextMessageReceivedEvent(&ClientProcess::TextMessageReceived, this);
 			PushNextUpdate();
 		}
-		catch (InvalidObjectException* e)
+        catch (InvalidObjectException e)
 		{
-			qDebug() << "ShimException: " << e->what();
+            qDebug() << "ShimException: " << e.what();
 			mNetwork = 0;
 		}
-		catch (NetworkSessionExistsException* e)
+        catch (NetworkSessionExistsException e)
 		{
-			qDebug() << "ShimException: " << e->what();
+            qDebug() << "ShimException: " << e.what();
 			mNetwork = 0;
 		}
-		catch(std::exception* e)
+        catch(std::exception e)
 		{
-			qDebug() << "StdException: " << e->what();
+            qDebug() << "StdException: " << e.what();
 		}
-	}
+    }
 }
 
 bool ClientProcess::LoginToServer()
@@ -77,22 +77,22 @@ bool ClientProcess::LoginToServer()
 		{
 			retVal = mNetwork->ConnectAndLogon();
 		}
-		catch (InvalidObjectException * e)
+        catch (InvalidObjectException e)
 		{
-			qDebug() << mClient->GetCallsign() << ": " << e->what();
+            qDebug() << mClient->GetCallsign() << ": " << e.what();
 		}
-		catch (InvalidNetworkSessionException * e)
+        catch (InvalidNetworkSessionException e)
 		{
-			qDebug() << mClient->GetCallsign() << ": " << e->what();
+            qDebug() << mClient->GetCallsign() << ": " << e.what();
 		}
 		if(!retVal)
 		{
 			qDebug() << qPrintable(mClient->GetCallsign()) << " error in connecting!";
 			return false;
 		}
-		qDebug() << qPrintable(mClient->GetCallsign()) << " connected!";
-		isConnected = true;
-		return true;
+        //qDebug() << qPrintable(mClient->GetCallsign()) << " connected!";
+        //isConnected = true;
+        return true;
 	}
 	return false;
 }
@@ -103,11 +103,11 @@ void ClientProcess::Run()
 	{
 		ClientFinished();
 		return;
-	}
-	QTimer::singleShot(mNextUpdate->GetTimeDiff(), this, SLOT(DoNextEvent()));
+    }
+    QTimer::singleShot(mNextUpdate->GetTimeDiff(), this, SLOT(DoNextEvent()));
 
-	mTimer = new QTimer(this);
-	QObject::connect(mTimer, SIGNAL(timeout()), this, SLOT(ProcessShimLib()));
+    mTimer = new QTimer(this);
+    mProcessShimLibConnection = QObject::connect(mTimer, &QTimer::timeout, this, &ClientProcess::ProcessShimLib);
 	mTimer->start(100);
 }
 
@@ -123,102 +123,107 @@ void ClientProcess::SendTextMsg(pTimeUpdate Update)
 	{
 		mNetwork->SendPrivateTextMessage(text->GetReceiver().toStdString().c_str(), text->GetMessage().toStdString().c_str());
 	}
-	catch (InvalidObjectException * e)
+    catch (InvalidObjectException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
-	catch (InvalidNetworkSessionException * e)
+    catch (InvalidNetworkSessionException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
-	catch (NetworkNotConnectedException * e)
+    catch (NetworkNotConnectedException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
 }
 
 void ClientProcess::DoNextEvent()
 {
 	pTimeUpdate UpdateTask = mNextUpdate;
-	PushNextUpdate();
-	if(mNextUpdate != 0)
-	{
-		// load Timer for next shot:
-		QTimer::singleShot(mNextUpdate->GetTimeDiff(), this, SLOT(DoNextEvent()));
-	}
+    PushNextUpdate();
 
 	// do stuff with UpdateTask:
 	qDebug() << qPrintable(mClient->GetCallsign()) << ": " << qPrintable(UpdateReasonToString(UpdateTask->GetUpdateReason()));
 	if(!(UpdateTask->GetUpdateReason() == RemoveAirplaneReason || UpdateTask->GetUpdateReason() == RemoveATCReason) && !isConnected)
 	{
 		if(!LoginToServer())
-		{
-			QObject::disconnect(mTimer, SIGNAL(timeout()), this, SLOT(ProcessShimLib()));
+        {
+            QObject::disconnect(mProcessShimLibConnection);
 			try
 			{
 				mNetwork->DestroyNetworkSession();
 			}
-			catch (InvalidObjectException * e)
+            catch (InvalidObjectException e)
 			{
-				qDebug() << e->what();
+                qDebug() << e.what();
 			}
-			catch (InvalidNetworkSessionException * e)
+            catch (InvalidNetworkSessionException e)
 			{
-				qDebug() << e->what();
+                qDebug() << e.what();
 			}
 			ClientFinished();
 			qDebug() << "closing because of error on connecting";
 			return;
-		}
-		this->ProcessShimLib();
-	}
-	if(UpdateTask->GetUpdateReason() == PositionAirplaneReason || UpdateTask->GetUpdateReason() == PositionATCReason)
-	{
-		SendPositionInfo(UpdateTask);
-	}
-	else if(UpdateTask->GetUpdateReason() == TextMsg)
-	{
-		SendTextMsg(UpdateTask);
-	}
-	else if (UpdateTask->GetUpdateReason() == RemoveAirplaneReason || UpdateTask->GetUpdateReason() == RemoveATCReason)
-	{
-		try
-		{
-			mNetwork->LogoffAndDisconnect(-1);
-		}
-		catch (InvalidObjectException * e)
-		{
-			qDebug() << mClient->GetCallsign() << ": " << e->what();
-		}
-		catch (InvalidNetworkSessionException * e)
-		{
-			qDebug() << mClient->GetCallsign() << ": " << e->what();
-		}
-		catch (NetworkNotConnectedException * e)
-		{
-			qDebug() << mClient->GetCallsign() << ": " << e->what();
-		}
-	}
+        }
+        else
+        {
+            // connection is in progress...
+            return;
+        }
+    }
+    if(mNextUpdate != 0)
+    {
+        // load Timer for next shot:
+        QTimer::singleShot(mNextUpdate->GetTimeDiff(), this, SLOT(DoNextEvent()));
+    }
+    if(UpdateTask->GetUpdateReason() == PositionAirplaneReason || UpdateTask->GetUpdateReason() == PositionATCReason)
+    {
+        SendPositionInfo(UpdateTask);
+    }
+    else if(UpdateTask->GetUpdateReason() == TextMsg)
+    {
+        SendTextMsg(UpdateTask);
+    }
+    else if (UpdateTask->GetUpdateReason() == RemoveAirplaneReason || UpdateTask->GetUpdateReason() == RemoveATCReason)
+    {
+        try
+        {
+            mNetwork->LogoffAndDisconnect(-1);
+        }
+        catch (InvalidObjectException e)
+        {
+            qDebug() << mClient->GetCallsign() << ": " << e.what();
+        }
+        catch (InvalidNetworkSessionException e)
+        {
+            qDebug() << mClient->GetCallsign() << ": " << e.what();
+        }
+        catch (NetworkNotConnectedException e)
+        {
+            qDebug() << mClient->GetCallsign() << ": " << e.what();
+        }
+        isConnected = false;
+    }
 
 	if(mNextUpdate == 0)
-	{
-		QObject::disconnect(mTimer, SIGNAL(timeout()), this, SLOT(ProcessShimLib()));
+    {
+        QObject::disconnect(mProcessShimLibConnection);
 		try
 		{
 			mNetwork->LogoffAndDisconnect(-1);
 			mNetwork->DestroyNetworkSession();
 		}
-		catch (InvalidObjectException * e)
+        catch (InvalidObjectException e)
 		{
-			qDebug() << e->what();
+            qDebug() << e.what();
 		}
-		catch (InvalidNetworkSessionException * e)
+        catch (InvalidNetworkSessionException e)
 		{
-			qDebug() << e->what();
+            qDebug() << e.what();
 		}
-		catch (NetworkNotConnectedException * e)
+        catch (NetworkNotConnectedException e)
 		{
-			qDebug() << mClient->GetCallsign() << ": " << e->what();
+            qDebug() << mClient->GetCallsign() << ": " << e.what();
 		}
 		ClientFinished();
 		qDebug() << "closing";
@@ -231,13 +236,13 @@ void ClientProcess::ProcessShimLib()
 	{
 		mNetwork->DoProcessing();
 	}
-	catch (InvalidObjectException * e)
+    catch (InvalidObjectException e)
 	{
-		qDebug() << e->what();
+        qDebug() << e.what();
 	}
-	catch (InvalidNetworkSessionException * e)
+    catch (InvalidNetworkSessionException e)
 	{
-		qDebug() << e->what();
+        qDebug() << e.what();
 	}
 }
 
@@ -263,11 +268,13 @@ void ClientProcess::ConnectionStatusChanged(Cvatlib_Network * obj, Cvatlib_Netwo
 	qDebug() <<	"    new: " << ConvertConnStatusToQString(newStatus);
 	if(oldStatus == Cvatlib_Network::connStatus_Connecting && newStatus == Cvatlib_Network::connStatus_Connected)
 	{
+        client->isConnected = true;
 		QTimer::singleShot(client->mNextUpdate->GetTimeDiff(), client, SLOT(DoNextEvent()));
 	}
 	if(newStatus == Cvatlib_Network::connStatus_Disconnected)
 	{
 		// close it
+        client->isConnected = false;
 	}
 }
 
@@ -300,17 +307,17 @@ void ClientProcess::TextMessageReceived(Cvatlib_Network * obj, const char * from
 		{
 			obj->SendPrivateTextMessage(from, newMessage);
 		}
-		catch (InvalidObjectException * e)
+        catch (InvalidObjectException e)
 		{
-			qDebug() << client->mClient->GetCallsign() << ": " << e->what();
+            qDebug() << client->mClient->GetCallsign() << ": " << e.what();
 		}
-		catch (InvalidNetworkSessionException * e)
+        catch (InvalidNetworkSessionException e)
 		{
-			qDebug() << client->mClient->GetCallsign() << ": " << e->what();
+            qDebug() << client->mClient->GetCallsign() << ": " << e.what();
 		}
-		catch (NetworkNotConnectedException * e)
+        catch (NetworkNotConnectedException e)
 		{
-			qDebug() << client->mClient->GetCallsign() << ": " << e->what();
+            qDebug() << client->mClient->GetCallsign() << ": " << e.what();
 		}
 	}
 }

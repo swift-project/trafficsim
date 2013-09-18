@@ -124,7 +124,7 @@ WARNING</h1>
 <p>It is not legal to invoke any voice routines from a voice callback.</p>
 <p>It is recommended that one of the following two methods is used to handle calls to the VATSIM library to deal with the threading limitations:</p>
 <ol type="1">
-<li>Always call library functions from the main thread. The libraries functions do not block, so the program simply needs to call them with adequate frequency</li>
+<li>Always call library functions from the main thread. The libraries functions do not block, so the program simply needs to call them with adequate frequency.</li>
 <li>Always call library functions from a single worker thread and use some kind of synchronizing structure, such as a message queue, to send commands to the library worker thread. Additional message queues may be required for callbacks.</li>
 </ol>
 <p>It is the clients responsibility to call destruction/deallocation routines on all objects/handles.</p>
@@ -134,7 +134,8 @@ WARNING</h1>
 <p>Failure to destroy <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> or <a class="el" href="class_cvatlib___voice___simple.html" title="Contains functions and variables for the simple implementation of the voice library. This is most suitable for a pilot client. ">Cvatlib_Voice_Simple</a> objects may cause resources to not be released. Ensure that all exit paths properly destroy these objects so that their destructors are run.</p>
 <h1><a class="anchor" id="buildnotes"></a>
 BUILD NOTES</h1>
-<p>For Linux, the following defines should be present: VATLIB_STATIC, NOSTDCALL, DEFNULL </p>
+<p>For Linux, the following defines should be present: VATLIB_STATIC, NOSTDCALL, DEFNULL</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>The character encoding on the network is currently unknown, for now assume ASCII </dd></dl>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

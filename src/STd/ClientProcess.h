@@ -50,6 +50,7 @@ private:
 	pTimeUpdate mNextUpdate;
 	QTimer * mTimer;
     bool isConnected;
+    QMetaObject::Connection mProcessShimLibConnection;
 };
 
 #endif

@@ -23,7 +23,7 @@
     #define USER_ID		"111111"
     #define USER_PASS	"111111"
 #else
-    #define SERVER_ADDR	"192.168.192.128"
+    #define SERVER_ADDR	"192.168.222.128"
     #define SERVER_PORT	6809
     #define USER_ID		"sup"
     #define USER_PASS	"sup"
@@ -115,12 +115,11 @@ int main(int argc, char *argv[])
 			process = new ControllerClientProcess(*iter);
 		}
 		if(process != 0)
-		{
-			QThread * thread = new QThread();
-			QThread::connect(thread, SIGNAL(started()), process, SLOT(Run()));
-			//QThread::connect(thread, SIGNAL(finished()), process, SLOT(deleteLater()));
-			QThread::connect(thread, SIGNAL(finished()), closer, SLOT(AllThreadsClosed()));
-			QThread::connect(process, SIGNAL(ClientFinished()), thread, SLOT(quit()));
+        {
+            QThread * thread = new QThread();
+            QThread::connect(thread, &QThread::started, process, &ClientProcess::Run);
+            QThread::connect(thread, &QThread::finished, closer, &ThreadHelper::AllThreadsClosed);
+            QThread::connect(process, &ClientProcess::ClientFinished, thread, &QThread::quit);
 
 			process->moveToThread(thread);
 			thread->start();
@@ -128,5 +127,10 @@ int main(int argc, char *argv[])
 			Threads.append(thread);
 		}
 	}
+    if(Cont.size() == 0)
+    {
+        qDebug() << "No Data!";
+        return 0;
+    }
 	return a.exec();
 }

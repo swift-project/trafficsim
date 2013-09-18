@@ -24,13 +24,13 @@ void ControllerClientProcess::SetLoginInformation()
                                     Username.toStdString().c_str(), Password.toStdString().c_str(),
                                     ControllerInfo);
 	}
-	catch (InvalidObjectException * e)
+    catch (InvalidObjectException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
-	catch (InvalidNetworkSessionException * e)
+    catch (InvalidNetworkSessionException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
 }
 
@@ -49,16 +49,16 @@ void ControllerClientProcess::SendPositionInfo(pTimeUpdate Update)
 	{
 		mNetwork->SendATCUpdate(ATCUpdate);
 	}
-	catch (InvalidObjectException * e)
+    catch (InvalidObjectException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
-	catch (InvalidNetworkSessionException * e)
+    catch (InvalidNetworkSessionException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
-	catch (NetworkNotConnectedException * e)
+    catch (NetworkNotConnectedException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
 }

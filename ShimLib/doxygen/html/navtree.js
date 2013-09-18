@@ -16,9 +16,14 @@ var NAVTREE =
         [ "03/27/2013 09:04 pm", "changelog.html#change7", null ],
         [ "03/28/2013 06:46 pm", "changelog.html#change8", null ],
         [ "05/03/2013 04:22 pm", "changelog.html#change9", null ],
-        [ "06/06/2013 10:15 am", "changelog.html#change10", null ]
+        [ "06/06/2013 10:15 am", "changelog.html#change10", null ],
+        [ "07/08/2013 12:00 pm", "changelog.html#change11", null ],
+        [ "07/21/2013 05:46 pm", "changelog.html#change12", null ],
+        [ "08/23/2013 12:42 pm", "changelog.html#change13", null ]
       ] ]
     ] ],
+    [ "Todo List", "todo.html", null ],
+    [ "Deprecated List", "deprecated.html", null ],
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],
       [ "Class Index", "classes.html", null ],
@@ -46,7 +51,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"class_cvatlib___network.html#ac9848b96e2ae41c23d96fa8d338a25d0"
+"class_cvatlib___network.html#ac71eea6e5f88ff5db89dd0668fc1663b"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

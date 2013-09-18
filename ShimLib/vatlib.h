@@ -151,27 +151,29 @@ public:
 		*/
 		error_Ok = 0,
 		/**
-			The selected callsign is already being used by a connected user
+			The selected callsign is already being used by a connected user (Fatal)
 		*/
 		error_CallsignTaken = 1,
 		/**
-			The selected callsign is invalid
+			The selected callsign is invalid (Fatal)
 		*/
 		error_CallsignInvalid = 2,
 		/**
-			Already registered
+			Already registered (Fatal)
+
+			@todo find the real meaning
 		*/
 		error_Registered = 3,
 		/**
-			Syntax error
+			Syntax error in packet
 		*/
 		error_Syntax = 4,
 		/**
-			Invalid source
+			Invalid source (sender) callsign in packet
 		*/
 		error_SourceInvalid = 5,
 		/**
-			Invalid CID or Password
+			Invalid CID or Password (Fatal)
 		*/
 		error_CIDPasswdInvalid = 6,
 		/**
@@ -179,39 +181,41 @@ public:
 		*/
 		error_CallsignNotExists = 7,
 		/**
-			No flightplan
+			No flightplan available for that callsign
 		*/
 		error_NoFP = 8,
 		/**
-			No such weather profile
+			The requested weather profile does not exist
 		*/
 		error_NoWeather = 9,
 		/**
-			Invalid protocol version
+			Invalid protocol version (Fatal)
 		*/
 		error_ProtoVersion = 10,
 		/**
-			Requested level too high
+			Requested level too high (eg. login as S2 when user is a S1) (Fatal)
 		*/
 		error_LevelTooHigh = 11,
 		/**
-			The server is full
+			The server is full (Fatal)
 		*/
 		error_ServerFull = 12,
 		/**
-			The CID is suspended
+			The CID is suspended (Fatal)
 		*/
 		error_CIDSuspended = 13,
 		/**
 			Invalid control
+
+			@todo find the real meaning
 		*/
 		error_InvalidControl = 14,
 		/**
-			Invalid position for rating
+			Invalid position for rating (Fatal)
 		*/
 		error_InvalidPosition = 15,
 		/**
-			This software is not authorized
+			This software is not authorized (Fatal)
 		*/
 		error_SoftwareNotAuthorized = 16
 	};
@@ -246,7 +250,9 @@ public:
 		*/
 		connectionType_ATC = 2,
 		/**
-			AVC. Should not be used, this is an old type for use by AVC only
+			AVC
+
+			@deprecated This is a legacy value for the Advanced Voice Client and should not be used
 		*/
 		connectionType_AVC = 3
 	};
@@ -556,38 +562,70 @@ public:
 	enum infoQuery_enum {
 		/**
 			Request a pilots flightplan. Pilot replies with flightplan (Only send to pilots)
+
+			Replies are received in @ref onFlightPlanReceivedEvent
+
+			@note The internal library will automatically handle the sending of a reply to this info query
 		*/
 		infoQuery_FP = 0,
 		/**
-			Request a pilots frequency (Only send to pilots)
+			Request a pilots com1 frequency (Only send to pilots)
+
+			Reply parameters are frequency (eg. 122.8), NULL
 		*/
 		infoQuery_Freq = 1,
 		/**
 			Gets user info (Supervisors only)
+
+			Replies are received as a text message
+
+			@note The internal library will automatically handle the sending of a reply to this info query
 		*/
 		infoQuery_UserInfo = 2,
 		/**
 			Request a controllers text ATIS (Only send to controllers)
+
+			Replies are received as multiple @ref onAtisReplyReceivedEvent
 		*/
 		infoQuery_ATIS = 3,
 		/**
 			What server is this client on?
+
+			Reply parameters are HostnameOrIP, NULL
+
+			@note The internal library will automatically handle the sending of a reply to this info query
 		*/
 		infoQuery_Server = 4,
 		/**
 			What is this clients real name?
+
+			Reply parameters are Name, SectorFile (empty string for pilots)
 		*/
 		infoQuery_Name = 5,
 		/**
-			Is this controller working or observing? (Only send to controllers)
+			Does this callsign have ATC privileges? (Only send to controllers)
+
+			This info query actually gets sent to the server. If a blank callsign is sent, server assumes client is asking about itself
+
+			Reply parameters are YorN, CallsignChecked (If you sent blank callsign, will be NULL)
+
+			@note The internal library will automatically handle the sending of a reply to this info query
 		*/
 		infoQuery_ATC = 6,
 		/**
 			What is this clients capabilities?
+
+			Replies are received in @ref onCapabilitiesReplyReceivedEvent
+
+			@note The internal library will automatically handle the sending of a reply to this info query
 		*/
 		infoQuery_Capabilities = 7,
 		/**
-			What is my IP?
+			What is my public IP? (Only send to server)
+
+			Reply parameters are IP, NULL
+
+			@note The internal library will automatically handle the sending of a reply to this info query
 		*/
 		infoQuery_IP = 8
 	};
@@ -600,13 +638,13 @@ public:
 	/**
 		@name ATIS Line Identifiers
 
-		@note The atisType type is meant to hold the character code number of the chars in the enum
+		@note The atisLineType type is meant to hold the character code number of the chars in the enum
 	*/
 	///@{
 	/**
 		@name ATIS Line Identifiers
 
-		@note The atisType type is meant to hold the character code number of the chars in the enum
+		@note The atisLineType type is meant to hold the character code number of the chars in the enum
 	*/
 	enum atisLineType_enum {
 		/**
@@ -1164,7 +1202,10 @@ public:
 	} StormLayer;
 
 	/* Callback Definitions */
-
+	/**
+		@name Setup and Handling Callbacks
+	*/
+	///@{
 	/**
 		A callback for when the connection status of the network changes
 
@@ -1175,6 +1216,22 @@ public:
 	*/
 	typedef void (*onConnectionStatusChangedEvent) (Cvatlib_Network* obj, connStatus oldStatus, connStatus newStatus, void* cbVar);
 
+	/**
+		A callback for when the server returns an error
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] type Passes in the error type from the error struct
+		@param[in] message Passes in the error message returned by the server
+		@param[in] errorData Passes in extra data related to certain errors. eg. On a flight plan not found error, the pilot whose flight plan wasn't found
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onErrorReceivedEvent) (Cvatlib_Network* obj, error type, const char* message, const char* errorData, void* cbVar);
+	///@}
+
+	/**
+		@name Basic Communications Callbacks
+	*/
+	///@{
 	/**
 		A callback for when a private text message is received
 
@@ -1198,126 +1255,6 @@ public:
 		@param[in] cbVar Passes in a variable defined when the callback is installed
 	*/
 	typedef void (*onRadioMessageReceivedEvent) (Cvatlib_Network* obj, const char* from, INT numFreq, INT* freqList, const char* message, void* cbVar);
-
-	/**
-		A callback for when a pilot disconnects from the network
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] callsign Passes in the callsign of the pilot who disconnected
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onPilotDisconnectedEvent) (Cvatlib_Network* obj, const char* callsign, void* cbVar);
-
-	/**
-		A callback for when a controller disconnects from the network
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] callsign Passes in the callsign of the controller who disconnected
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onControllerDisconnectedEvent) (Cvatlib_Network* obj, const char* callsign, void* cbVar);
-
-	/**
-		A callback for when a pilot position update comes in
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] callsign Passes in the callsign of the pilot whose position has been updated
-		@param[in] pos Passes in a PilotPosUpdate struct with the new data
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onPilotPositionUpdateEvent) (Cvatlib_Network* obj, const char* callsign, PilotPosUpdate pos, void* cbVar);
-
-	/**
-		A callback for when an interim (high speed) pilot position update comes in
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] callsign Passes in the callsign of the pilot whose position has been updated
-		@param[in] pos Passes in a PilotPosUpdate struct with the new data
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-
-		@note The PilotPosUpdate will only contain valid values for latitude, longitude, true altitude, pitch, bank, and heading
-		@note This callback will also be triggered by Squawkbox high speed updates
-	*/
-	typedef void (*onInterimPilotPositionUpdateEvent) (Cvatlib_Network* obj, const char* callsign, PilotPosUpdate pos, void* cbVar);
-
-	/**
-		A callback for when an ATC position update comes in
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] callsign Passes in the callsign of the controller whose position has been updated
-		@param[in] pos Passes in an ATCPosUpdate struct with the new data
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onAtcPositionUpdateEvent) (Cvatlib_Network* obj, const char* callsign, ATCPosUpdate pos, void* cbVar);
-
-	/**
-		A callback for when the user are kicked from the network
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] reason Passes in the reason provided by the supervisor for kicking the user
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onKickedEvent) (Cvatlib_Network* obj, const char* reason, void* cbVar);
-
-	/**
-		A callback for when the user receive a reply to a ping
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] callsign Passes in the callsign of the client who has responded to a ping
-		@param[in] elapsedTime Passes in the amount of time that it took to receive the reply
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onPongEvent) (Cvatlib_Network* obj, const char* callsign, INT elapsedTime, void* cbVar);
-
-	/**
-		A callback for when the user receive a flight plan
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] callsign Passes in the callsign of the pilot whose flightplan has been updated
-		@param[in] fp Passes in a FlightPlan struct with the new/updated flight plan information
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onFlightPlanReceivedEvent) (Cvatlib_Network* obj, const char* callsign, FlightPlan fp, void* cbVar);
-
-	/**
-		A callback for when the user receive a request to handoff an aircraft to the user
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] atcCallsign Passes in the callsign of the controller who wishes to handoff the aircraft to the user
-		@param[in] acCallsign Passes in the callsign of the aircraft the controller wishes to handoff to the user
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onHandoffRequestReceivedEvent) (Cvatlib_Network* obj, const char* atcCallsign, const char* acCallsign, void* cbVar);
-
-	/**
-		A callback for when another controller has accepted a handoff, not neccessarily from the user
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] atcFromCallsign Passes in the callsign of the controller who handed off the aircraft
-		@param[in] atcToCallsign Passes in the callsign of the controller who has accepted handoff of the aircraft
-		@param[in] acCallsign Passes in the callsign of the aircraft that was handed off
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onHandoffAcceptedEvent) (Cvatlib_Network* obj, const char* atcFromCallsign, const char* atcToCallsign, const char* acCallsign, void* cbVar);
-
-	/**
-		A callback for when a handoff request from/to the user was canceled/rejected
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] atcCallsign Passes in the callsign of the other controller involved in the handoff
-		@param[in] acCallsign Passes in the callsign of the aircraft that is no longer being handed off
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onHandoffCancelledRejectedEvent) (Cvatlib_Network* obj, const char* atcCallsign, const char* acCallsign, void* cbVar);
-
-	/**
-		A callback for when METAR data is received
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] data Passes in the content of the METAR
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onMetarReceivedEvent) (Cvatlib_Network* obj, const char* data, void* cbVar);
 
 	/**
 		A callback for when an infoQuery request is received
@@ -1372,45 +1309,14 @@ public:
 	typedef void (*onAtisReplyReceivedEvent) (Cvatlib_Network* obj, const char* callsign, atisLineType type, const char* data, void* cbVar);
 
 	/**
-		A callback for when the temperature layers are received
+		A callback for when the user receive a flight plan
 
 		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] layers Passes in the temperature layers
-		@param[in] pressure Passes in the barometric pressure in hundredths of inches of mercury. eg. 2992
+		@param[in] callsign Passes in the callsign of the pilot whose flightplan has been updated
+		@param[in] fp Passes in a FlightPlan struct with the new/updated flight plan information
 		@param[in] cbVar Passes in a variable defined when the callback is installed
 	*/
-	typedef void (*onTemperatureDataReceivedEvent) (Cvatlib_Network* obj, TempLayer layers[4], INT pressure, void* cbVar);
-
-	/**
-		A callback for when the server returns an error
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] type Passes in the error type from the error struct
-		@param[in] message Passes in the error message returned by the server
-		@param[in] errorData Passes in extra data related to certain errors. eg. On a flight plan not found error, the pilot whose flight plan wasn't found
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onErrorReceivedEvent) (Cvatlib_Network* obj, error type, const char* message, const char* errorData, void* cbVar);
-
-	/**
-		A callback for when the wind layers are received
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] layers Passes in the wind layers
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onWindDataReceivedEvent) (Cvatlib_Network* obj, WindLayer layers[4], void* cbVar);
-
-	/**
-		A callback for when the cloud layers are received
-
-		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] cLayers Passes in the cloud layers
-		@param[in] sLayer Passes in the storm layer
-		@param[in] visibility Passes in the visibility in statute miles
-		@param[in] cbVar Passes in a variable defined when the callback is installed
-	*/
-	typedef void (*onCloudDataReceivedEvent) (Cvatlib_Network* obj, CloudLayer cLayers[2], StormLayer sLayer, float visibility, void* cbVar);
+	typedef void (*onFlightPlanReceivedEvent) (Cvatlib_Network* obj, const char* callsign, FlightPlan fp, void* cbVar);
 
 	/**
 		A callback for when pilot info is requested
@@ -1432,18 +1338,61 @@ public:
 		@note keysValues is NULL terminated
 	*/
 	typedef void (*onPilotInfoReceivedEvent) (Cvatlib_Network* obj, const char* callsign, const char** keysValues, void* cbVar);
+	///@}
 
 	/**
-		A callback for when a shared state is received from another ATC
+		@name ATC Callbacks
+	*/
+	///@{
+	/**
+		A callback for when a controller disconnects from the network
 
 		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
-		@param[in] atcCallsign Passes in the callsign of the controller who is sending the info
-		@param[in] acCallsign Passes in the callsign of the pilot whose info has been sent
-		@param[in] prop Passes in the ccpPropertyType of the info sent
-		@param[in] data Passes in the new value of the property
+		@param[in] callsign Passes in the callsign of the controller who disconnected
 		@param[in] cbVar Passes in a variable defined when the callback is installed
 	*/
-	typedef void (*onSharedStateReceivedEvent) (Cvatlib_Network* obj, const char* atcCallsign, const char* acCallsign, ccpPropertyType prop, const char* data, void* cbVar);
+	typedef void (*onControllerDisconnectedEvent) (Cvatlib_Network* obj, const char* callsign, void* cbVar);
+
+	/**
+		A callback for when an ATC position update comes in
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] callsign Passes in the callsign of the controller whose position has been updated
+		@param[in] pos Passes in an ATCPosUpdate struct with the new data
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onAtcPositionUpdateEvent) (Cvatlib_Network* obj, const char* callsign, ATCPosUpdate pos, void* cbVar);
+
+	/**
+		A callback for when the user receive a request to handoff an aircraft to the user
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] atcCallsign Passes in the callsign of the controller who wishes to handoff the aircraft to the user
+		@param[in] acCallsign Passes in the callsign of the aircraft the controller wishes to handoff to the user
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onHandoffRequestReceivedEvent) (Cvatlib_Network* obj, const char* atcCallsign, const char* acCallsign, void* cbVar);
+
+	/**
+		A callback for when another controller has accepted a handoff, not neccessarily from the user
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] atcFromCallsign Passes in the callsign of the controller who handed off the aircraft
+		@param[in] atcToCallsign Passes in the callsign of the controller who has accepted handoff of the aircraft
+		@param[in] acCallsign Passes in the callsign of the aircraft that was handed off
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onHandoffAcceptedEvent) (Cvatlib_Network* obj, const char* atcFromCallsign, const char* atcToCallsign, const char* acCallsign, void* cbVar);
+
+	/**
+		A callback for when a handoff request from/to the user was canceled/rejected
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] atcCallsign Passes in the callsign of the other controller involved in the handoff
+		@param[in] acCallsign Passes in the callsign of the aircraft that is no longer being handed off
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onHandoffCancelledRejectedEvent) (Cvatlib_Network* obj, const char* atcCallsign, const char* acCallsign, void* cbVar);
 
 	/**
 		A callback for when a landline command is received from another ATC
@@ -1479,6 +1428,18 @@ public:
 		@param[in] cbVar Passes in a variable defined when the callback is installed
 	*/
 	typedef void (*onBreakCommandReceivedEvent) (Cvatlib_Network* obj, const char* callsign, bool wantsBreak, void* cbVar);
+
+	/**
+		A callback for when a shared state is received from another ATC
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] atcCallsign Passes in the callsign of the controller who is sending the info
+		@param[in] acCallsign Passes in the callsign of the pilot whose info has been sent
+		@param[in] prop Passes in the ccpPropertyType of the info sent
+		@param[in] data Passes in the new value of the property
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onSharedStateReceivedEvent) (Cvatlib_Network* obj, const char* atcCallsign, const char* acCallsign, ccpPropertyType prop, const char* data, void* cbVar);
 
 	/**
 		A callback for when another ATC client queries the local client to see if it is a modern client
@@ -1527,6 +1488,112 @@ public:
 		@param[in] cbVar Passes in a variable defined when the callback is installed
 	*/
 	typedef void (*onHelpRequestReceivedEvent) (Cvatlib_Network* obj, const char* callsign, bool wantsHelp, const char* message, void* cbVar);
+	///@}
+
+	/**
+		@name Pilot Callbacks
+	*/
+	///@{
+	/**
+		A callback for when a pilot disconnects from the network
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] callsign Passes in the callsign of the pilot who disconnected
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onPilotDisconnectedEvent) (Cvatlib_Network* obj, const char* callsign, void* cbVar);
+
+	/**
+		A callback for when a pilot position update comes in
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] callsign Passes in the callsign of the pilot whose position has been updated
+		@param[in] pos Passes in a PilotPosUpdate struct with the new data
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onPilotPositionUpdateEvent) (Cvatlib_Network* obj, const char* callsign, PilotPosUpdate pos, void* cbVar);
+
+	/**
+		A callback for when an interim (high speed) pilot position update comes in
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] callsign Passes in the callsign of the pilot whose position has been updated
+		@param[in] pos Passes in a PilotPosUpdate struct with the new data
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+
+		@note The PilotPosUpdate will only contain valid values for latitude, longitude, true altitude, pitch, bank, and heading
+		@note This callback will also be triggered by Squawkbox high speed updates
+	*/
+	typedef void (*onInterimPilotPositionUpdateEvent) (Cvatlib_Network* obj, const char* callsign, PilotPosUpdate pos, void* cbVar);
+	///@}
+
+	/**
+		@name Administrative Callbacks
+	*/
+	///@{
+	/**
+		A callback for when the user are kicked from the network
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] reason Passes in the reason provided by the supervisor for kicking the user
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onKickedEvent) (Cvatlib_Network* obj, const char* reason, void* cbVar);
+
+	/**
+		A callback for when the user receive a reply to a ping
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] callsign Passes in the callsign of the client who has responded to a ping
+		@param[in] elapsedTime Passes in the amount of time, in seconds, that it took to receive the reply
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onPongEvent) (Cvatlib_Network* obj, const char* callsign, INT elapsedTime, void* cbVar);
+	///@}
+
+	/**
+		@name Weather Callbacks
+	*/
+	///@{
+	/**
+		A callback for when METAR data is received
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] data Passes in the content of the METAR
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onMetarReceivedEvent) (Cvatlib_Network* obj, const char* data, void* cbVar);
+
+	/**
+		A callback for when the temperature layers are received
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] layers Passes in the temperature layers
+		@param[in] pressure Passes in the barometric pressure in hundredths of inches of mercury. eg. 2992
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onTemperatureDataReceivedEvent) (Cvatlib_Network* obj, TempLayer layers[4], INT pressure, void* cbVar);
+
+	/**
+		A callback for when the wind layers are received
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] layers Passes in the wind layers
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onWindDataReceivedEvent) (Cvatlib_Network* obj, WindLayer layers[4], void* cbVar);
+
+	/**
+		A callback for when the cloud layers are received
+
+		@param[in] obj Passes in a reference to the Cvatlib_Network object to which it is registered
+		@param[in] cLayers Passes in the cloud layers
+		@param[in] sLayer Passes in the storm layer
+		@param[in] visibility Passes in the visibility in statute miles
+		@param[in] cbVar Passes in a variable defined when the callback is installed
+	*/
+	typedef void (*onCloudDataReceivedEvent) (Cvatlib_Network* obj, CloudLayer cLayers[2], StormLayer sLayer, float visibility, void* cbVar);
+	///@}
 
 	/* Functions */
 
@@ -1634,6 +1701,8 @@ public:
 		@throws InvalidObjectException Thrown if this method is called on an invalid object
 		@throws InvalidNetworkSessionException Thrown if a network session has not been created
 		@throws NetworkNotConnectedException Thrown if there is no network connection
+
+		@note This method does not block
 	*/
 	VM void CALL LogoffAndDisconnect(INT timeoutSeconds)PVM;
 
@@ -2018,12 +2087,12 @@ public:
 
 	///@}
 	/*
-		*******************
-		* ADMIN FUNCTIONS *
-		*******************
+		****************************
+		* ADMINISTRATIVE FUNCTIONS *
+		****************************
 	*/
 	/**
-		@name Admin Functions
+		@name Administrative Functions
 	*/
 	///@{
 
@@ -2502,6 +2571,8 @@ public:
 	@class NetworkNotConnectedException
 
 	@brief An exception that is thrown if a method requiring a network connection is called before a connection attempt is made
+
+	@note This exception is thrown only by Cvatlib_Network
 */
 class VATLIB_API NetworkNotConnectedException : public VatlibException {
 public:
@@ -2519,6 +2590,8 @@ public:
 	@class InvalidNetworkSessionException
 
 	@brief An exception that is thrown if a method requiring a network session is called before a network session is created
+
+	@note This exception is thrown only by Cvatlib_Network
 */
 class VATLIB_API InvalidNetworkSessionException : public VatlibException {
 public:
@@ -2536,6 +2609,8 @@ public:
 	@class NetworkSessionExistsException
 
 	@brief An exception that is thrown if an attempt to create a network session is made when one already exists
+
+	@note This exception is thrown only by Cvatlib_Network
 */
 class VATLIB_API NetworkSessionExistsException : public VatlibException {
 public:
@@ -2553,6 +2628,8 @@ public:
 	@class ObjectNotSetupException
 
 	@brief An exception that is thrown if a method is called before the setup function
+
+	@note This exception is thrown only by Cvatlib_Voice_Simple
 */
 class VATLIB_API ObjectNotSetupException : public VatlibException {
 public:
@@ -2569,7 +2646,9 @@ public:
 /**
 	@class InvalidRoomException
 
-	@brief An exception that is thrown if a method requiring a room is called when it isnt valid
+	@brief An exception that is thrown if a method requiring a room is called when it isn't valid
+
+	@note This exception is thrown only by Cvatlib_Voice_Simple
 */
 class VATLIB_API InvalidRoomException : public VatlibException {
 public:
@@ -2587,6 +2666,8 @@ public:
 	@class RoomNotConnectedException
 
 	@brief An exception that is thrown if a method requiring a room is called when it isn't connected
+
+	@note This exception is thrown only by Cvatlib_Voice_Simple
 */
 class VATLIB_API RoomNotConnectedException : public VatlibException {
 public:
@@ -2904,6 +2985,19 @@ public:
 		@note This can also be used to abort a JoinRoom that has become hung
 	*/
 	VM void CALL LeaveRoom(INT roomIndex)PVM;
+
+	/**
+		Sets the volume of the output on a per-room basis
+
+		@param[in] roomIndex The 0-based index of the room to change
+		@param[in] volume The volume to set on the room. Valid values 0-100 where 0 is mute and 100 is no change in volume
+
+		@throws InvalidObjectException Thrown if this method is called on an invalid object
+		@throws ObjectNotSetupException Thrown if this method is called before the setup method is called
+
+		@note This volume setting is implemented as a modifier to the output volume set by @ref Cvatlib_Voice_Simple::SetOutputVolume "SetOutputVolume"
+	*/
+	VM void CALL SetRoomVolume(INT roomIndex, INT volume)PVM;
 
 	/**
 		Sets the state of the microphone, controlling if its sent to the designated room

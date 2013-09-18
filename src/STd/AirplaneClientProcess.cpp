@@ -26,13 +26,13 @@ void AirplaneClientProcess::SetLoginInformation()
                                     Username.toStdString().c_str(), Password.toStdString().c_str(),
                                     PilotInfo);
 	}
-	catch (InvalidObjectException * e)
+    catch (InvalidObjectException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
-	catch (InvalidNetworkSessionException * e)
+    catch (InvalidNetworkSessionException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
 }
 
@@ -56,17 +56,17 @@ void AirplaneClientProcess::SendPositionInfo(pTimeUpdate Update)
 	{
 		mNetwork->SendPilotUpdate(Pos);
 	}
-	catch (InvalidObjectException * e)
+    catch (InvalidObjectException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
-	catch (InvalidNetworkSessionException * e)
+    catch (InvalidNetworkSessionException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
-	catch (NetworkNotConnectedException * e)
+    catch (NetworkNotConnectedException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
 }
 
@@ -110,16 +110,16 @@ void AirplaneClientProcess::SendPlaneInfoRequest(const char * callsign)
 	{
 		mNetwork->SendPlaneInfo(callsign, const_cast<const char**>(args));
 	}
-	catch (InvalidObjectException * e)
+    catch (InvalidObjectException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
-	catch (InvalidNetworkSessionException * e)
+    catch (InvalidNetworkSessionException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
-	catch (NetworkNotConnectedException * e)
+    catch (NetworkNotConnectedException e)
 	{
-		qDebug() << mClient->GetCallsign() << ": " << e->what();
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
 	}
 }

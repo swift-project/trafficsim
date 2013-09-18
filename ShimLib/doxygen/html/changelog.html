@@ -112,6 +112,9 @@ $(document).ready(function(){initNavTree('changelog.html','');});
 <li class="level2"><a href="#change8">03/28/2013 06:46 pm</a></li>
 <li class="level2"><a href="#change9">05/03/2013 04:22 pm</a></li>
 <li class="level2"><a href="#change10">06/06/2013 10:15 am</a></li>
+<li class="level2"><a href="#change11">07/08/2013 12:00 pm</a></li>
+<li class="level2"><a href="#change12">07/21/2013 05:46 pm</a></li>
+<li class="level2"><a href="#change13">08/23/2013 12:42 pm</a></li>
 </ul>
 </li>
 </ul>
@@ -121,16 +124,16 @@ $(document).ready(function(){initNavTree('changelog.html','');});
 Version 0.4</h1>
 <h2><a class="anchor" id="change1"></a>
 03/21/2013 12:48 am</h2>
-<p>&rarr;Added void ConvertPBHToDoubles(unsigned long, double&amp;, double&amp;, double&amp;); to <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> <br/>
- &rarr;Added void ConvertDoublesToPBH(double, double, double, unsigned long&amp;); to <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a></p>
+<p>&rarr;Added void <a class="el" href="vatlib_8h.html#a31220d8699bdd84359587eff9c8a6088">ConvertPBHToDoubles(unsigned long, double&amp;, double&amp;, double&amp;)</a> to <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> <br/>
+ &rarr;Added void <a class="el" href="vatlib_8h.html#a56407b15f22a70599cb4d3aae2e74115">ConvertDoublesToPBH(double, double, double, unsigned long&amp;)</a> to <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a></p>
 <h2><a class="anchor" id="change2"></a>
 03/21/2013 12:54 pm</h2>
-<p>&rarr;Moved void ConvertPBHToDoubles(unsigned long, double&amp;, double&amp;, double&amp;); to the global namespace <br/>
- &rarr;Moved void ConvertDoublesToPBH(double, double, double, unsigned long&amp;); to the global namespace <br/>
+<p>&rarr;Moved void <a class="el" href="vatlib_8h.html#a31220d8699bdd84359587eff9c8a6088">ConvertPBHToDoubles(unsigned long, double&amp;, double&amp;, double&amp;)</a> to the global namespace <br/>
+ &rarr;Moved void <a class="el" href="vatlib_8h.html#a56407b15f22a70599cb4d3aae2e74115">ConvertDoublesToPBH(double, double, double, unsigned long&amp;)</a> to the global namespace <br/>
  &rarr;<a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> and <a class="el" href="class_cvatlib___voice___simple.html" title="Contains functions and variables for the simple implementation of the voice library. This is most suitable for a pilot client. ">Cvatlib_Voice_Simple</a> are now implemented as base classes of pure virtual functions <br/>
  &rarr;The constructor and destructor have been removed from <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> and <a class="el" href="class_cvatlib___voice___simple.html" title="Contains functions and variables for the simple implementation of the voice library. This is most suitable for a pilot client. ">Cvatlib_Voice_Simple</a> <br/>
- &rarr;The delete operator is overridden in <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> to call the Destroy function, which in turn properly calls the destructor of the implementation class. This replaces the destructor <br/>
- &rarr;The delete operator is overridden in <a class="el" href="class_cvatlib___voice___simple.html" title="Contains functions and variables for the simple implementation of the voice library. This is most suitable for a pilot client. ">Cvatlib_Voice_Simple</a> to call the Destroy function, which in turn properly calls the destructor of the implementation class. This replaces the destructor <br/>
+ &rarr;The delete operator is overridden in <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> to call the <a class="el" href="class_cvatlib___network.html#ad0cd1e477152e15289501128034db7a6">Destroy</a> function, which in turn properly calls the destructor of the implementation class. This replaces the destructor <br/>
+ &rarr;The delete operator is overridden in <a class="el" href="class_cvatlib___voice___simple.html" title="Contains functions and variables for the simple implementation of the voice library. This is most suitable for a pilot client. ">Cvatlib_Voice_Simple</a> to call the <a class="el" href="class_cvatlib___voice___simple.html#a54ffefae47699d7ca91cdc5c51b0b9c1">Destroy</a> function, which in turn properly calls the destructor of the implementation class. This replaces the destructor <br/>
  &rarr;Added Cvatlib_Network* <a class="el" href="vatlib_8h.html#a9dbdee41892e487e2252b00e6a0914f9">Create_Cvatlib_Network()</a>; as a factory function to create <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> objects. This replaces the constructor <br/>
  &rarr;Added Cvatlib_Voice_Simple* <a class="el" href="vatlib_8h.html#a857c2db035678b96037f95c42c2f9d90">Create_Cvatlib_Voice_Simple()</a>; as a factory function to create <a class="el" href="class_cvatlib___voice___simple.html" title="Contains functions and variables for the simple implementation of the voice library. This is most suitable for a pilot client. ">Cvatlib_Voice_Simple</a> objects. This replaces the constructor <br/>
  &rarr;Moved some internal/private variables and functions to the implementing classes, they are no longer in the base class of <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> or <a class="el" href="class_cvatlib___voice___simple.html" title="Contains functions and variables for the simple implementation of the voice library. This is most suitable for a pilot client. ">Cvatlib_Voice_Simple</a></p>
@@ -147,7 +150,7 @@ Version 0.4</h1>
  &rarr;All documentation updated to refer to "the user", "the client", or "the program" instead of "you" <br/>
  &rarr;Added new defines NOSTDCALL and DEFNULL for Linux. They disable use of __stdcall and define NULL, respectively <br/>
  &rarr;As part of Doxygen documentation, enums now have the name &lt;enumname&gt;_enum so they don't appear as anonymous <br/>
- &rarr;Removed an unused/not needed ccpPropertyType <br/>
+ &rarr;Removed an unused/not needed <a class="el" href="class_cvatlib___network.html#ad0541771891d8eac899871c1897fb8e5">ccpPropertyType</a> <br/>
  &rarr;Added information to documentation where char**'s are used mentioning that these string arrays are NULL terminated</p>
 <h2><a class="anchor" id="change6"></a>
 03/27/2013 05:30 am</h2>
@@ -160,15 +163,15 @@ Version 0.4</h1>
 <h2><a class="anchor" id="change7"></a>
 03/27/2013 09:04 pm</h2>
 <p>&rarr;Added exceptions to prevent programmers from doing some things they shouldn't <br/>
- &rarr;Added <a class="el" href="class_invalid_network_session_exception.html" title="An exception that is thrown if a method requiring a network session is called before a network sessio...">InvalidNetworkSessionException</a>, <a class="el" href="class_invalid_object_exception.html" title="An exception that is thrown if a method is called after the object becomes invalid. ">InvalidObjectException</a>, <a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isnt valid. ">InvalidRoomException</a>, <a class="el" href="class_network_not_connected_exception.html" title="An exception that is thrown if a method requiring a network connection is called before a connection ...">NetworkNotConnectedException</a>, <a class="el" href="class_network_session_exists_exception.html" title="An exception that is thrown if an attempt to create a network session is made when one already exists...">NetworkSessionExistsException</a>, <a class="el" href="class_object_not_setup_exception.html" title="An exception that is thrown if a method is called before the setup function. ">ObjectNotSetupException</a>, and <a class="el" href="class_room_not_connected_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t connected. ">RoomNotConnectedException</a> <br/>
+ &rarr;Added <a class="el" href="class_invalid_network_session_exception.html" title="An exception that is thrown if a method requiring a network session is called before a network sessio...">InvalidNetworkSessionException</a>, <a class="el" href="class_invalid_object_exception.html" title="An exception that is thrown if a method is called after the object becomes invalid. ">InvalidObjectException</a>, <a class="el" href="class_invalid_room_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t valid. ">InvalidRoomException</a>, <a class="el" href="class_network_not_connected_exception.html" title="An exception that is thrown if a method requiring a network connection is called before a connection ...">NetworkNotConnectedException</a>, <a class="el" href="class_network_session_exists_exception.html" title="An exception that is thrown if an attempt to create a network session is made when one already exists...">NetworkSessionExistsException</a>, <a class="el" href="class_object_not_setup_exception.html" title="An exception that is thrown if a method is called before the setup function. ">ObjectNotSetupException</a>, and <a class="el" href="class_room_not_connected_exception.html" title="An exception that is thrown if a method requiring a room is called when it isn&#39;t connected. ">RoomNotConnectedException</a> <br/>
  &rarr;Added ExceptionCheck function to <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> &amp; <a class="el" href="class_cvatlib___voice___simple.html" title="Contains functions and variables for the simple implementation of the voice library. This is most suitable for a pilot client. ">Cvatlib_Voice_Simple</a> <br/>
  &rarr;Most functions in <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> &amp; <a class="el" href="class_cvatlib___voice___simple.html" title="Contains functions and variables for the simple implementation of the voice library. This is most suitable for a pilot client. ">Cvatlib_Voice_Simple</a> will call ExceptionCheck and pass on any exceptions thrown <br/>
  &rarr;Updated doxygen to include thrown exceptions in method documentation</p>
 <h2><a class="anchor" id="change8"></a>
 03/28/2013 06:46 pm</h2>
 <p>&rarr;Changed network connected exception check to always get the underlying network status of the network session <br/>
- &rarr;Added bool IsValid(), bool IsSessionExists(), and bool IsNetworkConnected() to <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> <br/>
- &rarr;Added bool IsValid(), bool IsSetup(), bool IsRoomValid(int), and bool IsRoomConnected(int) to <a class="el" href="class_cvatlib___voice___simple.html" title="Contains functions and variables for the simple implementation of the voice library. This is most suitable for a pilot client. ">Cvatlib_Voice_Simple</a> <br/>
+ &rarr;Added bool <a class="el" href="class_cvatlib___network.html#ac71eea6e5f88ff5db89dd0668fc1663b">IsValid()</a>, bool <a class="el" href="class_cvatlib___network.html#a0142990e02cafd093a6e490274a107d5">IsSessionExists()</a>, and bool <a class="el" href="class_cvatlib___network.html#a7b66cabe3bffb3aec4581e0b8ccf3dfe">IsNetworkConnected()</a> to <a class="el" href="class_cvatlib___network.html" title="Contains functions and variables for the network library. ">Cvatlib_Network</a> <br/>
+ &rarr;Added bool <a class="el" href="class_cvatlib___voice___simple.html#ad7cd5b267c338fc2f6f7c56cba1dbba7">IsValid()</a>, bool <a class="el" href="class_cvatlib___voice___simple.html#a92a9091f1f5dae2725fba28e3530afcc">IsSetup()</a>, bool <a class="el" href="class_cvatlib___voice___simple.html#a8a49f36acdccb68de5e2cdc14e454f70">IsRoomValid(int)</a>, and bool <a class="el" href="class_cvatlib___voice___simple.html#a138aee9e4558828015e736c75ed5ab4c">IsRoomConnected(int)</a> to <a class="el" href="class_cvatlib___voice___simple.html" title="Contains functions and variables for the simple implementation of the voice library. This is most suitable for a pilot client. ">Cvatlib_Voice_Simple</a> <br/>
  &rarr;The inheritance chain for exceptions has changed, all exceptions now derive from the new <a class="el" href="class_vatlib_exception.html" title="This is the base class for all exceptions thrown by the shim library. ">VatlibException</a> class which derives from std::exception</p>
 <h2><a class="anchor" id="change9"></a>
 05/03/2013 04:22 pm</h2>
@@ -177,7 +180,18 @@ Version 0.4</h1>
  &rarr;Minor 64-bit compatibility fixes</p>
 <h2><a class="anchor" id="change10"></a>
 06/06/2013 10:15 am</h2>
-<p>&rarr;Converted all int and short values to cstdint types for cross-platform and 32/64-bit compatability </p>
+<p>&rarr;Converted all int and short values to cstdint types for cross-platform and 32/64-bit compatibility</p>
+<h2><a class="anchor" id="change11"></a>
+07/08/2013 12:00 pm</h2>
+<p>&rarr;Clarified some information in the doxygen <br/>
+ &rarr;Added groups to callback typedefs, some callbacks were re-arranged for this <br/>
+ &rarr;Made doxygen changelog display links to mentioned functions/methods</p>
+<h2><a class="anchor" id="change12"></a>
+07/21/2013 05:46 pm</h2>
+<p>&rarr;Updated exceptions to be thrown by value rather than by pointer</p>
+<h2><a class="anchor" id="change13"></a>
+08/23/2013 12:42 pm</h2>
+<p>&rarr;Added void <a class="el" href="class_cvatlib___voice___simple.html#a4be6ab4dcac3d307543e419202fbcf18">Cvatlib_Voice_Simple::SetRoomVolume(int, int)</a> </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
