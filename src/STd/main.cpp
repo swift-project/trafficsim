@@ -98,11 +98,13 @@ int main(int argc, char *argv[])
     qDebug() << "FSD Password:      " << ClientProcess::Password;
 
 	QCoreApplication a(argc, argv);
+    qDebug() << "Loading Logfile!";
 	ClientContainer Cont(FileName);
 
 	QList<QThread*> Threads;
 	ThreadHelper * closer = new ThreadHelper(&Threads);
 
+    qDebug() << "Create and Start Threads";
 	for(ClientContainer::iterator iter = Cont.begin(); iter != Cont.end(); iter++)
 	{
 		ClientProcess * process;
