@@ -97,6 +97,51 @@ bool ClientProcess::LoginToServer()
 	return false;
 }
 
+void ClientProcess::Disconnect()
+{
+    try
+    {
+        mNetwork->LogoffAndDisconnect(-1);
+    }
+    catch (InvalidObjectException e)
+    {
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
+    }
+    catch (InvalidNetworkSessionException e)
+    {
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
+    }
+    catch (NetworkNotConnectedException e)
+    {
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
+    }
+    isConnected = false;
+}
+
+void ClientProcess::DisconnectAndDestroy()
+{
+    QObject::disconnect(mProcessShimLibConnection);
+    try
+    {
+        mNetwork->LogoffAndDisconnect(-1);
+        mNetwork->DestroyNetworkSession();
+        mNetwork = 0;
+    }
+    catch (InvalidObjectException e)
+    {
+        qDebug() << e.what();
+    }
+    catch (InvalidNetworkSessionException e)
+    {
+        qDebug() << e.what();
+    }
+    catch (NetworkNotConnectedException e)
+    {
+        qDebug() << mClient->GetCallsign() << ": " << e.what();
+    }
+    ClientFinished();
+}
+
 void ClientProcess::Run()
 {
 	if(mNetwork == 0)
@@ -139,42 +184,18 @@ void ClientProcess::SendTextMsg(pTimeUpdate Update)
 
 void ClientProcess::DoNextEvent()
 {
-	pTimeUpdate UpdateTask = mNextUpdate;
-    PushNextUpdate();
+    pTimeUpdate UpdateTask = mNextUpdate;
 
 	// do stuff with UpdateTask:
 	qDebug() << qPrintable(mClient->GetCallsign()) << ": " << qPrintable(UpdateReasonToString(UpdateTask->GetUpdateReason()));
-	if(!(UpdateTask->GetUpdateReason() == RemoveAirplaneReason || UpdateTask->GetUpdateReason() == RemoveATCReason) && !isConnected)
+    if(!isConnected)
 	{
 		if(!LoginToServer())
         {
-            QObject::disconnect(mProcessShimLibConnection);
-			try
-			{
-				mNetwork->DestroyNetworkSession();
-			}
-            catch (InvalidObjectException e)
-			{
-                qDebug() << e.what();
-			}
-            catch (InvalidNetworkSessionException e)
-			{
-                qDebug() << e.what();
-			}
-			ClientFinished();
-			qDebug() << "closing because of error on connecting";
-			return;
+            DisconnectAndDestroy();
+            qDebug() << "closing because of error on connecting";
         }
-        else
-        {
-            // connection is in progress...
-            return;
-        }
-    }
-    if(mNextUpdate != 0)
-    {
-        // load Timer for next shot:
-        QTimer::singleShot(mNextUpdate->GetTimeDiff(), this, SLOT(DoNextEvent()));
+        return;
     }
     if(UpdateTask->GetUpdateReason() == PositionAirplaneReason || UpdateTask->GetUpdateReason() == PositionATCReason)
     {
@@ -186,48 +207,20 @@ void ClientProcess::DoNextEvent()
     }
     else if (UpdateTask->GetUpdateReason() == RemoveAirplaneReason || UpdateTask->GetUpdateReason() == RemoveATCReason)
     {
-        try
-        {
-            mNetwork->LogoffAndDisconnect(-1);
-        }
-        catch (InvalidObjectException e)
-        {
-            qDebug() << mClient->GetCallsign() << ": " << e.what();
-        }
-        catch (InvalidNetworkSessionException e)
-        {
-            qDebug() << mClient->GetCallsign() << ": " << e.what();
-        }
-        catch (NetworkNotConnectedException e)
-        {
-            qDebug() << mClient->GetCallsign() << ": " << e.what();
-        }
-        isConnected = false;
+        Disconnect();
     }
 
+    PushNextUpdate();
 	if(mNextUpdate == 0)
     {
-        QObject::disconnect(mProcessShimLibConnection);
-		try
-		{
-			mNetwork->LogoffAndDisconnect(-1);
-			mNetwork->DestroyNetworkSession();
-		}
-        catch (InvalidObjectException e)
-		{
-            qDebug() << e.what();
-		}
-        catch (InvalidNetworkSessionException e)
-		{
-            qDebug() << e.what();
-		}
-        catch (NetworkNotConnectedException e)
-		{
-            qDebug() << mClient->GetCallsign() << ": " << e.what();
-		}
-		ClientFinished();
+        DisconnectAndDestroy();
 		qDebug() << "closing";
 	}
+    else
+    {
+        // load Timer for next shot:
+        QTimer::singleShot(mNextUpdate->GetTimeDiff(), this, SLOT(DoNextEvent()));
+    }
 }
 
 void ClientProcess::ProcessShimLib()
@@ -268,6 +261,13 @@ void ClientProcess::ConnectionStatusChanged(Cvatlib_Network * obj, Cvatlib_Netwo
 	qDebug() <<	"    new: " << ConvertConnStatusToQString(newStatus);
 	if(oldStatus == Cvatlib_Network::connStatus_Connecting && newStatus == Cvatlib_Network::connStatus_Connected)
 	{
+        if(client->mNextUpdate == 0)
+        {
+            // there is no next Event, so disconnect:
+            client->DisconnectAndDestroy();
+            qDebug() << "closing";
+            return;
+        }
         client->isConnected = true;
 		QTimer::singleShot(client->mNextUpdate->GetTimeDiff(), client, SLOT(DoNextEvent()));
 	}

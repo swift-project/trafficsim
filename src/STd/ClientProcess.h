@@ -40,6 +40,8 @@ private slots:
 
 private:
 	bool LoginToServer();
+    void Disconnect();
+    void DisconnectAndDestroy();
 	void PushNextUpdate();
 
 	static void ConnectionStatusChanged(Cvatlib_Network * obj, Cvatlib_Network::connStatus oldStatus, Cvatlib_Network::connStatus newStatus, void * cbVar);
