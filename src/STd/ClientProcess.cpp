@@ -156,7 +156,7 @@ void ClientProcess::Run()
 	mTimer->start(100);
 }
 
-void ClientProcess::SendPlaneInfoRequest(const char * callsign)
+void ClientProcess::SendPlaneInfoRequest(const char * /* callsign */ )
 {
 	// do nothing ;)
 }
@@ -253,7 +253,7 @@ void ClientProcess::PushNextUpdate()
 	}
 }
 
-void ClientProcess::ConnectionStatusChanged(Cvatlib_Network * obj, Cvatlib_Network::connStatus oldStatus, Cvatlib_Network::connStatus newStatus, void * cbVar)
+void ClientProcess::ConnectionStatusChanged(Cvatlib_Network * /* obj */ , Cvatlib_Network::connStatus oldStatus, Cvatlib_Network::connStatus newStatus, void * cbVar)
 {
 	ClientProcess * client = static_cast<ClientProcess*>(cbVar);
 	qDebug() << "ConnectionStatusChanged: (" << qPrintable(client->mClient->GetCallsign()) << ")";
@@ -278,7 +278,7 @@ void ClientProcess::ConnectionStatusChanged(Cvatlib_Network * obj, Cvatlib_Netwo
 	}
 }
 
-void ClientProcess::ErrorReceived(Cvatlib_Network * obj, Cvatlib_Network::error type, const char * message, const char * errorData, void * cbVar)
+void ClientProcess::ErrorReceived(Cvatlib_Network * /* obj */ , Cvatlib_Network::error type, const char * message, const char * errorData, void * cbVar)
 {
 	ClientProcess * client = static_cast<ClientProcess*>(cbVar);
 	qDebug() << "ErrorReceived: (" << qPrintable(client->mClient->GetCallsign()) << ")";
@@ -287,7 +287,7 @@ void ClientProcess::ErrorReceived(Cvatlib_Network * obj, Cvatlib_Network::error 
 	qDebug() <<	"    errorData: " << errorData;
 }
 
-void ClientProcess::PilotInfoRequest(Cvatlib_Network * obj, const char * callsign, void * cbVar)
+void ClientProcess::PilotInfoRequest(Cvatlib_Network * /* obj */ , const char * callsign, void * cbVar)
 {
 	ClientProcess * client = static_cast<ClientProcess*>(cbVar);
 	qDebug() << "PilotInfoRequest: (" << qPrintable(client->mClient->GetCallsign()) << ")";

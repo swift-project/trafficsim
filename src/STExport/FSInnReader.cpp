@@ -105,6 +105,9 @@ bool FSInnReader::ReadFile(ClientContainer & Cont)
 					}
 				}
 				break;
+            case NotInitReason:
+            default:
+                break;
 			}
 			if(needStartTime)
 			{

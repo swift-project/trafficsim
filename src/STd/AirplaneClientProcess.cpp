@@ -77,7 +77,7 @@ void AirplaneClientProcess::SendPlaneInfoRequest(const char * callsign)
 	for (int i = 0; i < ARRAY_SIZE-1; i++)
 	{
 		args[i] = new char[20];
-		sprintf(args[i], "");
+        args[i] = '\0';
 	}
 	args[ARRAY_SIZE-1] = 0;
 	if(pAirplane->GetAircraftClientType() == FSInnType)

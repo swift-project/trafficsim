@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
     qDebug() << "Create and Start Threads";
 	for(ClientContainer::iterator iter = Cont.begin(); iter != Cont.end(); iter++)
 	{
-		ClientProcess * process;
+        ClientProcess * process = 0;
 		if((*iter)->GetType() == AirplaneType)
 		{
 			process = new AirplaneClientProcess(*iter);
