@@ -16,3 +16,10 @@ HEADERS += *.h
 LIBS    += -L../../ShimLib -lvatlib
 
 DESTDIR = ../../lib
+
+unix {
+    QMAKE_CXXFLAGS += -std=c++0x
+    DEFINES += "VATLIB_STATIC"
+    DEFINES += "NOSTDCALL"
+    DEFINES += "DEFNULL"
+}

@@ -85,6 +85,13 @@ void TimeUpdate::Serialize(QXmlStreamWriter * xmlWriter) const
 	case RemoveATCReason:
 		xmlWriter->writeStartElement("RemoveController");
 		break;
+    case NotInitReason:
+    case TextMsg:
+    case PositionAirplaneReason:
+    case PositionATCReason:
+    case SBInfoReason:
+    default:
+        break;
 	}
 	this->SerializeTime(xmlWriter);
 	xmlWriter->writeEndElement();
