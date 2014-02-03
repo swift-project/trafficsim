@@ -32,7 +32,7 @@ QString ConvertConnStatusToQString(Cvatlib_Network::connStatus Status)
 ClientProcess::ClientProcess(pClient client)
 	: mClient(client), mNetwork(0), isConnected(false)
 {
-	mNetwork = Create_Cvatlib_Network();
+    mNetwork = Cvatlib_Network::Create();
 	if(mNetwork != 0)
 	{
 		char result[50];

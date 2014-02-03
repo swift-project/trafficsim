@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['what',['what',['../class_vatlib_exception.html#a0cf4813eab156688e5b732d1d1ed26e7',1,'VatlibException::what()'],['../class_network_not_connected_exception.html#a70c524d8477782d01a68a8d9f27ea458',1,'NetworkNotConnectedException::what()'],['../class_invalid_network_session_exception.html#adb25fe6a3893b3bd20d9b182bae7e17d',1,'InvalidNetworkSessionException::what()'],['../class_network_session_exists_exception.html#a5a8a822723edc76d87c9066823c3c0a7',1,'NetworkSessionExistsException::what()'],['../class_object_not_setup_exception.html#ac8ef1679e3234673f419ed6a475dcafc',1,'ObjectNotSetupException::what()'],['../class_invalid_room_exception.html#a321b3b47bf27c8f8b42770d71403914d',1,'InvalidRoomException::what()'],['../class_room_not_connected_exception.html#a1c354e780e69e4b7aa62ca2e490fc1ae',1,'RoomNotConnectedException::what()'],['../class_invalid_object_exception.html#a5dd3604e567325481f74d751b89cfbe0',1,'InvalidObjectException::what()']]],
-  ['windlayer',['WindLayer',['../class_cvatlib___network.html#struct_cvatlib___network_1_1_wind_layer',1,'Cvatlib_Network']]]
-];

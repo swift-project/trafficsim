@@ -19,7 +19,4 @@ DESTDIR = ../../bin
 
 unix {
     QMAKE_CXXFLAGS += -std=c++0x
-    DEFINES += "VATLIB_STATIC"
-    DEFINES += "NOSTDCALL"
-    DEFINES += "DEFNULL"
 }

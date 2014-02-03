@@ -54,34 +54,85 @@
 	Failure to destroy Cvatlib_Network or Cvatlib_Voice_Simple objects may cause resources to not be released. Ensure that all exit paths properly destroy these objects
 	so that their destructors are run.
 
+	-----[PROGRAMMING NOTES]-----
+	Objects are created using the x::Create() static member functions. Objects are destroyed using the obj->Destroy() member functions.
+
 	-----[BUILD NOTES]-----
-	For Linux, the following defines should be present: VATLIB_STATIC, NOSTDCALL, DEFNULL
-*/
+	The VATSIM C++ Shim Library requires a C++11 compatible compiler.
 
-/*
-	The following ifdef block is the standard way of creating macros which make exporting 
-	from a DLL simpler. All files within this DLL are compiled with the VATLIB_EXPORTS
-	symbol defined on the command line. This symbol should not be defined on any project
-	that uses this DLL. This way any other project whose source files include this file see 
-	VATLIB_API functions as being imported from a DLL, whereas this DLL sees symbols
-	defined with this macro as being exported. VATLIB_STATIC can also be defined to use
-	this library as a static library.
-
-	No define is needed for windows.
-	VATLIB_STATIC should be defined for Linux.
+	Tested compilers:
+	->Microsoft Windows: Microsoft Visual Studio 2010 and later
+	->Apple OS X: Not tested yet
+	->GNU/Linux: Not tested yet
 */
 
 /// @cond
 
-#ifdef VATLIB_EXPORTS
-	#define VATLIB_API __declspec(dllexport)
-#elif VATLIB_STATIC
-	#define VATLIB_API
+#ifndef VATLIB_HEADER_H
+#define VATLIB_HEADER_H
+
+/****************************************
+ * OPERATING SYSTEMS
+ ***************************************/
+
+#if defined(_WIN32) || defined(__WIN32__)
+#   define _OS_WIN32
+#   define _OS_WIN
+#endif
+#if defined(_WIN64) || defined(__WIN64__)
+#   define _OS_WIN64
+#   define _OS_WIN
+#endif
+#if defined(__APPLE__) || defined(__MACOSX__)
+#   define _OS_MACOSX
+#endif
+#if defined(unix) || defined(__unix) || defined(__unix__)
+#   define _OS_UNIX
+#endif
+#if defined(linux) || defined(__linux) || defined(__linux__)
+#   define _OS_LINUX
+#endif
+
+/****************************************
+ * COMPILERS
+ ***************************************/
+
+#if defined(__GNUC__)
+#   define _CC_GNU
+#endif
+
+#if defined(__MINGW32__)
+#   define _CC_MINGW
+#endif
+
+#if defined(_MSC_VER)
+#   define _CC_MSVC
+#   if _MSC_VER >= 1700
+#       define _CC_MSVC11
+#   elif _MSC_VER >= 1600
+#       define _CC_MSVC10
+#   elif _MSC_VER >= 1500
+#       define _CC_MSVC9
+#   elif _MSC_VER >= 1400
+#       define _CC_MSVC8
+#   endif
+#endif
+
+
+#if defined(_OS_WIN)
+#   ifdef VATLIB_EXPORTS
+#      define VATLIB_API __declspec(dllexport)
+#   elif VATLIB_STATIC
+#      define VATLIB_API
+#   else
+#      define VATLIB_API __declspec(dllimport)
+#   endif
 #else
-	#define VATLIB_API __declspec(dllimport)
+#   define VATLIB_API
 #endif
 
 #include <cstdint>
+#include <exception>
 
 #define EXC extern "C"
 
@@ -113,19 +164,14 @@
 
 /// @cond
 
-// NOSTDCALL should be defined for Linux.
-#ifndef NOSTDCALL
-#define CALL __stdcall
+#ifdef _OS_WIN
+#   define CALL __stdcall
 #else
-#define CALL 
+#   define CALL 
 #endif
 
-// DEFNULL should be defined for Linux.
-#ifdef DEFNULL
-#define NULL __null
-#endif
-
-#include <exception>
+#undef NULL
+#define NULL nullptr 
 
 /// @endcond
 
@@ -867,7 +913,7 @@ public:
 
 		Capabilities that can be used when running CreateNetworkSession or that can be sent as a reply to an infoQuery_Capabilities
 		@n To use these values, append an = and a 1 to them to mark the capability as present. eg. sprintf(result, "%s=1", capability_AtcInfo);
-		@n Capabilities should be separated by a colon (:)
+		@n Capabilities should be separated by a colon (:) eg. sprintf(result, "%s=1:%s=1", capability_AtcInfo, capability_ModelDesc);
 	*/
 	///@{
 	/**
@@ -890,6 +936,10 @@ public:
 		Can send/receive high-speed position updates. Used by Squawkbox
 	*/
 	char* capability_InterimPos;
+	/**
+		Position reports are not forwarded to other clients, only to servers. Essentially, the client does not appear to anyone but supervisors and servers
+	*/
+	char* capability_Stealth;
 	///@}
 
 	/**
@@ -992,7 +1042,7 @@ public:
 		*/
 		double pitch;
 		/**
-			Transponder code in octal 0000-7777, no illegal digits please
+			Transponder code in decimal 0000-7777, no illegal digits please
 		*/
 		SHORT xpdrCode;
 		/**
@@ -1598,21 +1648,21 @@ public:
 	/* Functions */
 
 	/**
+		Contructor
+	*/
+	static Cvatlib_Network* CALL Create();
+
+	/**
 		Destructor
 	*/
 	VM void CALL Destroy()PVM;
 
 	/**
-		Overrides delete operator to call Destroy() destructor
+		Default Destructor
 
-		@param[in] p A Cvatlib_Network* object to delete
+		@deprecated Use the @ref Cvatlib_Voice_Simple::Destroy method to delete a Cvatlib_Network object
 	*/
-	void operator delete(void* p) {
-		if (p) {
-			Cvatlib_Network* c = static_cast<Cvatlib_Network*>(p);
-			c->Destroy();
-		}
-	}
+	VM ~Cvatlib_Network()PVM;
 
 	/*
 		********************************
@@ -2543,13 +2593,6 @@ public:
 };
 
 /**
-	Creates a new Cvatlib_Network instance
-
-	@return A new Cvatlib_Network* object
-*/
-EXC VATLIB_API Cvatlib_Network* CALL Create_Cvatlib_Network();
-
-/**
 	@class VatlibException
 
 	@brief This is the base class for all exceptions thrown by the shim library
@@ -2908,21 +2951,21 @@ public:
 	/* Functions */
 
 	/**
+		Contructor
+	*/
+	static Cvatlib_Voice_Simple* CALL Create();
+
+	/**
 		Destructor
 	*/
 	VM void CALL Destroy()PVM;
 
 	/**
-		Overrides delete operator to call Destroy() destructor
+		Default Destructor
 
-		@param[in] p A Cvatlib_Voice_Simple* object to delete
+		@deprecated Use the @ref Cvatlib_Voice_Simple::Destroy method to delete a Cvatlib_Voice_Simple object
 	*/
-	void operator delete(void* p) {
-		if (p) {
-			Cvatlib_Voice_Simple* v = static_cast<Cvatlib_Voice_Simple*>(p);
-			v->Destroy();
-		}
-	}
+	VM ~Cvatlib_Voice_Simple()PVM;
 
 	/*
 		*******************************
@@ -3420,9 +3463,4 @@ public:
 	///@}
 };
 
-/**
-	Creates a new Cvatlib_Voice_Simple object
-
-	@return A new Cvatlib_Voice_Simple* object
-*/
-EXC VATLIB_API Cvatlib_Voice_Simple* CALL Create_Cvatlib_Voice_Simple();
+#endif
