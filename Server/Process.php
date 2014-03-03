@@ -13,7 +13,7 @@ class Process
 	{
 		$this->command = $cl;
 		$this->arguments = $arg;
-		$this->searchPid();
+		$this->status();
 		if ($run != false)
 		{
 			$this->runCom();
@@ -31,7 +31,7 @@ class Process
 		{
 			return;
 		}
-		$command = 'nohup '.$this->command.' '.$this->arguments.' > /dev/null 2>&1 & echo $!';
+		$command = 'nohup '.$this->command.' '.$this->arguments.' > '.$this->command.'.log.txt 2>&1 & echo $!';
 		exec($command, $op);
 		$this->pid = (int)$op[0];
 		file_put_contents($this->getPidFile(), $this->pid);
@@ -51,7 +51,7 @@ class Process
 	
 	public function getPid()
 	{
-		$this->searchPid();
+		$this->status();
 		return $this->pid;
 	}
 
@@ -78,12 +78,14 @@ class Process
 
 	public function start()
 	{
+		$this->status();
 		$this->runCom();
 		return $this->status();
 	}
 
 	public function stop()
 	{
+		$this->status();
 		$command = 'kill '.$this->pid;
 		exec($command);
 		if ($this->status() == false)
