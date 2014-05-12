@@ -25,6 +25,9 @@ QString ConvertConnStatusToQString(Cvatlib_Network::connStatus Status)
 	case Cvatlib_Network::connStatus_Error:
 		return "Error";
 		break;
+    default:
+        return "NOT DEFINED";
+        break;
 	}
 	return "Unknown";
 }
@@ -149,6 +152,7 @@ void ClientProcess::Run()
 		ClientFinished();
 		return;
     }
+    //qDebug() << "Next Update in " << mNextUpdate->GetTimeDiff();
     QTimer::singleShot(mNextUpdate->GetTimeDiff(), this, SLOT(DoNextEvent()));
 
     mTimer = new QTimer(this);
@@ -219,6 +223,7 @@ void ClientProcess::DoNextEvent()
     else
     {
         // load Timer for next shot:
+        //qDebug() << "Next Update in " << mNextUpdate->GetTimeDiff();
         QTimer::singleShot(mNextUpdate->GetTimeDiff(), this, SLOT(DoNextEvent()));
     }
 }
@@ -250,7 +255,7 @@ void ClientProcess::PushNextUpdate()
 	{
 		mNextUpdate = List->first();
 		List->pop_front();
-	}
+    }
 }
 
 void ClientProcess::ConnectionStatusChanged(Cvatlib_Network * /* obj */ , Cvatlib_Network::connStatus oldStatus, Cvatlib_Network::connStatus newStatus, void * cbVar)
@@ -259,7 +264,7 @@ void ClientProcess::ConnectionStatusChanged(Cvatlib_Network * /* obj */ , Cvatli
 	qDebug() << "ConnectionStatusChanged: (" << qPrintable(client->mClient->GetCallsign()) << ")";
 	qDebug() <<	"    old: " << ConvertConnStatusToQString(oldStatus);
 	qDebug() <<	"    new: " << ConvertConnStatusToQString(newStatus);
-	if(oldStatus == Cvatlib_Network::connStatus_Connecting && newStatus == Cvatlib_Network::connStatus_Connected)
+    if(newStatus == Cvatlib_Network::connStatus_Connected)
 	{
         if(client->mNextUpdate == 0)
         {

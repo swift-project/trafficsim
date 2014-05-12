@@ -72,17 +72,16 @@ void AirplaneClientProcess::SendPositionInfo(pTimeUpdate Update)
 
 void AirplaneClientProcess::SendPlaneInfoRequest(const char * callsign)
 {
-#define ARRAY_SIZE 7
-	char ** args = new char*[ARRAY_SIZE];
-	for (int i = 0; i < ARRAY_SIZE-1; i++)
+#define ARRAY_SIZE 20
+    char ** args = new char*[ARRAY_SIZE];
+    for (int i = 0; i < ARRAY_SIZE-1; i++)
 	{
-		args[i] = new char[20];
-        args[i] = '\0';
-	}
-	args[ARRAY_SIZE-1] = 0;
+        args[i] = new char[50];
+        args[i][0] = '\0';
+    }
 	if(pAirplane->GetAircraftClientType() == FSInnType)
 	{
-		sprintf(args[0], "%s", mNetwork->acinfo_Equipment);
+		sprintf(args[0], "EQUIPMENT");
 		sprintf(args[1], "%s", pAirplane->GetAircraftType().toStdString().c_str());
 	}
 	else if(pAirplane->GetAircraftClientType() == SBType)
@@ -90,25 +89,25 @@ void AirplaneClientProcess::SendPlaneInfoRequest(const char * callsign)
 		int i = 0;
 		if(pAirplane->GetAircraftType() != "")
 		{
-			sprintf(args[i], "%s", mNetwork->acinfo_Equipment);
+			sprintf(args[i], "EQUIPMENT");
 			sprintf(args[i+1], "%s", pAirplane->GetAircraftType().toStdString().c_str());
 			i = i + 2;
 		}
 		if(pAirplane->GetAircraftAirline() != "")
 		{
-			sprintf(args[i], "%s", mNetwork->acinfo_Airline);
+			sprintf(args[i], "AIRLINE");
 			sprintf(args[i+1], "%s", pAirplane->GetAircraftAirline().toStdString().c_str());
 			i = i + 2;
 		}
 		if(pAirplane->GetAircraftLivery() != "")
 		{
-			sprintf(args[i], "%s", mNetwork->acinfo_Livery);
+			sprintf(args[i], "LIVERY");
 			sprintf(args[i+1], "%s", pAirplane->GetAircraftLivery().toStdString().c_str());
 		}
 	}
 	try
 	{
-		mNetwork->SendPlaneInfo(callsign, const_cast<const char**>(args));
+        //mNetwork->SendPlaneInfo(callsign, const_cast<const char**>(args));
 	}
     catch (InvalidObjectException e)
 	{

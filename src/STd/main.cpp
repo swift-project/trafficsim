@@ -3,7 +3,7 @@
  *  License, v. 2.0. If a copy of the MPL was not distributed with this
  *  file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-#define VATSIM_GERMANY_TEST
+//#define VATSIM_GERMANY_TEST
 
 // QtArg include.
 #include <QtArg/Arg>
@@ -20,10 +20,10 @@
 #ifdef VATSIM_GERMANY_TEST
     #define SERVER_ADDR	"vatsim-germany.org"
     #define SERVER_PORT	6809
-    #define USER_ID		"111111"
-    #define USER_PASS	"111111"
+    #define USER_ID		"sup"
+    #define USER_PASS	"sup"
 #else
-    #define SERVER_ADDR	"192.168.222.128"
+    #define SERVER_ADDR	"127.0.0.1"
     #define SERVER_PORT	6809
     #define USER_ID		"sup"
     #define USER_PASS	"sup"
@@ -37,12 +37,13 @@ QString ClientProcess::Password = USER_PASS;
 
 int main(int argc, char *argv[])
 {
-    QString FileName = "";
+    qDebug() << "Servus!";
+    QString FileName = "../Logs/Onlineday_LOWW.xml";
     try
     {
         QtArgCmdLine cmd(argc, argv);
 
-        QtArg xmlFile(QLatin1String("xml"), QLatin1String("XML Logfile"), true, true);
+        QtArg xmlFile(QLatin1String("xml"), QLatin1String("XML Logfile"), false, true);
         QtArg server(QLatin1String("server"), QLatin1String("FSD Serveraddress"), false, true);
         QtArg user(QLatin1String("user"), QLatin1String("FSD Username"), false, true);
         QtArg password(QLatin1String("password"), QLatin1String("FSD Password"), false, true);
@@ -61,7 +62,10 @@ int main(int argc, char *argv[])
 
         cmd.parse();
 
-        FileName = xmlFile.value().toString();
+        if(xmlFile.isDefined())
+        {
+            FileName = xmlFile.value().toString();
+        }
         if(server.isDefined())
         {
             ClientProcess::Server = server.value().toString();
