@@ -32,7 +32,7 @@ if($running != false)
 <input type="hidden" name="action" value="STOP">
 <input type="submit" value="Stop running scenery!">
 </form>
-<?
+<?php
 }
 else
 {
@@ -52,22 +52,22 @@ foreach ($sceneries as $log)
 ?>
 <form action="index.php" method="post">
 <input type="hidden" name="action" value="<?=$log?>">
-<?
+<?php
 	if($running == $log)
 	{
 ?>
 <input type="submit" value="Restart scenery!">
-<?
+<?php
 	}
 	else
 	{
 ?>
 <input type="submit" value="Start scenery!">
-<?
+<?php
 	}
 ?>
 </form>
-<?
+<?php
 }
 
 ?>
