@@ -73,52 +73,81 @@ void AirplaneClientProcess::SendPositionInfo(pTimeUpdate Update)
 void AirplaneClientProcess::SendPlaneInfoRequest(const char * callsign)
 {
 #define ARRAY_SIZE 20
-    char ** args = new char*[ARRAY_SIZE];
+    /*char ** args = new char*[ARRAY_SIZE];
     for (int i = 0; i < ARRAY_SIZE-1; i++)
 	{
         args[i] = new char[50];
         args[i][0] = '\0';
-    }
+    }*/
+    char ** args;
+    int created = 0;
 	if(pAirplane->GetAircraftClientType() == FSInnType)
 	{
+        created = 2;
+        args = new char*[created + 1];
+        for (int i = 0; i < created; i++)
+        {
+            args[i] = new char[50];
+            args[i][0] = '\0';
+        }
 		sprintf(args[0], "EQUIPMENT");
 		sprintf(args[1], "%s", pAirplane->GetAircraftType().toStdString().c_str());
+        args[2] = 0;
 	}
 	else if(pAirplane->GetAircraftClientType() == SBType)
 	{
+        if(pAirplane->GetAircraftType() != "")
+        {
+            created += 2;
+        }
+        if(pAirplane->GetAircraftAirline() != "")
+        {
+            created += 2;
+        }
+        if(pAirplane->GetAircraftLivery() != "")
+        {
+            created += 2;
+        }
+
+        args = new char*[created + 1];
+        for (int i = 0; i < created; i++)
+        {
+            args[i] = new char[50];
+            args[i][0] = '\0';
+        }
+
 		int i = 0;
 		if(pAirplane->GetAircraftType() != "")
 		{
 			sprintf(args[i], "EQUIPMENT");
 			sprintf(args[i+1], "%s", pAirplane->GetAircraftType().toStdString().c_str());
-			i = i + 2;
+            i += 2;
 		}
 		if(pAirplane->GetAircraftAirline() != "")
 		{
 			sprintf(args[i], "AIRLINE");
 			sprintf(args[i+1], "%s", pAirplane->GetAircraftAirline().toStdString().c_str());
-			i = i + 2;
+            i += 2;
 		}
 		if(pAirplane->GetAircraftLivery() != "")
 		{
 			sprintf(args[i], "LIVERY");
 			sprintf(args[i+1], "%s", pAirplane->GetAircraftLivery().toStdString().c_str());
+            i += 2;
 		}
+        args[i] = 0;
 	}
 	try
 	{
-        //mNetwork->SendPlaneInfo(callsign, const_cast<const char**>(args));
+        mNetwork->SendPlaneInfo(callsign, const_cast<const char**>(args));
 	}
-    catch (InvalidObjectException e)
+    catch (const std::exception &e)
 	{
         qDebug() << mClient->GetCallsign() << ": " << e.what();
-	}
-    catch (InvalidNetworkSessionException e)
-	{
-        qDebug() << mClient->GetCallsign() << ": " << e.what();
-	}
-    catch (NetworkNotConnectedException e)
-	{
-        qDebug() << mClient->GetCallsign() << ": " << e.what();
-	}
+    }
+    for (int i = 0; i < created; i++)
+    {
+        delete args[i];
+    }
+    delete args;
 }

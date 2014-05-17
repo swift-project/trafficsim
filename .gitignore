@@ -20,7 +20,7 @@ ReleaseDebug/
 DebugFast/
 ReleaseDebugStatic/
 DebugFastStatic/
-build/
+build*/
 
 # .log files (usually created by QtTest - thanks to VestniK)
 *.log
