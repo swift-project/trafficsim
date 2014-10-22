@@ -5,6 +5,7 @@
 
 #include "Client.h"
 #include "exporter.h"
+#include <iterator>
 
 Client::Client(QString Callsign, eClientType Type)
 {
@@ -104,8 +105,32 @@ bool Client::IsOnline() const
 
 void Client::SerializeClient(QXmlStreamWriter * xmlWriter)
 {
-	xmlWriter->writeAttribute("Callsign", mCallsign);
-	xmlWriter->writeAttribute("Rating", QString::number(mRating));
+    // https://dev.vatsim-germany.org/issues/340
+    // Delete all TimeUpdates after the last position update, because
+    // without further position updates the airplane is considered out
+    // of range.
+    if (mType == AirplaneType)
+    {
+        using RevIter = std::reverse_iterator<TimeUpdateContainer::Iterator>;
+
+        RevIter rbegin(mTimeUpdate.end());
+        RevIter rend(mTimeUpdate.begin());
+
+        RevIter lastPositionUpdate = std::find_if(rbegin, rend, [](pTimeUpdate timeUpdate)
+        {
+            return timeUpdate->GetUpdateReason() == PositionAirplaneReason;
+        });
+
+        // lastPositionUpdate points now logically to the last position update,
+        // but lastPositionUpdate.base() does return a forward iterator
+        // pointing already to the next item in the list. Hence we can start
+        // erasing from there.
+        mTimeUpdate.erase(lastPositionUpdate.base(), mTimeUpdate.end());
+    }
+
+    xmlWriter->writeAttribute("Callsign", mCallsign);
+    xmlWriter->writeAttribute("Rating", QString::number(mRating));
+
 	for(TimeUpdateContainer::const_iterator iter = mTimeUpdate.begin(); iter != mTimeUpdate.end(); iter++)
 	{
 		(*iter)->Serialize(xmlWriter);
