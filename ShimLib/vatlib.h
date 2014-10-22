@@ -1816,7 +1816,7 @@ public:
 	/**
 		Attempts to logoff from the network
 
-		@param[in] timeoutSeconds Number of seconds to wait before forcefully dropping the connection. Use -1 for no timeout
+		@param[in] timeoutSeconds Number of seconds to wait before forcefully dropping the connection. Use 0 for no timeout
 
 		@throws InvalidObjectException Thrown if this method is called on an invalid object
 		@throws InvalidNetworkSessionException Thrown if a network session has not been created

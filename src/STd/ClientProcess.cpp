@@ -104,7 +104,7 @@ void ClientProcess::Disconnect()
 {
     try
     {
-        mNetwork->LogoffAndDisconnect(-1);
+        mNetwork->LogoffAndDisconnect(0);
     }
     catch (InvalidObjectException e)
     {
@@ -126,7 +126,7 @@ void ClientProcess::DisconnectAndDestroy()
     QObject::disconnect(mProcessShimLibConnection);
     try
     {
-        mNetwork->LogoffAndDisconnect(-1);
+        mNetwork->LogoffAndDisconnect(0);
         mNetwork->DestroyNetworkSession();
         mNetwork = 0;
     }
