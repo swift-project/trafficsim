@@ -142,14 +142,14 @@ void ClientProcess::DisconnectAndDestroy()
     {
         qDebug() << mClient->GetCallsign() << ": " << e.what();
     }
-    ClientFinished();
+    emit ClientFinished();
 }
 
 void ClientProcess::Run()
 {
 	if(mNetwork == 0)
 	{
-		ClientFinished();
+        emit ClientFinished();
 		return;
     }
     //qDebug() << "Next Update in " << mNextUpdate->GetTimeDiff();
