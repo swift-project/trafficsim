@@ -5,6 +5,8 @@
 QT += core xml
 QT -= gui
 
+include(../common.pri)
+
 INCLUDEPATH += . .. ../..
 
 TARGET = STExport
@@ -14,7 +16,7 @@ CONFIG += console
 SOURCES += *.cpp
 HEADERS += *.h
 
-LIBS    += -L../../lib -lSTLib -L../../ShimLib -lvatlib
+LIBS    += -L../../lib -lSTLib -lvatlib
 
 DESTDIR = ../../bin
 

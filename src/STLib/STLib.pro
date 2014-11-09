@@ -5,6 +5,8 @@
 QT += core xml
 QT -= gui
 
+include(../common.pri)
+
 INCLUDEPATH += . .. ../..
 
 TARGET = STLib
@@ -14,7 +16,7 @@ CONFIG += staticlib
 SOURCES += *.cpp
 HEADERS += *.h
 
-LIBS    += -L../../ShimLib -lvatlib
+LIBS    += -lvatlib
 
 DESTDIR = ../../lib
 
