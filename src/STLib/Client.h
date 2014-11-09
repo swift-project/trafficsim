@@ -77,7 +77,7 @@ public:
 	QString GetUniqId() const;
 	QString GetFSAircraftName() const;
 
-	Cvatlib_Network::PilotConnectionInfo GetConnectionInfo() const;
+    VatPilotConnection GetConnectionInfo() const;
 
 private:
 	bool mIsAirplaneInfoSet;
@@ -104,7 +104,7 @@ public:
 
 	virtual void Serialize(QXmlStreamWriter * xmlWriter);
 
-	Cvatlib_Network::ATCConnectionInfo GetConnectionInfo() const;
+    VatAtcConnection GetConnectionInfo() const;
 private:
 	int CountPositionUpdates() const;
 };

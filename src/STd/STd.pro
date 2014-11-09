@@ -13,12 +13,10 @@ TARGET = STd
 TEMPLATE = app
 CONFIG += console
 
-DEFINES += VATLIB_STATIC
-
 SOURCES += *.cpp
 HEADERS += *.h
 
-LIBS    += -L../../lib -lSTLib -lvatlib
+LIBS    += -L../../lib -lSTLib -lvatlib2
 
 DESTDIR = ../../bin
 

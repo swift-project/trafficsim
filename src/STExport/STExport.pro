@@ -16,7 +16,7 @@ CONFIG += console
 SOURCES += *.cpp
 HEADERS += *.h
 
-LIBS    += -L../../lib -lSTLib -lvatlib
+LIBS    += -L../../lib -lSTLib -lvatlib2
 
 DESTDIR = ../../bin
 

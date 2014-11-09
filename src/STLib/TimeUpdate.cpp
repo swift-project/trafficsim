@@ -204,20 +204,20 @@ int AirplanePositionUpdate::GetPressureDelta() const
 	return mPressureDelta;
 }
 
-Cvatlib_Network::PilotPosUpdate AirplanePositionUpdate::GetPosUpdate() const
+VatPilotPosition AirplanePositionUpdate::GetPosUpdate() const
 {
-	Cvatlib_Network::PilotPosUpdate pos;
-	pos.altAdj = mPressureDelta;
-	pos.altTrue = mAlt;
+    VatPilotPosition pos;
+    pos.altitudePressure = mAlt + mPressureDelta;
+    pos.altitudeTrue = mAlt;
 	pos.bank = mBank;
 	pos.groundSpeed = mSpeed;
 	pos.heading = mHeading;
-	pos.lat = mLat;
-	pos.lon = mLong;
+    pos.latitude = mLat;
+    pos.longitude = mLong;
 	pos.pitch = mPitch;
-	pos.rating = mRating;
-	pos.xpdrCode = mSquawk;
-    pos.xpdrMode = mSquawkMode.toLatin1();
+    pos.rating = static_cast<VatPilotRating>(mRating);
+    pos.transponderCode = mSquawk;
+    pos.transponderMode = convertToTransponderMode(mSquawkMode);
 	return pos;
 }
 
@@ -227,7 +227,7 @@ ControllerPositionUpdate::ControllerPositionUpdate(int TimeDiff, QString Line)
 {
 	QList<QString> List = Seperate(Line, ':');
 	mFrequency = 100000 + List[1].toInt();
-	mFacilityType = List[2].toInt();
+    mFacilityType = static_cast<VatFacilityType>(List[2].toInt());
 	mVisRange = List[3].toInt();
 	mRating = List[4].toInt();
 	mLat = List[5].toDouble();
@@ -239,7 +239,7 @@ ControllerPositionUpdate::ControllerPositionUpdate(QXmlStreamReader * xmlReader)
 	: TimeUpdate(PositionATCReason, xmlReader)
 {
 	mFrequency = xmlReader->attributes().value("Frequency").toString().toInt();
-	mFacilityType = xmlReader->attributes().value("FacilityType").toString().toInt();
+    mFacilityType = static_cast<VatFacilityType>(xmlReader->attributes().value("FacilityType").toString().toInt());
 	mVisRange = xmlReader->attributes().value("VisRange").toString().toInt();
 	mRating = xmlReader->attributes().value("Rating").toString().toInt();
 	mLat = xmlReader->attributes().value("Lat").toString().toDouble();
@@ -296,15 +296,15 @@ int ControllerPositionUpdate::GetAlt() const
 	return mAlt;
 }
 
-Cvatlib_Network::ATCPosUpdate ControllerPositionUpdate::GetPosUpdate() const
+VatAtcPosition ControllerPositionUpdate::GetPosUpdate() const
 {
-	Cvatlib_Network::ATCPosUpdate pos;
+    VatAtcPosition pos;
 	pos.elevation = mAlt;
 	pos.facility = mFacilityType;
 	pos.frequency = mFrequency;
-	pos.lat = mLat;
-	pos.lon = mLong;
-	pos.rating = mRating;
+    pos.latitude = mLat;
+    pos.longitude = mLong;
+    pos.rating = static_cast<VatAtcRating>(mRating);
 	pos.visibleRange = mVisRange;
 	return pos;
 }
@@ -342,4 +342,23 @@ QString TextMessageUpdate::GetMessage() const
 QString TextMessageUpdate::GetReceiver() const
 {
 	return mReceiver;
+}
+
+VatTransponderMode AirplanePositionUpdate::convertToTransponderMode(QChar identifier) const
+{
+    if (identifier == 'N')
+        return vatTransponderModeCharlie;
+    else if (identifier == 'Y')
+        return vatTransponderModeIdent;
+    else
+        return vatTransponderModeStandby;
+}
+
+void AirplanePositionUpdate::ConvertPBHToDoubles(unsigned int pbh, double &pitch, double &bank, double &heading)
+{
+    FS_PBH u_pbh;
+    u_pbh.pbh = pbh;
+    pitch = u_pbh.pitch;
+    bank = u_pbh.bank;
+    heading = u_pbh.hdg;
 }

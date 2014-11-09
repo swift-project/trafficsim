@@ -8,7 +8,7 @@
 
 #include <QtXml>
 #include <memory>
-#include "vatlib.h"
+#include "vatlib2.h"
 
 enum UpdateReason
 {
@@ -62,7 +62,7 @@ public:
 
 	void Serialize(QXmlStreamWriter * xmlWriter) const;
 
-	QChar GetSquawkMode() const;
+    QChar GetSquawkMode() const;
 	int GetSquawk() const;
 	int GetRating() const;
 	double GetLat() const;
@@ -74,10 +74,25 @@ public:
 	double GetHeading() const;
 	int GetPressureDelta() const;
 
-	Cvatlib_Network::PilotPosUpdate GetPosUpdate() const;
+    VatPilotPosition GetPosUpdate() const;
 
 private:
-	QChar mSquawkMode;
+
+    VatTransponderMode convertToTransponderMode(QChar identifier) const;
+    void ConvertPBHToDoubles(unsigned int pbh, double &pitch, double &bank, double &heading);
+
+    union FS_PBH {
+    unsigned int pbh;
+        struct {
+            int pitch             : 10;
+            int bank              : 10;
+            unsigned int hdg      : 10;
+            unsigned int onground : 1;
+            unsigned int unused   : 1;
+        };
+    };
+
+    QChar mSquawkMode;
 	int mSquawk;
 	int mRating;
 	double mLat;
@@ -111,11 +126,11 @@ public:
 	double GetLong() const;
 	int GetAlt() const;
 
-	Cvatlib_Network::ATCPosUpdate GetPosUpdate() const;
+    VatAtcPosition GetPosUpdate() const;
 
 private:
 	int mFrequency;
-	int mFacilityType;
+    VatFacilityType mFacilityType;
 	int mVisRange;
 	int mRating;
 	double mLat;

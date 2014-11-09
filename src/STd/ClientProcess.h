@@ -32,7 +32,7 @@ protected:
 	void SendTextMsg(pTimeUpdate Update);
 
 	pClient mClient;
-	Cvatlib_Network * mNetwork;
+    VatSessionID mNetwork;
 
 private slots:
 	void DoNextEvent();
@@ -44,13 +44,13 @@ private:
     void DisconnectAndDestroy();
 	void PushNextUpdate();
 
-	static void ConnectionStatusChanged(Cvatlib_Network * obj, Cvatlib_Network::connStatus oldStatus, Cvatlib_Network::connStatus newStatus, void * cbVar);
-	static void ErrorReceived(Cvatlib_Network * obj, Cvatlib_Network::error type, const char * message, const char * errorData, void * cbVar);
-	static void PilotInfoRequest(Cvatlib_Network * obj, const char * callsign, void * cbVar);
-	static void TextMessageReceived(Cvatlib_Network* obj, const char* from, const char* to, const char* message, void* cbVar);
+    static void ConnectionStatusChanged(VatSessionID session, VatConnectionStatus oldStatus, VatConnectionStatus newStatus, void *cbVar);
+    static void ErrorReceived(VatSessionID session, VatServerError errorType, const char *message, const char *errorData, void *cbVar);
+    static void PilotInfoRequest(VatSessionID session, const char *callsign, void *cbVar);
+    static void TextMessageReceived(VatSessionID session, const char *from, const char *to, const char *message, void *cbVar);
 
 	pTimeUpdate mNextUpdate;
-	QTimer * mTimer;
+    QTimer mTimer;
     bool isConnected;
     QMetaObject::Connection mProcessShimLibConnection;
 };

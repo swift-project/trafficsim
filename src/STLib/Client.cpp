@@ -319,13 +319,13 @@ QString Airplane::GetFSAircraftName() const
 	return mFSAircraftName;
 }
 
-Cvatlib_Network::PilotConnectionInfo Airplane::GetConnectionInfo() const
+VatPilotConnection Airplane::GetConnectionInfo() const
 {
-	Cvatlib_Network::PilotConnectionInfo info;
+    VatPilotConnection info;
 	info.callsign = mCallsign.toStdString().c_str();
 	info.name = "PilotName";
-	info.rating = mRating;
-	info.sim = Cvatlib_Network::simType_Unknown;
+    info.rating = static_cast<VatPilotRating>(mRating);
+    info.simType = vatSimTypeUnknown;
 	return info;
 }
 
@@ -351,12 +351,12 @@ void Controller::Serialize(QXmlStreamWriter * xmlWriter)
 	}
 }
 
-Cvatlib_Network::ATCConnectionInfo Controller::GetConnectionInfo() const
+VatAtcConnection Controller::GetConnectionInfo() const
 {
-	Cvatlib_Network::ATCConnectionInfo info;
+    VatAtcConnection info;
 	info.callsign = mCallsign.toStdString().c_str();
 	info.name = "ControllerName";
-	info.rating = mRating;
+    info.rating = static_cast<VatAtcRating>(mRating);
 	return info;
 }
 
