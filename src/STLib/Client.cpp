@@ -131,9 +131,9 @@ void Client::SerializeClient(QXmlStreamWriter *xmlWriter)
     xmlWriter->writeAttribute("Callsign", mCallsign);
     xmlWriter->writeAttribute("Rating", QString::number(mRating));
 
-    for (TimeUpdateContainer::const_iterator iter = mTimeUpdate.begin(); iter != mTimeUpdate.end(); iter++)
+    for (auto &timeUpdate : mTimeUpdate)
     {
-        (*iter)->Serialize(xmlWriter);
+        timeUpdate->Serialize(xmlWriter);
     }
 }
 
@@ -244,9 +244,9 @@ void Airplane::SetAirplaneInfo(QString Line)
     else if (List[2] == "PI" && List[3] == "GEN" && List.size() > 4)
     {
         mAircraftClientType = SBType;
-        for (QList<QString>::const_iterator iter = List.begin() + 4; iter != List.end(); iter++)
+        for (QString token : List)
         {
-            QList<QString> comval = Seperate(*iter, '=');
+            QList<QString> comval = Seperate(token, '=');
             if (comval[0] == "EQUIPMENT")
             {
                 mAircraftType = comval[1];
@@ -363,9 +363,9 @@ VatAtcConnection Controller::GetConnectionInfo() const
 int Controller::CountPositionUpdates() const
 {
     int counter = 0;
-    for (TimeUpdateContainer::const_iterator iter = mTimeUpdate.begin(); iter != mTimeUpdate.end(); iter++)
+    for (auto &timeUpdate : mTimeUpdate)
     {
-        if ((*iter)->GetUpdateReason() == PositionATCReason)
+        if (timeUpdate->GetUpdateReason() == PositionATCReason)
         {
             counter++;
         }

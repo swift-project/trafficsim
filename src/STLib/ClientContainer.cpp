@@ -47,7 +47,7 @@ ClientContainer::ClientContainer(QString Filename)
 
 pClient ClientContainer::SearchClient(QString Callsign, eClientType Type)
 {
-    for (QList<pClient>::iterator iter = this->begin(); iter != this->end(); iter++)
+    for (auto iter = this->begin(); iter != this->end(); ++iter)
     {
         if ((*iter)->GetCallsign() == Callsign)
         {
@@ -88,7 +88,7 @@ bool ClientContainer::WriteToXMLFile(QString Filename)
     xmlWriter.writeStartElement("ClientContainer");
     xmlWriter.writeAttribute("StartTime", QString::number(mStartTime));
 
-    for (ClientContainer::const_iterator iter = this->begin(); iter != this->end(); iter++)
+    for (auto iter = this->cbegin(); iter != this->end(); iter++)
     {
         (*iter)->Serialize(&xmlWriter);
     }
@@ -123,13 +123,13 @@ int ClientContainer::GetStartTime() const
 
 void ClientContainer::CalculateTimes()
 {
-    for (ClientContainer::iterator ClientInter = this->begin(); ClientInter != this->end(); ClientInter++)
+    for (auto ClientInter = this->begin(); ClientInter != this->end(); ++ClientInter)
     {
         int Time = mStartTime;
-        for (TimeUpdateContainer::iterator UpdateIter = (*ClientInter)->GetTimeUpdateContainer()->begin(); UpdateIter != (*ClientInter)->GetTimeUpdateContainer()->end(); UpdateIter++)
+        for (auto &timeUpdate : *(*ClientInter)->GetTimeUpdateContainer())
         {
-            int TimeBuff = (*UpdateIter)->GetTimeDiff();
-            (*UpdateIter)->SetTimeDiff(TimeBuff - Time);
+            int TimeBuff = timeUpdate->GetTimeDiff();
+            timeUpdate->SetTimeDiff(TimeBuff - Time);
             Time = TimeBuff;
         }
     }

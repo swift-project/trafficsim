@@ -15,7 +15,7 @@ ThreadHelper::ThreadHelper(QList<QThread *> *Threads)
 void ThreadHelper::AllThreadsClosed()
 {
     //cout << "all threads closed?" << endl;
-    for (QList<QThread *>::iterator iter = mThreads->begin(); iter != mThreads->end(); iter++)
+    for (auto iter = mThreads->begin(); iter != mThreads->end(); ++iter)
     {
         (*iter)->wait(10); // give the thread time to finish... in Qt finished means not he is finished completely ;)
         if ((*iter)->isRunning())
