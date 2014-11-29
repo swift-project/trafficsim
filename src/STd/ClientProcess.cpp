@@ -36,7 +36,7 @@ QString ConvertConnStatusToQString(VatConnectionStatus Status)
 }
 
 ClientProcess::ClientProcess(pClient client)
-    : mClient(client), mNetwork(0), mTimer(this), isConnected(false)
+    : mClient(client), mNetwork(0), mTimer(this), m_connectionStatus(vatStatusIdle)
 
 {
     mNetwork = Vat_CreateNetworkSession(vatServerVatsim, "SimTest 1.0", 1, 0, "MSFS", 0xb9ba,
@@ -54,17 +54,14 @@ ClientProcess::ClientProcess(pClient client)
 
 bool ClientProcess::LoginToServer()
 {
-	if(mNetwork != 0)
-	{
-		if(isConnected)
-		{
-			return true;
-		}
+    if (mNetwork != 0)
+    {
+        if(m_connectionStatus == vatStatusConnecting || m_connectionStatus == vatStatusConnected)
+        {
+            return true;
+        }
         this->SetLoginInformation();
-		bool retVal = true;
         Vat_Logon(mNetwork);
-        //qDebug() << qPrintable(mClient->GetCallsign()) << " connected!";
-        //isConnected = true;
         return true;
 	}
 	return false;
@@ -73,7 +70,7 @@ bool ClientProcess::LoginToServer()
 void ClientProcess::Disconnect()
 {
     Vat_Logoff(mNetwork);
-    isConnected = false;
+    m_connectionStatus = vatStatusDisconnecting;
 }
 
 void ClientProcess::DisconnectAndDestroy()
@@ -113,11 +110,11 @@ void ClientProcess::DoNextEvent()
 {
     pTimeUpdate UpdateTask = mNextUpdate;
 
-	// do stuff with UpdateTask:
-	qDebug() << qPrintable(mClient->GetCallsign()) << ": " << qPrintable(UpdateReasonToString(UpdateTask->GetUpdateReason()));
-    if(!isConnected)
-	{
-		if(!LoginToServer())
+    // do stuff with UpdateTask:
+    qDebug() << qPrintable(mClient->GetCallsign()) << ": " << qPrintable(UpdateReasonToString(UpdateTask->GetUpdateReason()));
+    if(m_connectionStatus != vatStatusConnecting && m_connectionStatus != vatStatusConnected)
+    {
+        if (!LoginToServer())
         {
             DisconnectAndDestroy();
             qDebug() << "closing because of error on connecting";
@@ -185,14 +182,13 @@ void ClientProcess::ConnectionStatusChanged(VatSessionID /* obj */ , VatConnecti
             qDebug() << "closing";
             return;
         }
-        client->isConnected = true;
         QTimer::singleShot(client->mNextUpdate->GetTimeDiff(), client, SLOT(DoNextEvent()));
-	}
-    if(newStatus == vatStatusDisconnected)
-	{
-		// close it
-        client->isConnected = false;
-	}
+    }
+    if (newStatus == vatStatusDisconnected)
+    {
+        // close it
+    }
+    client->m_connectionStatus = newStatus;
 }
 
 void ClientProcess::ErrorReceived(VatSessionID /* obj */ , VatServerError errorType, const char *message, const char *errorData, void *cbVar)

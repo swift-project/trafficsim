@@ -51,7 +51,7 @@ private:
 
 	pTimeUpdate mNextUpdate;
     QTimer mTimer;
-    bool isConnected;
+    VatConnectionStatus m_connectionStatus;
     QMetaObject::Connection mProcessShimLibConnection;
 };
 
