@@ -7,17 +7,17 @@
 #include "AirplaneClientProcess.h"
 
 AirplaneClientProcess::AirplaneClientProcess(pClient client)
-	: ClientProcess(client)
+    : ClientProcess(client)
 {
-	pAirplane = (Airplane*)client.get();
+    pAirplane = (Airplane *)client.get();
 }
 
 void AirplaneClientProcess::SetLoginInformation()
 {
     VatPilotConnection PilotInfo;
-	std::string callsign = mClient->GetCallsign().toStdString();
-	PilotInfo.callsign = callsign.c_str();
-	PilotInfo.name = "Test Client";
+    std::string callsign = mClient->GetCallsign().toStdString();
+    PilotInfo.callsign = callsign.c_str();
+    PilotInfo.name = "Test Client";
     PilotInfo.rating = static_cast<VatPilotRating>(mClient->GetRating());
     PilotInfo.simType = vatSimTypeMSFS95;
 
@@ -27,13 +27,13 @@ void AirplaneClientProcess::SetLoginInformation()
 
 void AirplaneClientProcess::SendPositionInfo(pTimeUpdate Update)
 {
-	AirplanePositionUpdate * AirPos = (AirplanePositionUpdate*)Update.get();
+    AirplanePositionUpdate *AirPos = (AirplanePositionUpdate *)Update.get();
     VatPilotPosition Pos = AirPos->GetPosUpdate();
 
     Vat_SendPilotUpdate(mNetwork, &Pos);
 }
 
-void AirplaneClientProcess::SendPlaneInfoRequest(const char * callsign)
+void AirplaneClientProcess::SendPlaneInfoRequest(const char *callsign)
 {
     VatAircraftInfo aircraftInfo;
     QByteArray type = pAirplane->GetAircraftType().toLocal8Bit();

@@ -6,17 +6,17 @@
 #include "ControllerClientProcess.h"
 
 ControllerClientProcess::ControllerClientProcess(pClient client)
-	: ClientProcess(client)
+    : ClientProcess(client)
 {
-	pController = (Controller*)client.get();
+    pController = (Controller *)client.get();
 }
 
 void ControllerClientProcess::SetLoginInformation()
 {
     VatAtcConnection ControllerInfo;
-	std::string callsign = mClient->GetCallsign().toStdString();
-	ControllerInfo.callsign = callsign.c_str();
-	ControllerInfo.name = "Controller Name";
+    std::string callsign = mClient->GetCallsign().toStdString();
+    ControllerInfo.callsign = callsign.c_str();
+    ControllerInfo.name = "Controller Name";
     ControllerInfo.rating = static_cast<VatAtcRating>(mClient->GetRating());
 
     Vat_SpecifyATCLogon(mNetwork, Server.toStdString().c_str(), Port, Username.toStdString().c_str(),
@@ -25,7 +25,7 @@ void ControllerClientProcess::SetLoginInformation()
 
 void ControllerClientProcess::SendPositionInfo(pTimeUpdate Update)
 {
-	ControllerPositionUpdate * ATCPos = (ControllerPositionUpdate*)Update.get();
+    ControllerPositionUpdate *ATCPos = (ControllerPositionUpdate *)Update.get();
     VatAtcPosition ATCUpdate = ATCPos->GetPosUpdate();
     Vat_SendATCUpdate(mNetwork, &ATCUpdate);
 }

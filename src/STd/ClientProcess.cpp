@@ -8,31 +8,31 @@
 
 QString ConvertConnStatusToQString(VatConnectionStatus Status)
 {
-	switch(Status)
-	{
+    switch (Status)
+    {
     case vatStatusIdle:
-		return "Idle";
-		break;
+        return "Idle";
+        break;
     case vatStatusConnecting:
-		return "Connecting";
-		break;
+        return "Connecting";
+        break;
     case vatStatusConnected:
-		return "Connected";
-		break;
+        return "Connected";
+        break;
     case vatStatusDisconnecting:
         return "Disconnecting";
         break;
     case vatStatusDisconnected:
-		return "Disconnected";
-		break;
+        return "Disconnected";
+        break;
     case vatStatusError:
-		return "Error";
-		break;
+        return "Error";
+        break;
     default:
         return "NOT DEFINED";
         break;
-	}
-	return "Unknown";
+    }
+    return "Unknown";
 }
 
 ClientProcess::ClientProcess(pClient client)
@@ -63,8 +63,8 @@ bool ClientProcess::LoginToServer()
         this->SetLoginInformation();
         Vat_Logon(mNetwork);
         return true;
-	}
-	return false;
+    }
+    return false;
 }
 
 void ClientProcess::Disconnect()
@@ -84,10 +84,10 @@ void ClientProcess::DisconnectAndDestroy()
 
 void ClientProcess::Run()
 {
-	if(mNetwork == 0)
-	{
+    if (mNetwork == 0)
+    {
         emit ClientFinished();
-		return;
+        return;
     }
     //qDebug() << "Next Update in " << mNextUpdate->GetTimeDiff();
     QTimer::singleShot(mNextUpdate->GetTimeDiff(), this, SLOT(DoNextEvent()));
@@ -95,14 +95,14 @@ void ClientProcess::Run()
     mTimer.start(100);
 }
 
-void ClientProcess::SendPlaneInfoRequest(const char * /* callsign */ )
+void ClientProcess::SendPlaneInfoRequest(const char * /* callsign */)
 {
-	// do nothing ;)
+    // do nothing ;)
 }
 
 void ClientProcess::SendTextMsg(pTimeUpdate Update)
 {
-	TextMessageUpdate * text = (TextMessageUpdate*)Update.get();
+    TextMessageUpdate *text = (TextMessageUpdate *)Update.get();
     Vat_SendTextMessage(mNetwork, text->GetReceiver().toStdString().c_str(), text->GetMessage().toStdString().c_str());
 }
 
@@ -121,11 +121,11 @@ void ClientProcess::DoNextEvent()
         }
         return;
     }
-    if(UpdateTask->GetUpdateReason() == PositionAirplaneReason || UpdateTask->GetUpdateReason() == PositionATCReason)
+    if (UpdateTask->GetUpdateReason() == PositionAirplaneReason || UpdateTask->GetUpdateReason() == PositionATCReason)
     {
         SendPositionInfo(UpdateTask);
     }
-    else if(UpdateTask->GetUpdateReason() == TextMsg)
+    else if (UpdateTask->GetUpdateReason() == TextMsg)
     {
         SendTextMsg(UpdateTask);
     }
@@ -135,11 +135,11 @@ void ClientProcess::DoNextEvent()
     }
 
     PushNextUpdate();
-	if(mNextUpdate == 0)
+    if (mNextUpdate == 0)
     {
         DisconnectAndDestroy();
-		qDebug() << "closing";
-	}
+        qDebug() << "closing";
+    }
     else
     {
         // load Timer for next shot:
@@ -155,27 +155,27 @@ void ClientProcess::ProcessShimLib()
 
 void ClientProcess::PushNextUpdate()
 {
-	QList<pTimeUpdate> * List = mClient->GetTimeUpdateContainer();
-	if(List->size() == 0)
-	{
-		mNextUpdate = 0;
-	}
-	else
-	{
-		mNextUpdate = List->first();
-		List->pop_front();
+    QList<pTimeUpdate> *List = mClient->GetTimeUpdateContainer();
+    if (List->size() == 0)
+    {
+        mNextUpdate = 0;
+    }
+    else
+    {
+        mNextUpdate = List->first();
+        List->pop_front();
     }
 }
 
-void ClientProcess::ConnectionStatusChanged(VatSessionID /* obj */ , VatConnectionStatus oldStatus, VatConnectionStatus newStatus, void * cbVar)
+void ClientProcess::ConnectionStatusChanged(VatSessionID /* obj */ , VatConnectionStatus oldStatus, VatConnectionStatus newStatus, void *cbVar)
 {
-	ClientProcess * client = static_cast<ClientProcess*>(cbVar);
-	qDebug() << "ConnectionStatusChanged: (" << qPrintable(client->mClient->GetCallsign()) << ")";
-	qDebug() <<	"    old: " << ConvertConnStatusToQString(oldStatus);
-	qDebug() <<	"    new: " << ConvertConnStatusToQString(newStatus);
-    if(newStatus == vatStatusConnected)
-	{
-        if(client->mNextUpdate == 0)
+    ClientProcess *client = static_cast<ClientProcess *>(cbVar);
+    qDebug() << "ConnectionStatusChanged: (" << qPrintable(client->mClient->GetCallsign()) << ")";
+    qDebug() << "    old: " << ConvertConnStatusToQString(oldStatus);
+    qDebug() << "    new: " << ConvertConnStatusToQString(newStatus);
+    if (newStatus == vatStatusConnected)
+    {
+        if (client->mNextUpdate == 0)
         {
             // there is no next Event, so disconnect:
             client->DisconnectAndDestroy();
@@ -193,28 +193,28 @@ void ClientProcess::ConnectionStatusChanged(VatSessionID /* obj */ , VatConnecti
 
 void ClientProcess::ErrorReceived(VatSessionID /* obj */ , VatServerError errorType, const char *message, const char *errorData, void *cbVar)
 {
-	ClientProcess * client = static_cast<ClientProcess*>(cbVar);
-	qDebug() << "ErrorReceived: (" << qPrintable(client->mClient->GetCallsign()) << ")";
-    qDebug() <<	"    type:      " << errorType;
-	qDebug() << "    message:   " << message;
-	qDebug() <<	"    errorData: " << errorData;
+    ClientProcess *client = static_cast<ClientProcess *>(cbVar);
+    qDebug() << "ErrorReceived: (" << qPrintable(client->mClient->GetCallsign()) << ")";
+    qDebug() << "    type:      " << errorType;
+    qDebug() << "    message:   " << message;
+    qDebug() << "    errorData: " << errorData;
 }
 
 void ClientProcess::PilotInfoRequest(VatSessionID /* obj */ , const char *callsign, void *cbVar)
 {
-	ClientProcess * client = static_cast<ClientProcess*>(cbVar);
-	qDebug() << "PilotInfoRequest: (" << qPrintable(client->mClient->GetCallsign()) << ")";
-	qDebug() <<	"    from:      " << callsign;
-	client->SendPlaneInfoRequest(callsign);
+    ClientProcess *client = static_cast<ClientProcess *>(cbVar);
+    qDebug() << "PilotInfoRequest: (" << qPrintable(client->mClient->GetCallsign()) << ")";
+    qDebug() << "    from:      " << callsign;
+    client->SendPlaneInfoRequest(callsign);
 }
 
-void ClientProcess::TextMessageReceived(VatSessionID session, const char * from, const char * to, const char * message, void * cbVar)
+void ClientProcess::TextMessageReceived(VatSessionID session, const char *from, const char *to, const char *message, void *cbVar)
 {
-	ClientProcess * client = static_cast<ClientProcess*>(cbVar);
-	if(to == client->mClient->GetCallsign())
-	{
+    ClientProcess *client = static_cast<ClientProcess *>(cbVar);
+    if (to == client->mClient->GetCallsign())
+    {
         QString returnMessage = "I got this Message from you: ";
         returnMessage += message;
         Vat_SendTextMessage(session, from, qPrintable(returnMessage));
-	}
+    }
 }

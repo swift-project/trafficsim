@@ -10,24 +10,24 @@
 
 enum Direction
 {
-	eDNotInit,
-	eSent,
-	eRecv,
+    eDNotInit,
+    eSent,
+    eRecv,
 };
 
 class FSInnReader
 {
 public:
-	FSInnReader(QString Filename);
-	bool ReadFile(ClientContainer & Cont);
+    FSInnReader(QString Filename);
+    bool ReadFile(ClientContainer &Cont);
 
 private:
-	QFile mFile;
+    QFile mFile;
 
-	bool ExportLine(QString & Line, int & time, Direction & direction, UpdateReason & command, QString & Argument);
-	int ConvertTimeStr(QString & TimeStr);
+    bool ExportLine(QString &Line, int &time, Direction &direction, UpdateReason &command, QString &Argument);
+    int ConvertTimeStr(QString &TimeStr);
 };
 
-bool ReadLine(QFile & File, QString & String);
+bool ReadLine(QFile &File, QString &String);
 
 #endif

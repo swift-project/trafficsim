@@ -7,23 +7,23 @@
 
 QList<QString> Seperate(QString Str, QChar seperator)
 {
-	QList<QString> List;
-	QString Temp = "";
-	for(int i = 0; i < Str.size(); i++)
-	{
-		if(Str[i] == seperator)
-		{
-			List.append(Temp);
-			Temp = "";
-		}
-		else
-		{
-			Temp += Str[i];
-		}
-	}
-	if(Temp != "")
-	{
-		List.append(Temp);
-	}
-	return List;
+    QList<QString> List;
+    QString Temp = "";
+    for (int i = 0; i < Str.size(); i++)
+    {
+        if (Str[i] == seperator)
+        {
+            List.append(Temp);
+            Temp = "";
+        }
+        else
+        {
+            Temp += Str[i];
+        }
+    }
+    if (Temp != "")
+    {
+        List.append(Temp);
+    }
+    return List;
 }

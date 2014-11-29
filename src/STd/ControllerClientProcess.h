@@ -10,17 +10,17 @@
 
 class ControllerClientProcess : public ClientProcess
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	ControllerClientProcess(pClient client);
+    ControllerClientProcess(pClient client);
 
     virtual void SetLoginInformation();
 
 protected:
-	virtual void SendPositionInfo(pTimeUpdate Update);
+    virtual void SendPositionInfo(pTimeUpdate Update);
 
 private:
-	Controller * pController;
+    Controller *pController;
 
 };
 

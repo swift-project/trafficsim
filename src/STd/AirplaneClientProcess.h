@@ -10,18 +10,18 @@
 
 class AirplaneClientProcess : public ClientProcess
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	AirplaneClientProcess(pClient client);
+    AirplaneClientProcess(pClient client);
 
     virtual void SetLoginInformation();
 
 protected:
-	virtual void SendPositionInfo(pTimeUpdate Update);
-	virtual void SendPlaneInfoRequest(const char * callsign);
+    virtual void SendPositionInfo(pTimeUpdate Update);
+    virtual void SendPlaneInfoRequest(const char *callsign);
 
 private:
-	Airplane * pAirplane;
+    Airplane *pAirplane;
 };
 
 #endif

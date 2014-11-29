@@ -10,46 +10,46 @@
 
 class ClientProcess : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	ClientProcess(pClient client);
+    ClientProcess(pClient client);
     virtual void SetLoginInformation() = 0;
 
     static QString Server;
     static qint16 Port;
     static QString Username;
     static QString Password;
-	
+
 signals:
-	void ClientFinished();
+    void ClientFinished();
 
 public slots:
-	void Run();
+    void Run();
 
 protected:
-	virtual void SendPositionInfo(pTimeUpdate Update) = 0;
-	virtual void SendPlaneInfoRequest(const char * callsign);
-	void SendTextMsg(pTimeUpdate Update);
+    virtual void SendPositionInfo(pTimeUpdate Update) = 0;
+    virtual void SendPlaneInfoRequest(const char *callsign);
+    void SendTextMsg(pTimeUpdate Update);
 
-	pClient mClient;
+    pClient mClient;
     VatSessionID mNetwork;
 
 private slots:
-	void DoNextEvent();
-	void ProcessShimLib();
+    void DoNextEvent();
+    void ProcessShimLib();
 
 private:
-	bool LoginToServer();
+    bool LoginToServer();
     void Disconnect();
     void DisconnectAndDestroy();
-	void PushNextUpdate();
+    void PushNextUpdate();
 
     static void ConnectionStatusChanged(VatSessionID session, VatConnectionStatus oldStatus, VatConnectionStatus newStatus, void *cbVar);
     static void ErrorReceived(VatSessionID session, VatServerError errorType, const char *message, const char *errorData, void *cbVar);
     static void PilotInfoRequest(VatSessionID session, const char *callsign, void *cbVar);
     static void TextMessageReceived(VatSessionID session, const char *from, const char *to, const char *message, void *cbVar);
 
-	pTimeUpdate mNextUpdate;
+    pTimeUpdate mNextUpdate;
     QTimer mTimer;
     VatConnectionStatus m_connectionStatus;
     QMetaObject::Connection mProcessShimLibConnection;

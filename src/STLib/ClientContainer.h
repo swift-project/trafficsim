@@ -11,19 +11,19 @@
 class ClientContainer : public QList<pClient>
 {
 public:
-	ClientContainer();
-	ClientContainer(QString Filename);
+    ClientContainer();
+    ClientContainer(QString Filename);
 
-	pClient SearchClient(QString Callsign, eClientType Type);
-	bool WriteToXMLFile(QString Filename);
+    pClient SearchClient(QString Callsign, eClientType Type);
+    bool WriteToXMLFile(QString Filename);
 
-	void SetStartTime(int StartTime);
-	int GetStartTime() const;
+    void SetStartTime(int StartTime);
+    int GetStartTime() const;
 
 private:
-	void CalculateTimes();
+    void CalculateTimes();
 
-	int mStartTime;
+    int mStartTime;
 };
 
 #endif

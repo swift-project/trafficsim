@@ -12,16 +12,16 @@
 
 enum UpdateReason
 {
-	NotInitReason,
-	AddAirplaneReason,
-	RemoveAirplaneReason,
-	AddATCReason,
-	RemoveATCReason,
-	TextMsg,
+    NotInitReason,
+    AddAirplaneReason,
+    RemoveAirplaneReason,
+    AddATCReason,
+    RemoveATCReason,
+    TextMsg,
 
-	PositionAirplaneReason,
-	PositionATCReason,
-	SBInfoReason,
+    PositionAirplaneReason,
+    PositionATCReason,
+    SBInfoReason,
 };
 
 QString UpdateReasonToString(UpdateReason reason);
@@ -29,21 +29,21 @@ QString UpdateReasonToString(UpdateReason reason);
 class TimeUpdate
 {
 public:
-	TimeUpdate(UpdateReason Reason, int TimeDiff);
-	TimeUpdate(UpdateReason Reason, QXmlStreamReader * xmlReader);
+    TimeUpdate(UpdateReason Reason, int TimeDiff);
+    TimeUpdate(UpdateReason Reason, QXmlStreamReader *xmlReader);
 
-	void SetTimeDiff(int TimeDiff);
-	int GetTimeDiff() const;
+    void SetTimeDiff(int TimeDiff);
+    int GetTimeDiff() const;
 
-	void SetUpdateReason(UpdateReason Reason);
-	UpdateReason GetUpdateReason() const;
+    void SetUpdateReason(UpdateReason Reason);
+    UpdateReason GetUpdateReason() const;
 
-	void SerializeTime(QXmlStreamWriter * xmlWriter) const;
-	virtual void Serialize(QXmlStreamWriter * xmlWriter) const;
+    void SerializeTime(QXmlStreamWriter *xmlWriter) const;
+    virtual void Serialize(QXmlStreamWriter *xmlWriter) const;
 
 private:
-	int mTimeDiff;
-	UpdateReason mUpdateReason;
+    int mTimeDiff;
+    UpdateReason mUpdateReason;
 };
 
 typedef std::shared_ptr<TimeUpdate> pTimeUpdate;
@@ -55,24 +55,24 @@ typedef QList<pTimeUpdate> TimeUpdateContainer;
 class AirplanePositionUpdate : public TimeUpdate
 {
 public:
-	AirplanePositionUpdate(int TimeDiff, QString Line);
-	AirplanePositionUpdate(QXmlStreamReader * xmlReader);
+    AirplanePositionUpdate(int TimeDiff, QString Line);
+    AirplanePositionUpdate(QXmlStreamReader *xmlReader);
 
-	QString GetLine() const;
+    QString GetLine() const;
 
-	void Serialize(QXmlStreamWriter * xmlWriter) const;
+    void Serialize(QXmlStreamWriter *xmlWriter) const;
 
     QChar GetSquawkMode() const;
-	int GetSquawk() const;
-	int GetRating() const;
-	double GetLat() const;
-	double GetLong() const;
-	int GetAlt() const;
-	int GetSpeed() const;
-	double GetPitch() const;
-	double GetBank() const;
-	double GetHeading() const;
-	int GetPressureDelta() const;
+    int GetSquawk() const;
+    int GetRating() const;
+    double GetLat() const;
+    double GetLong() const;
+    int GetAlt() const;
+    int GetSpeed() const;
+    double GetPitch() const;
+    double GetBank() const;
+    double GetHeading() const;
+    int GetPressureDelta() const;
 
     VatPilotPosition GetPosUpdate() const;
 
@@ -81,9 +81,11 @@ private:
     VatTransponderMode convertToTransponderMode(QChar identifier) const;
     void ConvertPBHToDoubles(unsigned int pbh, double &pitch, double &bank, double &heading);
 
-    union FS_PBH {
-    unsigned int pbh;
-        struct {
+    union FS_PBH
+    {
+        unsigned int pbh;
+        struct
+        {
             int pitch             : 10;
             int bank              : 10;
             unsigned int hdg      : 10;
@@ -93,16 +95,16 @@ private:
     };
 
     QChar mSquawkMode;
-	int mSquawk;
-	int mRating;
-	double mLat;
-	double mLong;
-	int mAlt;
-	int mSpeed;
-	double mPitch;
-	double mBank;
-	double mHeading;
-	int mPressureDelta;
+    int mSquawk;
+    int mRating;
+    double mLat;
+    double mLong;
+    int mAlt;
+    int mSpeed;
+    double mPitch;
+    double mBank;
+    double mHeading;
+    int mPressureDelta;
 };
 
 // LOWW_APP:28200:5:145:5:48.11028:16.56972:0
@@ -111,47 +113,47 @@ private:
 class ControllerPositionUpdate : public TimeUpdate
 {
 public:
-	ControllerPositionUpdate(int TimeDiff, QString Line);
-	ControllerPositionUpdate(QXmlStreamReader * xmlReader);
+    ControllerPositionUpdate(int TimeDiff, QString Line);
+    ControllerPositionUpdate(QXmlStreamReader *xmlReader);
 
-	QString GetLine() const;
+    QString GetLine() const;
 
-	void Serialize(QXmlStreamWriter * xmlWriter) const;
+    void Serialize(QXmlStreamWriter *xmlWriter) const;
 
-	int GetFrequency() const;
-	int GetFacilityType() const;
-	int GetVisRange() const;
-	int GetRating() const;
-	double GetLat() const;
-	double GetLong() const;
-	int GetAlt() const;
+    int GetFrequency() const;
+    int GetFacilityType() const;
+    int GetVisRange() const;
+    int GetRating() const;
+    double GetLat() const;
+    double GetLong() const;
+    int GetAlt() const;
 
     VatAtcPosition GetPosUpdate() const;
 
 private:
-	int mFrequency;
+    int mFrequency;
     VatFacilityType mFacilityType;
-	int mVisRange;
-	int mRating;
-	double mLat;
-	double mLong;
-	int mAlt;
+    int mVisRange;
+    int mRating;
+    double mLat;
+    double mLong;
+    int mAlt;
 };
 
 class TextMessageUpdate : public TimeUpdate
 {
 public:
-	TextMessageUpdate(int TimeDiff, QString Line);
-	TextMessageUpdate(QXmlStreamReader * xmlReader);
+    TextMessageUpdate(int TimeDiff, QString Line);
+    TextMessageUpdate(QXmlStreamReader *xmlReader);
 
-	void Serialize(QXmlStreamWriter * xmlWriter) const;
+    void Serialize(QXmlStreamWriter *xmlWriter) const;
 
-	QString GetMessage() const;
-	QString GetReceiver() const;
+    QString GetMessage() const;
+    QString GetReceiver() const;
 
 private:
-	QString mMessage;
-	QString mReceiver;
+    QString mMessage;
+    QString mReceiver;
 };
 
 #endif

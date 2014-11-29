@@ -7,22 +7,22 @@
 #include <QCoreApplication>
 #include "helper.h"
 
-ThreadHelper::ThreadHelper(QList<QThread*> * Threads)
+ThreadHelper::ThreadHelper(QList<QThread *> *Threads)
 {
-	mThreads = Threads;
+    mThreads = Threads;
 }
 
 void ThreadHelper::AllThreadsClosed()
 {
-	//cout << "all threads closed?" << endl;
-	for(QList<QThread*>::iterator iter = mThreads->begin(); iter != mThreads->end(); iter++)
-	{
-		(*iter)->wait(10); // give the thread time to finish... in Qt finished means not he is finished completely ;)
-		if((*iter)->isRunning())
-		{
-			return;
-		}
-	}
-	QCoreApplication::exit();
+    //cout << "all threads closed?" << endl;
+    for (QList<QThread *>::iterator iter = mThreads->begin(); iter != mThreads->end(); iter++)
+    {
+        (*iter)->wait(10); // give the thread time to finish... in Qt finished means not he is finished completely ;)
+        if ((*iter)->isRunning())
+        {
+            return;
+        }
+    }
+    QCoreApplication::exit();
 }
 

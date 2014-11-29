@@ -10,15 +10,15 @@
 
 class ThreadHelper : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	ThreadHelper(QList<QThread*> * Threads);
+    ThreadHelper(QList<QThread *> *Threads);
 
 public slots:
-	void AllThreadsClosed();
+    void AllThreadsClosed();
 
 private:
-	QList<QThread*> * mThreads;
+    QList<QThread *> *mThreads;
 };
 
 #endif

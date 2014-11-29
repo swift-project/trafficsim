@@ -18,15 +18,15 @@
 #include "helper.h"
 
 #ifdef VATSIM_GERMANY_TEST
-    #define SERVER_ADDR	"vatsim-germany.org"
-    #define SERVER_PORT	6809
-    #define USER_ID		"sup"
-    #define USER_PASS	"sup"
+#define SERVER_ADDR "vatsim-germany.org"
+#define SERVER_PORT 6809
+#define USER_ID     "sup"
+#define USER_PASS   "sup"
 #else
-    #define SERVER_ADDR	"127.0.0.1"
-    #define SERVER_PORT	6809
-    #define USER_ID		"sup"
-    #define USER_PASS	"sup"
+#define SERVER_ADDR "127.0.0.1"
+#define SERVER_PORT 6809
+#define USER_ID     "sup"
+#define USER_PASS   "sup"
 #endif
 
 
@@ -62,33 +62,33 @@ int main(int argc, char *argv[])
 
         cmd.parse();
 
-        if(xmlFile.isDefined())
+        if (xmlFile.isDefined())
         {
             FileName = xmlFile.value().toString();
         }
-        if(server.isDefined())
+        if (server.isDefined())
         {
             ClientProcess::Server = server.value().toString();
         }
-        if(port.isDefined())
+        if (port.isDefined())
         {
             ClientProcess::Port = port.value().toInt();
         }
-        if(user.isDefined())
+        if (user.isDefined())
         {
             ClientProcess::Username = user.value().toString();
         }
-        if(password.isDefined())
+        if (password.isDefined())
         {
             ClientProcess::Password = password.value().toString();
         }
     }
-    catch(const QtArgHelpHasPrintedEx & x)
+    catch (const QtArgHelpHasPrintedEx &x)
     {
         qDebug() << x.what();
         return -1;
     }
-    catch(const QtArgBaseException & x)
+    catch (const QtArgBaseException &x)
     {
         qDebug() << x.what();
         return -1;
@@ -101,42 +101,42 @@ int main(int argc, char *argv[])
     qDebug() << "FSD Username:      " << ClientProcess::Username;
     qDebug() << "FSD Password:      " << ClientProcess::Password;
 
-	QCoreApplication a(argc, argv);
+    QCoreApplication a(argc, argv);
     qDebug() << "Loading Logfile!";
-	ClientContainer Cont(FileName);
+    ClientContainer Cont(FileName);
 
-	QList<QThread*> Threads;
-	ThreadHelper * closer = new ThreadHelper(&Threads);
+    QList<QThread *> Threads;
+    ThreadHelper *closer = new ThreadHelper(&Threads);
 
     qDebug() << "Create and Start Threads";
-	for(ClientContainer::iterator iter = Cont.begin(); iter != Cont.end(); iter++)
-	{
-        ClientProcess * process = 0;
-		if((*iter)->GetType() == AirplaneType)
-		{
-			process = new AirplaneClientProcess(*iter);
-		}
-		else if((*iter)->GetType() == ControllerType)
-		{
-			process = new ControllerClientProcess(*iter);
-		}
-		if(process != 0)
+    for (ClientContainer::iterator iter = Cont.begin(); iter != Cont.end(); iter++)
+    {
+        ClientProcess *process = 0;
+        if ((*iter)->GetType() == AirplaneType)
         {
-            QThread * thread = new QThread();
+            process = new AirplaneClientProcess(*iter);
+        }
+        else if ((*iter)->GetType() == ControllerType)
+        {
+            process = new ControllerClientProcess(*iter);
+        }
+        if (process != 0)
+        {
+            QThread *thread = new QThread();
             QThread::connect(thread, &QThread::started, process, &ClientProcess::Run);
             QThread::connect(thread, &QThread::finished, closer, &ThreadHelper::AllThreadsClosed);
             QThread::connect(process, &ClientProcess::ClientFinished, thread, &QThread::quit);
 
-			process->moveToThread(thread);
-			thread->start();
+            process->moveToThread(thread);
+            thread->start();
 
-			Threads.append(thread);
-		}
-	}
-    if(Cont.size() == 0)
+            Threads.append(thread);
+        }
+    }
+    if (Cont.size() == 0)
     {
         qDebug() << "No Data!";
         return 0;
     }
-	return a.exec();
+    return a.exec();
 }
