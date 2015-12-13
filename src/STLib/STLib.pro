@@ -16,7 +16,7 @@ CONFIG += staticlib
 SOURCES += *.cpp
 HEADERS += *.h
 
-LIBS    += -lvatlib2
+LIBS    += -lvatlib
 
 DESTDIR = ../../lib
 

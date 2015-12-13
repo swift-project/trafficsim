@@ -8,7 +8,7 @@
 
 #include <QtXml>
 #include <memory>
-#include "vatlib2.h"
+#include "vatlib.h"
 
 enum UpdateReason
 {
