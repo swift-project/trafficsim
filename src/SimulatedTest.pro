@@ -8,6 +8,6 @@ message("You are running qmake on a generated .pro file. This may not work!")
 
 
 TEMPLATE = subdirs
-SUBDIRS += STLib/STLib.pro \
-    STExport/STExport.pro \
-    STd/STd.pro
+SUBDIRS += STLib \
+    STExport \
+    STd
