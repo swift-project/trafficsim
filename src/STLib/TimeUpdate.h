@@ -81,19 +81,6 @@ private:
     VatTransponderMode convertToTransponderMode(QChar identifier) const;
     void ConvertPBHToDoubles(unsigned int pbh, double &pitch, double &bank, double &heading);
 
-    union FS_PBH
-    {
-        unsigned int pbh;
-        struct
-        {
-            int pitch             : 10;
-            int bank              : 10;
-            unsigned int hdg      : 10;
-            unsigned int onground : 1;
-            unsigned int unused   : 1;
-        };
-    };
-
     QChar mSquawkMode;
     int mSquawk;
     int mRating;

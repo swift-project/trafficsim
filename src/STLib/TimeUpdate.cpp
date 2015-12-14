@@ -356,9 +356,23 @@ VatTransponderMode AirplanePositionUpdate::convertToTransponderMode(QChar identi
 
 void AirplanePositionUpdate::ConvertPBHToDoubles(unsigned int pbh, double &pitch, double &bank, double &heading)
 {
-    FS_PBH u_pbh;
-    u_pbh.pbh = pbh;
-    pitch = u_pbh.pitch;
-    bank = u_pbh.bank;
-    heading = u_pbh.hdg;
+    int pitchRaw, bankRaw, headingRaw;
+    pitchRaw = (pbh & 0xFFC00000) >> 22;
+    bankRaw = (pbh & 0x003FF000) >> 12;
+    headingRaw = (pbh & 0x00000FFC) >> 2;
+    pitch = ((double) pitchRaw) / 1024.0 * -360.0;
+    bank = ((double) bankRaw) / 1024.0 * -360.0;
+    heading = ((double) headingRaw) / 1024.0 * 360.0;
+    if (pitch >= 180.0)
+        pitch -= 360.0;
+    if (pitch <= -180.0)
+        pitch += 360.0;
+    if (bank >= 180.0)
+        bank -= 360.0;
+    if (bank < -180.0)
+        bank += 360.0;
+    if (heading < 0.0)
+        heading += 360.0;
+    if (heading >= 360.0)
+        heading -= 360.0;
 }
