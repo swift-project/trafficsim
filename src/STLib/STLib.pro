@@ -12,6 +12,7 @@ INCLUDEPATH += . .. ../..
 TARGET = STLib
 TEMPLATE = lib
 CONFIG += staticlib
+CONFIG += c++11
 
 SOURCES += *.cpp
 HEADERS += *.h
@@ -19,7 +20,3 @@ HEADERS += *.h
 LIBS    += -lvatlib
 
 DESTDIR = ../../lib
-
-unix {
-    QMAKE_CXXFLAGS += -std=c++0x
-}

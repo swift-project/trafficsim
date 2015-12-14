@@ -12,6 +12,7 @@ INCLUDEPATH += . .. ../..
 TARGET = STd
 TEMPLATE = app
 CONFIG += console
+CONFIG += c++11
 
 SOURCES += *.cpp
 HEADERS += *.h
@@ -21,7 +22,3 @@ LIBS    += -L../../lib -lSTLib -lvatlib
 DESTDIR = ../../bin
 
 include(../../QtArg/qtarg.pri)
-
-unix {
-    QMAKE_CXXFLAGS += -std=c++0x
-}

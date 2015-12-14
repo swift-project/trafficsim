@@ -12,6 +12,7 @@ INCLUDEPATH += . .. ../..
 TARGET = STExport
 TEMPLATE = app
 CONFIG += console
+CONFIG += c++11
 
 SOURCES += *.cpp
 HEADERS += *.h
@@ -19,7 +20,3 @@ HEADERS += *.h
 LIBS    += -L../../lib -lSTLib -lvatlib
 
 DESTDIR = ../../bin
-
-unix {
-    QMAKE_CXXFLAGS += -std=c++0x
-}
