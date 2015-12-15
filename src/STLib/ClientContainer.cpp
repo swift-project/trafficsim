@@ -49,7 +49,7 @@ pClient ClientContainer::SearchClient(QString Callsign, eClientType Type)
 {
     for (auto iter = this->begin(); iter != this->end(); ++iter)
     {
-        if ((*iter)->GetCallsign() == Callsign)
+        if ((*iter)->GetCallsign() == Callsign && (*iter)->GetType() == Type)
         {
             return (*iter);
         }
