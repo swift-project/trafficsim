@@ -43,5 +43,5 @@ void AirplaneClientProcess::SendPlaneInfoRequest(const char *callsign)
     aircraftInfo.aircraftType = type.constData();
     aircraftInfo.airline = airline.constData();
     aircraftInfo.livery = livery.constData();
-    Vat_SendModernPlaneInfo(mNetwork, callsign, &aircraftInfo);
+    Vat_SendAircraftInfo(mNetwork, callsign, &aircraftInfo);
 }

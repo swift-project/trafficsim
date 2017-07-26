@@ -41,7 +41,7 @@ ClientProcess::ClientProcess(pClient client)
 {
     mNetwork = Vat_CreateNetworkSession(vatServerVatsim, "SimTest 1.0", 1, 0, "MSFS", 0xb9ba,
                                         "727d1efd5cb9f8d2c28372469d922bb4",
-                                        vatCapsModelDesc | vatCapsInterminPos | vatCapsAircraftConfig);
+                                        vatCapsAircraftInfo | vatCapsInterminPos | vatCapsAircraftConfig);
     if (mNetwork != 0)
     {
         Vat_SetStateChangeHandler(mNetwork, &ClientProcess::ConnectionStatusChanged, this);
