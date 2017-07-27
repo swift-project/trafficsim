@@ -5,11 +5,7 @@
 
 //#define VATSIM_GERMANY_TEST
 
-// QtArg include.
-#include <QtArg/Arg>
-#include <QtArg/XorArg>
-#include <QtArg/CmdLine>
-#include <QtArg/Help>
+#include <QCommandLineParser>
 
 #include "STLib/ClientContainer.h"
 #include "ClientProcess.h"
@@ -28,6 +24,7 @@
 #define USER_ID     "sup"
 #define USER_PASS   "sup"
 #endif
+#define DEFAULT_FILENAME "../Logs/Onlineday_LOWW.xml"
 
 
 QString ClientProcess::Server = SERVER_ADDR;
@@ -38,62 +35,45 @@ QString ClientProcess::Password = USER_PASS;
 int main(int argc, char *argv[])
 {
     qDebug() << "Servus!";
-    QString FileName = "../Logs/Onlineday_LOWW.xml";
-    try
-    {
-        QtArgCmdLine cmd(argc, argv);
+    QCoreApplication a(argc, argv);
+    QCoreApplication::setApplicationName("trafficsim");
+    QCommandLineParser parser;
+    parser.setApplicationDescription("traffic simulator is a tool to replay recorded traffic to an FSD server.");
+    parser.addHelpOption();
+    parser.addOption({{"x", "xml"},
+                      QCoreApplication::translate("main", "Scenario <scenariofile> in xml format"),
+                      QCoreApplication::translate("main", "scenariofile"),
+                      DEFAULT_FILENAME
+                     });
+    parser.addOption({{"s", "server"},
+                      QCoreApplication::translate("main", "FSD server <url>"),
+                      QCoreApplication::translate("main", "url"),
+                      SERVER_ADDR
+                     });
+    parser.addOption({{"P", "port"},
+                      QCoreApplication::translate("main", "FSD server <port>"),
+                      QCoreApplication::translate("main", "port"),
+                      QString::number(SERVER_PORT)
+                     });
+    parser.addOption({{"u", "user"},
+                      QCoreApplication::translate("main", "FSD <user>"),
+                      QCoreApplication::translate("main", "user"),
+                      USER_ID
+                     });
+    parser.addOption({{"p", "password"},
+                      QCoreApplication::translate("main", "FSD user <password>"),
+                      QCoreApplication::translate("main", "password"),
+                      USER_PASS
+                     });
 
-        QtArg xmlFile(QLatin1String("xml"), QLatin1String("XML Logfile"), false, true);
-        QtArg server(QLatin1String("server"), QLatin1String("FSD Serveraddress"), false, true);
-        QtArg user(QLatin1String("user"), QLatin1String("FSD Username"), false, true);
-        QtArg password(QLatin1String("password"), QLatin1String("FSD Password"), false, true);
-        QtArg port(QLatin1String("port"), QLatin1String("FSD Port"), false, true);
+    // Process the actual command line arguments given by the user
+    parser.process(a);
 
-        QtArgHelp help(&cmd);
-        help.printer()->setProgramDescription(QLatin1String("Testing help printing."));
-        help.printer()->setExecutableName(QLatin1String(argv[0]));
-
-        cmd.addArg(xmlFile);
-        cmd.addArg(server);
-        cmd.addArg(port);
-        cmd.addArg(user);
-        cmd.addArg(password);
-        cmd.addArg(help);
-
-        cmd.parse();
-
-        if (xmlFile.isDefined())
-        {
-            FileName = xmlFile.value().toString();
-        }
-        if (server.isDefined())
-        {
-            ClientProcess::Server = server.value().toString();
-        }
-        if (port.isDefined())
-        {
-            ClientProcess::Port = port.value().toInt();
-        }
-        if (user.isDefined())
-        {
-            ClientProcess::Username = user.value().toString();
-        }
-        if (password.isDefined())
-        {
-            ClientProcess::Password = password.value().toString();
-        }
-    }
-    catch (const QtArgHelpHasPrintedEx &x)
-    {
-        qDebug() << x.what();
-        return -1;
-    }
-    catch (const QtArgBaseException &x)
-    {
-        qDebug() << x.what();
-        return -1;
-    }
-    //return 0;
+    QString FileName = parser.value("xml");
+    ClientProcess::Server = parser.value("server");
+    ClientProcess::Port = parser.value("port").toInt();
+    ClientProcess::Username = parser.value("user");
+    ClientProcess::Password = parser.value("password");
 
     qDebug() << "XML Filename:      " << FileName;
     qDebug() << "FSD Serveraddress: " << ClientProcess::Server;
@@ -101,7 +81,6 @@ int main(int argc, char *argv[])
     qDebug() << "FSD Username:      " << ClientProcess::Username;
     qDebug() << "FSD Password:      " << ClientProcess::Password;
 
-    QCoreApplication a(argc, argv);
     qDebug() << "Loading Logfile!";
     ClientContainer Cont(FileName);
 
