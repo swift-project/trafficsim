@@ -22,6 +22,9 @@ ReleaseDebugStatic/
 DebugFastStatic/
 build*/
 
+# Packaging folder
+dist/
+
 # .log files (usually created by QtTest - thanks to VestniK)
 *.log
 

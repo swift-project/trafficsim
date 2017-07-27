@@ -20,3 +20,6 @@ HEADERS += *.h
 LIBS    += -L../../lib -lSTLib -lvatlib
 
 DESTDIR = ../../bin
+
+target.path = ../../dist/bin
+INSTALLS += target
