@@ -32,7 +32,7 @@ protected:
     void SendTextMsg(pTimeUpdate Update);
 
     pClient mClient;
-    VatSessionID mNetwork;
+    VatFsdClient *mNetwork;
 
 private slots:
     void DoNextEvent();
@@ -44,10 +44,10 @@ private:
     void DisconnectAndDestroy();
     void PushNextUpdate();
 
-    static void ConnectionStatusChanged(VatSessionID session, VatConnectionStatus oldStatus, VatConnectionStatus newStatus, void *cbVar);
-    static void ErrorReceived(VatSessionID session, VatServerError errorType, const char *message, const char *errorData, void *cbVar);
-    static void PilotInfoRequest(VatSessionID session, const char *callsign, void *cbVar);
-    static void TextMessageReceived(VatSessionID session, const char *from, const char *to, const char *message, void *cbVar);
+    static void ConnectionStatusChanged(VatFsdClient *session, VatConnectionStatus oldStatus, VatConnectionStatus newStatus, void *cbVar);
+    static void ErrorReceived(VatFsdClient *session, VatServerError errorType, const char *message, const char *errorData, void *cbVar);
+    static void PilotInfoRequest(VatFsdClient *session, const char *callsign, void *cbVar);
+    static void TextMessageReceived(VatFsdClient *session, const char *from, const char *to, const char *message, void *cbVar);
 
     pTimeUpdate mNextUpdate;
     QTimer mTimer;

@@ -10,9 +10,6 @@ QString ConvertConnStatusToQString(VatConnectionStatus Status)
 {
     switch (Status)
     {
-    case vatStatusIdle:
-        return "Idle";
-        break;
     case vatStatusConnecting:
         return "Connecting";
         break;
@@ -25,9 +22,6 @@ QString ConvertConnStatusToQString(VatConnectionStatus Status)
     case vatStatusDisconnected:
         return "Disconnected";
         break;
-    case vatStatusError:
-        return "Error";
-        break;
     default:
         return "NOT DEFINED";
         break;
@@ -36,7 +30,7 @@ QString ConvertConnStatusToQString(VatConnectionStatus Status)
 }
 
 ClientProcess::ClientProcess(pClient client)
-    : mClient(client), mNetwork(0), mTimer(this), m_connectionStatus(vatStatusIdle)
+    : mClient(client), mNetwork(0), mTimer(this), m_connectionStatus(vatStatusDisconnected)
 
 {
     mNetwork = Vat_CreateNetworkSession(vatServerVatsim, "SimTest 1.0", 1, 0, "MSFS", 0xb9ba,
@@ -167,7 +161,7 @@ void ClientProcess::PushNextUpdate()
     }
 }
 
-void ClientProcess::ConnectionStatusChanged(VatSessionID /* obj */ , VatConnectionStatus oldStatus, VatConnectionStatus newStatus, void *cbVar)
+void ClientProcess::ConnectionStatusChanged(VatFsdClient */* obj */ , VatConnectionStatus oldStatus, VatConnectionStatus newStatus, void *cbVar)
 {
     ClientProcess *client = static_cast<ClientProcess *>(cbVar);
     qDebug() << "ConnectionStatusChanged: (" << qPrintable(client->mClient->GetCallsign()) << ")";
@@ -191,7 +185,7 @@ void ClientProcess::ConnectionStatusChanged(VatSessionID /* obj */ , VatConnecti
     client->m_connectionStatus = newStatus;
 }
 
-void ClientProcess::ErrorReceived(VatSessionID /* obj */ , VatServerError errorType, const char *message, const char *errorData, void *cbVar)
+void ClientProcess::ErrorReceived(VatFsdClient */* obj */ , VatServerError errorType, const char *message, const char *errorData, void *cbVar)
 {
     ClientProcess *client = static_cast<ClientProcess *>(cbVar);
     qDebug() << "ErrorReceived: (" << qPrintable(client->mClient->GetCallsign()) << ")";
@@ -200,7 +194,7 @@ void ClientProcess::ErrorReceived(VatSessionID /* obj */ , VatServerError errorT
     qDebug() << "    errorData: " << errorData;
 }
 
-void ClientProcess::PilotInfoRequest(VatSessionID /* obj */ , const char *callsign, void *cbVar)
+void ClientProcess::PilotInfoRequest(VatFsdClient */* obj */ , const char *callsign, void *cbVar)
 {
     ClientProcess *client = static_cast<ClientProcess *>(cbVar);
     qDebug() << "PilotInfoRequest: (" << qPrintable(client->mClient->GetCallsign()) << ")";
@@ -208,7 +202,7 @@ void ClientProcess::PilotInfoRequest(VatSessionID /* obj */ , const char *callsi
     client->SendPlaneInfoRequest(callsign);
 }
 
-void ClientProcess::TextMessageReceived(VatSessionID session, const char *from, const char *to, const char *message, void *cbVar)
+void ClientProcess::TextMessageReceived(VatFsdClient *session, const char *from, const char *to, const char *message, void *cbVar)
 {
     ClientProcess *client = static_cast<ClientProcess *>(cbVar);
     if (to == client->mClient->GetCallsign())
