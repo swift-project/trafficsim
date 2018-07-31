@@ -218,6 +218,7 @@ VatPilotPosition AirplanePositionUpdate::GetPosUpdate() const
     pos.rating = static_cast<VatPilotRating>(mRating);
     pos.transponderCode = mSquawk;
     pos.transponderMode = convertToTransponderMode(mSquawkMode);
+    pos.onGround = false;
     return pos;
 }
 
